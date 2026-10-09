@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SONIC AUDIO LABS - MODEL SW-74 MK II</title>
+<style>
+  :root { --gun: #16181a; --slate: #1e2124; --amber: #ff9a2e; }
+  * { box-sizing: border-box; user-select: none; }
+  body { margin: 0; min-height: 100vh; background: #0b0c0d; display: flex; align-items: center; justify-content: center;
+         font-family: "Arial Narrow", Arial, sans-serif; color: #c9cdd1; padding: 24px; }
+  .rack { width: 100%; max-width: 900px; background: linear-gradient(180deg, var(--slate), var(--gun));
+          border: 3px solid #2b2f33; border-radius: 4px; padding: 22px 26px; position: relative;
+          box-shadow: 0 0 0 2px #0d0e0f, 0 20px 60px rgba(0,0,0,.7); }
+  .bolt { position: absolute; width: 18px; height: 18px; border-radius: 50%;
+          background: radial-gradient(circle at 35% 35%, #6b7278, #2a2e32 70%); box-shadow: inset 0 0 2px #000, 0 1px 0 #0a0a0a; }
+  .bolt::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; transform: translate(-50%,-50%);
+          background: #14171a; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+  .b1 { left: 8px; top: 8px } .b2 { right: 8px; top: 8px } .b3 { left: 8px; bottom: 8px } .b4 { right: 8px; bottom: 8px }
+  header { text-align: center; border-bottom: 2px solid #2b2f33; padding-bottom: 12px; margin-bottom: 18px; }
+  .brand { font-family: Impact, "Arial Black", sans-serif; font-size: 30px; letter-spacing: 6px; color: #d7dade;
+           text-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(255,255,255,.08); margin: 0; }
+  .model { font-family: "Courier New", monospace; font-weight: bold; font-size: 14px; letter-spacing: 4px; color: #9aa1a7; margin-top: 4px; }
+  .stamp { display: inline-block; border: 2px solid #5b6168; padding: 2px 10px; font-size: 11px; letter-spacing: 3px; color: #7d848a; margin-top: 6px; }
+  .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: #111315; border: 2px solid #2b2f33; border-radius: 3px; padding: 12px; }
+  .label { font-size: 11px; letter-spacing: 3px; color: #8a9197; text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
+  canvas { width: 100%; height: 280px; display: block; background: #050403; border: 2px solid #000; border-radius: 6px;
+           box-shadow: inset 0 0 40px rgba(255,154,46,.12); }
+  .knobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-items: center; margin-top: 4px; }
+  .knobwrap { text-align: center; }
+  .knob { width: 74px; height: 74px; border-radius: 50%; margin: 0 auto; position: relative; cursor: ns-resize; touch-action: none;
+          background: radial-gradient(circle at 35% 30%, #5a6168, #23272b 65%, #111 100%);
+          box-shadow: 0 4px 8px rgba(0,0,0,.7), inset 0 0 0 3px #15181b; }
+  .knob .tick { position: absolute; inset: 0; border-radius: 50%;
+          background: repeating-conic-gradient(from 0deg, rgba(0,0,0,.5) 0 2deg, rgba(255,255,255,.07) 2deg 5deg);
+          -webkit-mask: radial-gradient(circle, transparent 60%, #000 62%); mask: radial-gradient(circle, transparent 60%, #000 62%); opacity: .9; }
+  .knob .ind { position: absolute; left: 50%; top: 6px; width: 4px; height: 26px; margin-left: -2px; background: var(--amber);
+               border-radius: 2px; box-shadow: 0 0 6px var(--amber); transform-origin: 2px 31px; transform: rotate(-135deg); }
+  .kname { font-size: 12px; letter-spacing: 2px; font-weight: bold; color: #cfd3d6; margin-top: 8px; }
+  .ro { font-family: "Courier New", monospace; font-size: 12px; color: var(--amber); text-shadow: 0 0 4px rgba(255,154,46,.6); margin-top: 2px; }
+  .row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
+  .sel { flex: 1; min-width: 70px; background: linear-gradient(#2a2e32, #1b1e21); border: 2px solid #0b0c0d; color: #8c9399;
+         font-family: Impact, "Arial Black", sans-serif; letter-spacing: 2px; font-size: 13px; padding: 10px 4px; cursor: pointer;
+         box-shadow: 0 3px 0 #0b0c0d, inset 0 1px 0 rgba(255,255,255,.06); }
+  .sel.on { color: #1a0f00; background: linear-gradient(#ffb457, #ff9a2e); text-shadow: none; box-shadow: 0 0 12px rgba(255,154,46,.6), 0 3px 0 #7a4a1a; transform: translateY(2px); }
+  .sel:hover:not(.on) { color: #c9cdd1; }
+  .transport { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
+  .power { width: 90px; padding: 12px 0; font-family: Impact, sans-serif; letter-spacing: 2px; background: #2a2e32; color: #aab0b5; border: 2px solid #0b0c0d; cursor: pointer; box-shadow: 0 3px 0 #0b0c0d; }
+  .power.on { background: #ff9a2e; color: #1a0f00; box-shadow: 0 0 16px rgba(255,154,46,.7), 0 3px 0 #7a4a1a; }
+  .led { width: 12px; height: 12px; border-radius: 50%; background: #3a1d00; box-shadow: inset 0 0 2px #000; }
+  .led.on { background: #ffb457; box-shadow: 0 0 10px #ff9a2e; }
+  .status { font-size: 12px; color: #7d848a; letter-spacing: 2px; }
+  .drop { margin-top: 14px; border: 2px dashed #5b6168; border-radius: 4px; padding: 14px 12px; text-align: center; cursor: pointer;
+          background: repeating-linear-gradient(45deg, #121417 0 8px, #15181b 8px 16px); }
+  .drop.hot { border-color: var(--amber); box-shadow: inset 0 0 14px rgba(255,154,46,.45); }
+  .dz-text { font-family: "Courier New", monospace; font-size: 12px; letter-spacing: 2px; color: #9aa1a7; }
+  .dz-sub { font-size: 10px; letter-spacing: 2px; color: #5d646a; margin-top: 4px; }
+  .loaded { margin-top: 10px; font-family: "Courier New", monospace; font-size: 13px; letter-spacing: 1px; color: var(--amber);
+            text-shadow: 0 0 4px rgba(255,154,46,.6); min-height: 18px; word-break: break-all; }
+  .meters { margin-top: 12px; background: #0b0c0d; border: 2px solid #000; border-radius: 4px; padding: 8px; }
+  .meter { display: flex; align-items: center; gap: 8px; font-family: "Courier New", monospace; font-size: 11px; color: #9aa1a7; margin: 4px 0; }
+  .meter .nm { width: 34px; letter-spacing: 2px; }
+  .meter .db { width: 70px; text-align: right; color: var(--amber); }
+  .bar { flex: 1; height: 10px; background: #050403; border: 1px solid #000; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: linear-gradient(90deg, #7a4a1a, #ff9a2e 80%, #ff4a2e); }
+  pre.diag { margin: 8px 0 0; font-family: "Courier New", monospace; font-size: 11px; line-height: 1.5; color: #7d848a; white-space: pre-wrap; min-height: 84px; }
+  .micsel { flex: 1; min-width: 160px; background: #1b1e21; color: #c9cdd1; border: 2px solid #0b0c0d; padding: 6px; font-family: "Courier New", monospace; font-size: 11px; }
+  .note { font-size: 11px; color: #5d646a; letter-spacing: 1px; margin-top: 6px; line-height: 1.4; }
+  .vst { margin-top: 18px; border-top: 2px solid #2b2f33; padding-top: 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .vst p { margin: 0; font-size: 13px; color: #7d848a; flex: 1; min-width: 240px; line-height: 1.4; }
+  .vst button { font-family: Impact, sans-serif; letter-spacing: 2px; padding: 10px 18px; background: #2a2e32; color: #5d646a; border: 2px solid #0b0c0d; cursor: not-allowed; }
+  footer { margin-top: 14px; font-family: "Courier New", monospace; font-size: 11px; color: #5d646a; text-align: center; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+<div class="rack">
+  <div class="bolt b1"></div><div class="bolt b2"></div><div class="bolt b3"></div><div class="bolt b4"></div>
+  <header>
+    <h1 class="brand">SONIC AUDIO LABS</h1>
+    <div class="model">MODEL SW-74 MK II</div>
+    <div class="stamp">SONICWAVESHAPER // ADAA-1 WAVESHAPER</div>
+  </header>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="label">Transfer Curve / Scope</div>
+      <canvas id="scope"></canvas>
+      <div class="label" style="margin-top:12px">Source</div>
+      <div class="row" id="srcRow">
+        <button class="sel on" data-src="kick">KICK</button>
+        <button class="sel" data-src="bass">BASS</button>
+        <button class="sel" data-src="lead">LEAD</button>
+        <button class="sel" data-src="sine">SINE</button>
+        <button class="sel" data-src="custom">CUSTOM</button>
+        <button class="sel" data-src="live">LIVE IN</button>
+      </div>
+      <div class="drop" id="drop">
+        <div class="dz-text" id="dzText">DROP WAV / MP3 / AIFF HERE OR CLICK TO LOAD</div>
+        <div class="dz-sub">CUSTOM SOURCE LOOPS THROUGH THE SW-74 ENGINE</div>
+        <input type="file" id="fileIn" accept=".wav,.mp3,.aif,.aiff,audio/*" style="display:none">
+      </div>
+      <div class="loaded" id="loaded">NO FILE LOADED</div>
+      <div class="transport">
+        <button class="power" id="power">POWER</button>
+        <div class="led" id="led"></div>
+        <span class="status" id="status">STANDBY - PRESS POWER FOR TEST TONE</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="label">Drive / Shape / Mix / Output</div>
+      <div class="knobs">
+        <div class="knobwrap"><div class="knob" id="kDrive"><div class="tick"></div><div class="ind"></div></div><div class="kname">DRIVE</div><div class="ro"></div></div>
+        <div class="knobwrap"><div class="knob" id="kMix"><div class="tick"></div><div class="ind"></div></div><div class="kname">MIX</div><div class="ro"></div></div>
+        <div class="knobwrap"><div class="knob" id="kOut"><div class="tick"></div><div class="ind"></div></div><div class="kname">OUTPUT</div><div class="ro"></div></div>
+      </div>
+      <div class="label" style="margin-top:16px">Shape</div>
+      <div class="row" id="shapeRow">
+        <button class="sel on" data-shape="0">TANH</button>
+        <button class="sel" data-shape="1">CUBIC</button>
+        <button class="sel" data-shape="2">HARD</button>
+        <button class="sel" data-shape="3">FOLD</button>
+      </div>
+      <div class="label" style="margin-top:14px">Speaker Profile</div>
+      <div class="row">
+        <button class="sel on" id="airBtn" data-air="0">FLAT STUDIO</button>
+        <button class="sel" id="laptopBtn" data-air="1">AIR / LAPTOP PUNCH</button>
+      </div>
+      <div class="note">LAPTOP PUNCH: high-pass at 60 Hz, presence bump near 1.8 kHz, 2nd/3rd harmonic exciter, and extra upper harmonics on KICK, BASS and SINE so a MacBook Air speaker reproduces the bass as perceived punch.</div>
+
+      <div class="label" style="margin-top:16px">Live Input / Diagnostics</div>
+      <div class="row">
+        <select class="micsel" id="micSel"><option value="">SYSTEM DEFAULT INPUT</option></select>
+        <button class="sel" id="testOut">TEST OUT</button>
+      </div>
+      <div class="meters">
+        <div class="meter"><span class="nm">IN</span><div class="bar"><div id="mIn"></div></div><span class="db" id="dIn">-INF</span></div>
+        <div class="meter"><span class="nm">OUT</span><div class="bar"><div id="mOut"></div></div><span class="db" id="dOut">-INF</span></div>
+        <pre class="diag" id="diag">STARTING DIAGNOSTICS...</pre>
+      </div>
+      <div class="note">LIVE IN uses your selected input (Scarlett Solo, USB interface, or built-in mic) with echo cancellation, noise suppression and auto gain turned off. Use headphones to avoid feedback. Chrome or Safari will ask for microphone permission.</div>
+    </div>
+  </div>
+
+  <div class="vst">
+    <p>VST3 PLUGIN: This browser edition runs the full SW-74 MK II engine in the page. No compiled VST3 binary is included in this file, so the download button is disabled until a plugin build exists.</p>
+    <button disabled>DOWNLOAD VST3 (NOT BUILT)</button>
+  </div>
+  <footer>ADAA-1 ANTIDERIVATIVE ANTIALIASING // WEB AUDIO API // SONIC AUDIO LABS</footer>
+</div>
+
+<script>
+// ===== ADAA-1 waveshaper math =====
+function shapeF(x, s) {
+  if (s === 0) return Math.tanh(x);
+  if (s === 1) return (x > 1) ? 2/3 : (x < -1) ? -2/3 : x - x*x*x/3;
+  if (s === 2) return Math.max(-1, Math.min(1, x));
+  return Math.sin(x * Math.PI / 2);
+}
+function antideriv(x, s) {
+  const a = Math.abs(x);
+  if (s === 0) return a + Math.log(1 + Math.exp(-2 * a)) - Math.LN2;
+  if (s === 1) return (a <= 1) ? a*a/2 - a*a*a*a/12 : 5/12 + (2/3) * (a - 1);
+  if (s === 2) return (a <= 1) ? a*a/2 : a - 0.5;
+  const k = Math.PI / 2;
+  return -Math.cos(x * k) / k;
+}
+function withTimeout(p, ms) {
+  return Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))]);
+}
+
+// ===== State =====
+const S = { drive: 12, mix: 1, out: 0, shape: 0, src: 'kick', on: false, air: false };
+let airHP = null, airPeak = null;
+let ctx = null, srcBus = null, bus = null, engine = null, analyser = null, master = null;
+let timer = null, step = 0, nextT = 0;
+let custBuf = null, custName = '', custSrc = null;
+let micStream = null, micNode = null, micDeviceId = '';
+const shState = [{ px: 0, pF: 0 }, { px: 0, pF: 0 }];
+const M = { inPk: 0, outPk: 0, cb: 0, lastCb: 0, stall: 0, lastErr: '' };
+
+// ===== Engine: ScriptProcessorNode, kept in the global `engine` so it is never garbage collected =====
+// Graph: synth/custom -> bus -> srcBus -> engine(ADAA-1) -> analyser -> master -> destination
+//        live mic      -------------------^
+function ensureContext() {
+  if (ctx) return ctx;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  srcBus = ctx.createGain(); srcBus.gain.value = 1;
+  bus = ctx.createGain(); bus.gain.value = 0.7;
+  bus.connect(srcBus);
+  engine = ctx.createScriptProcessor(1024, 2, 2);
+  engine.onaudioprocess = processAudio;
+  srcBus.connect(engine);
+  analyser = ctx.createAnalyser(); analyser.fftSize = 2048;
+  master = ctx.createGain(); master.gain.value = 1;
+  airHP = ctx.createBiquadFilter(); airHP.type = 'highpass'; airHP.frequency.value = 10; airHP.Q.value = 0.707;
+  airPeak = ctx.createBiquadFilter(); airPeak.type = 'peaking'; airPeak.frequency.value = 1800; airPeak.Q.value = 1.2; airPeak.gain.value = 0;
+  engine.connect(airHP);
+  airHP.connect(airPeak);
+  airPeak.connect(analyser);
+  analyser.connect(master);
+  applyAir();
+  master.connect(ctx.destination);
+  console.log('[SW-74] context created, sampleRate=' + ctx.sampleRate);
+  return ctx;
+}
+function processAudio(e) {
+  M.cb++;
+  const dl = Math.pow(10, S.drive / 20), g = Math.pow(10, S.out / 20);
+  const mix = S.mix, s = Math.round(S.shape), air = S.air;
+  const nIn = e.inputBuffer.numberOfChannels, nOut = e.outputBuffer.numberOfChannels;
+  let ip = 0, op = 0;
+  for (let ch = 0; ch < nOut; ch++) {
+    const inp = e.inputBuffer.getChannelData(Math.min(ch, nIn - 1));
+    const o = e.outputBuffer.getChannelData(ch);
+    const q = shState[Math.min(ch, 1)];
+    for (let i = 0; i < o.length; i++) {
+      const x = inp[i];
+      const ax = Math.abs(x); if (ax > ip) ip = ax;
+      const xd = x * dl;
+      const F0 = antideriv(xd, s);
+      const dx = xd - q.px;
+      const wet = Math.abs(dx) < 1e-5 ? shapeF((xd + q.px) / 2, s) : (F0 - q.pF) / dx;
+      q.px = xd; q.pF = F0;
+      let y = (x * (1 - mix) + wet * mix) * g;
+      if (air) {
+        // 2nd/3rd harmonic exciter: asymmetric soft clip adds overtones the small driver can reproduce
+        const ex = Math.tanh(y * 3) + 0.25 * y * y * (y >= 0 ? 1 : -1);
+        y = y * 0.8 + ex * 0.28;
+      }
+      o[i] = y;
+      const ay = Math.abs(y); if (ay > op) op = ay;
+    }
+  }
+  if (ip > M.inPk) M.inPk = ip;
+  if (op > M.outPk) M.outPk = op;
+}
+
+function applyAir() {
+  if (!airHP) return;
+  airHP.frequency.value = S.air ? 60 : 10;
+  airPeak.gain.value = S.air ? 7 : 0;
+}
+
+// ===== Test tone synth =====
+function env(g, t, peak, dur, attack = 0.005) {
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(peak, t + attack);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+}
+function kick(t) {
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(150, t);
+  o.frequency.exponentialRampToValueAtTime(42, t + 0.12);
+  env(g, t, 1.0, 0.35, 0.002);
+  o.connect(g); g.connect(bus); o.start(t); o.stop(t + 0.4);
+  if (S.air) note('triangle', 2400, t, 0.02, 0.22);
+}
+function note(type, freq, t, dur, peak, filterHz) {
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  env(g, t, peak, dur);
+  if (filterHz) {
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = filterHz;
+    o.connect(lp); lp.connect(g);
+  } else o.connect(g);
+  g.connect(bus); o.start(t); o.stop(t + dur + 0.05);
+}
+const BASS = [55, 55, 65.41, 55, 49, 55, 73.42, 65.41];
+const LEAD = [440, 523.25, 659.25, 523.25, 392, 440, 523.25, 587.33];
+const SINE = [110, 110, 146.83, 110, 98, 110, 130.81, 146.83];
+function playStep(t, s) {
+  const sd = 60 / 120 / 4;
+  switch (S.src) {
+    case 'kick': if (s % 4 === 0) kick(t); if (s % 8 === 4) note('triangle', 880, t, 0.05, 0.15); break;
+    case 'bass': if (s % 2 === 0) {
+      const bf = BASS[(s / 2) % 8];
+      note('sawtooth', bf, t, sd * 1.8, 0.35, 500);
+      if (S.air) note('sawtooth', bf * 2, t, sd * 1.2, 0.12, 1800);
+    } break;
+    case 'lead': note('square', LEAD[s % 8], t, sd * 1.5, 0.18, 2600); break;
+    case 'sine': if (s % 8 === 0) {
+      const sf = SINE[(s / 8) % 8];
+      note('sine', sf, t, sd * 7, 0.45);
+      if (S.air) note('triangle', sf * 2, t, sd * 4, 0.12, 2400);
+    } break;
+  }
+}
+function tick() {
+  if (!ctx) return;
+  while (nextT < ctx.currentTime + 0.12) {
+    playStep(nextT, step);
+    nextT += 60 / 120 / 4; step++;
+  }
+}
+
+// ===== Engine start/stop =====
+async function startEngine() {
+  ensureContext();
+  if (ctx.state !== 'running') {
+    try { await withTimeout(ctx.resume(), 2000); } catch (e) { console.warn('resume: ' + e.message); }
+  }
+  if (!S.on) {
+    S.on = true;
+    step = 0; nextT = ctx.currentTime + 0.05;
+    clearInterval(timer);
+    timer = setInterval(tick, 25);
+  }
+}
+function stopEngine() {
+  clearInterval(timer); timer = null; S.on = false;
+  stopCustom(); stopLive();
+}
+
+// ===== Custom file loop =====
+function startCustom() {
+  stopCustom();
+  if (!ctx || !custBuf || !S.on || S.src !== 'custom') return;
+  const src = ctx.createBufferSource();
+  src.buffer = custBuf; src.loop = true; src.loopStart = 0; src.loopEnd = custBuf.duration;
+  src.connect(bus);
+  src.start(ctx.currentTime + 0.02);
+  custSrc = src;
+}
+function stopCustom() {
+  if (custSrc) { try { custSrc.stop(); } catch (e) {} try { custSrc.disconnect(); } catch (e) {} custSrc = null; }
+}
+
+// ===== Live input (mic / audio interface) =====
+async function refreshDevices() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+  try {
+    const devs = await navigator.mediaDevices.enumerateDevices();
+    const sel = document.getElementById('micSel');
+    const ins = devs.filter(d => d.kind === 'audioinput');
+    sel.innerHTML = '<option value="">SYSTEM DEFAULT INPUT</option>';
+    ins.forEach((d, i) => {
+      const o = document.createElement('option');
+      o.value = d.deviceId; o.textContent = (d.label || ('INPUT ' + (i + 1))).toUpperCase();
+      sel.appendChild(o);
+    });
+    sel.value = micDeviceId;
+  } catch (e) { M.lastErr = 'enumerateDevices: ' + e.message; }
+}
+function stopLive() {
+  if (micNode) { try { micNode.disconnect(); } catch (e) {} micNode = null; }
+  if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+}
+async function startLive() {
+  setStatus('REQUESTING MIC - ALLOW ACCESS IF PROMPTED');
+  try {
+    await startEngine();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('getUserMedia not available in this browser');
+    stopLive(); stopCustom();
+    const audio = { echoCancellation: false, noiseSuppression: false, autoGainControl: false };
+    if (micDeviceId) audio.deviceId = { exact: micDeviceId };
+    const stream = await navigator.mediaDevices.getUserMedia({ audio });
+    if (S.src !== 'live') { stream.getTracks().forEach(t => t.stop()); return; }
+    micStream = stream;
+    micNode = ctx.createMediaStreamSource(stream);
+    micNode.connect(srcBus);
+    M.lastErr = '';
+    await refreshDevices();
+    setStatus('LIVE IN - PROCESSING YOUR INPUT (USE HEADPHONES)');
+  } catch (err) {
+    M.lastErr = (err.name || 'Error') + ': ' + err.message;
+    console.error('[SW-74] live input failed', err);
+    setStatus('LIVE IN FAILED - ' + (err.name || 'ERROR') + ': ' + err.message);
+  }
+}
+
+// ===== UI =====
+function statusText() {
+  if (!S.on) return 'STANDBY - PRESS POWER FOR TEST TONE';
+  if (S.src === 'live') return micNode ? 'LIVE IN - PROCESSING YOUR INPUT (USE HEADPHONES)' : 'LIVE IN - WAITING FOR MIC';
+  if (S.src === 'custom') return custBuf ? 'LIVE - LOOPING ' + custName.toUpperCase() : 'LIVE - LOAD A FILE FOR CUSTOM LOOP';
+  return 'LIVE - ' + S.src.toUpperCase() + ' TEST TONE';
+}
+function setStatus(t) { document.getElementById('status').textContent = t; }
+function setLed(on) {
+  document.getElementById('power').classList.toggle('on', on);
+  document.getElementById('led').classList.toggle('on', on);
+}
+function selectSource(v) {
+  S.src = v;
+  document.querySelectorAll('#srcRow .sel').forEach(b => b.classList.toggle('on', b.dataset.src === v));
+  if (v === 'live') { startLive().then(() => setLed(S.on)); setLed(true); return; }
+  stopLive();
+  if (S.on && v === 'custom') startCustom(); else stopCustom();
+  setStatus(statusText());
+}
+
+document.getElementById('power').addEventListener('click', async () => {
+  if (S.on) { stopEngine(); setLed(false); setStatus(statusText()); return; }
+  setLed(true);
+  setStatus('STARTING AUDIO...');
+  try {
+    await startEngine();
+    if (S.src === 'live') await startLive();
+    else if (S.src === 'custom') startCustom();
+    setLed(S.on);
+    setStatus(statusText());
+  } catch (err) {
+    S.on = false; setLed(false);
+    M.lastErr = err.message;
+    setStatus('AUDIO FAILED: ' + err.message + ' - CLICK POWER AGAIN');
+  }
+});
+
+document.querySelectorAll('#srcRow .sel').forEach(b => b.addEventListener('click', () => selectSource(b.dataset.src)));
+document.querySelectorAll('#shapeRow .sel').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#shapeRow .sel').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  S.shape = +b.dataset.shape;
+}));
+
+document.getElementById('micSel').addEventListener('change', e => {
+  micDeviceId = e.target.value;
+  if (S.src === 'live') startLive();
+});
+
+document.getElementById('testOut').addEventListener('click', async () => {
+  ensureContext();
+  if (ctx.state !== 'running') { try { await withTimeout(ctx.resume(), 2000); } catch (e) {} }
+  const t = ctx.currentTime;
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.frequency.value = 440;
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.linearRampToValueAtTime(0.25, t + 0.02);
+  g.gain.linearRampToValueAtTime(0.0001, t + 0.7);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(t); o.stop(t + 0.75);
+  setStatus('TEST OUT - 440 HZ BEEP SENT DIRECTLY TO OUTPUT');
+});
+
+document.querySelectorAll('#airBtn, #laptopBtn').forEach(b => b.addEventListener('click', () => {
+  S.air = b.dataset.air === '1';
+  document.getElementById('airBtn').classList.toggle('on', !S.air);
+  document.getElementById('laptopBtn').classList.toggle('on', S.air);
+  applyAir();
+}));
+
+// ===== File loading (picker + drag/drop) =====
+async function loadFile(file) {
+  const dzText = document.getElementById('dzText'), loaded = document.getElementById('loaded');
+  if (!file) { loaded.textContent = 'NO FILE RECEIVED'; return; }
+  dzText.textContent = 'DECODING ' + file.name.toUpperCase() + ' ...';
+  loaded.textContent = 'LOADING: ' + file.name;
+  try {
+    ensureContext();
+    const ab = await file.arrayBuffer();
+    const buf = await new Promise((res, rej) => {
+      const p = ctx.decodeAudioData(ab, res, rej);
+      if (p && p.then) p.then(res, rej);
+    });
+    custBuf = buf; custName = file.name;
+    loaded.textContent = 'LOADED: ' + file.name + ' (' + buf.duration.toFixed(2) + 's, ' + buf.numberOfChannels + 'ch)';
+    dzText.textContent = 'LOADED - DROP ANOTHER FILE TO REPLACE';
+    await startEngine();
+    selectSource('custom');
+    setLed(S.on);
+    setStatus(statusText());
+  } catch (err) {
+    console.error(err);
+    loaded.textContent = 'DECODE FAILED: ' + file.name;
+    dzText.textContent = 'DECODE FAILED - USE WAV / MP3 / AIFF';
+  }
+}
+const dz = document.getElementById('drop'), fi = document.getElementById('fileIn');
+dz.addEventListener('click', () => fi.click());
+fi.addEventListener('change', e => { const f = e.target.files && e.target.files[0]; fi.value = ''; loadFile(f); });
+['dragenter', 'dragover'].forEach(t => dz.addEventListener(t, e => { e.preventDefault(); e.stopPropagation(); dz.classList.add('hot'); }));
+dz.addEventListener('dragleave', e => { e.preventDefault(); dz.classList.remove('hot'); });
+dz.addEventListener('drop', e => {
+  e.preventDefault(); e.stopPropagation(); dz.classList.remove('hot');
+  const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+  loadFile(f);
+});
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => e.preventDefault());
+
+// ===== Knobs =====
+function Knob(id, o) {
+  const el = document.getElementById(id);
+  const ind = el.querySelector('.ind'), ro = el.parentElement.querySelector('.ro');
+  let v = o.value;
+  const norm = () => (v - o.min) / (o.max - o.min);
+  function render() {
+    ind.style.transform = `rotate(${-135 + norm() * 270}deg)`;
+    ro.textContent = o.fmt(v);
+  }
+  function set(nv) { v = Math.min(o.max, Math.max(o.min, nv)); render(); o.onChange(v); }
+  let drag = null;
+  el.addEventListener('pointerdown', e => { drag = { y: e.clientY, n: norm() }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => { if (drag) set(o.min + (drag.n + (drag.y - e.clientY) / 180) * (o.max - o.min)); });
+  const end = () => { drag = null; };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  el.addEventListener('wheel', e => { e.preventDefault(); set(v + (e.deltaY < 0 ? 1 : -1) * (o.max - o.min) / 50); }, { passive: false });
+  el.addEventListener('dblclick', () => set(o.value));
+  render();
+}
+Knob('kDrive', { min: 0, max: 24, value: 12, fmt: v => v.toFixed(1) + ' dB', onChange: v => { S.drive = v; } });
+Knob('kMix', { min: 0, max: 100, value: 100, fmt: v => Math.round(v) + ' %', onChange: v => { S.mix = v / 100; } });
+Knob('kOut', { min: -24, max: 12, value: 0, fmt: v => (v >= 0 ? '+' : '') + v.toFixed(1) + ' dB', onChange: v => { S.out = v; } });
+
+// ===== Meters + diagnostics (updates every 200 ms) =====
+function dbOf(p) { return 20 * Math.log10(p + 1e-9); }
+function barPct(db) { return Math.max(0, Math.min(100, (db + 60) / 60 * 100)); }
+function updateDiag() {
+  const inDb = dbOf(M.inPk), outDb = dbOf(M.outPk);
+  document.getElementById('mIn').style.width = barPct(inDb) + '%';
+  document.getElementById('mOut').style.width = barPct(outDb) + '%';
+  document.getElementById('dIn').textContent = M.inPk > 1e-6 ? inDb.toFixed(1) + ' dB' : '-INF';
+  document.getElementById('dOut').textContent = M.outPk > 1e-6 ? outDb.toFixed(1) + ' dB' : '-INF';
+  M.inPk = 0; M.outPk = 0;
+
+  if (S.on && M.cb === M.lastCb) M.stall++; else M.stall = 0;
+  M.lastCb = M.cb;
+
+  const lines = [
+    'CONTEXT: ' + (ctx ? ctx.state.toUpperCase() : 'NOT CREATED') + '   RATE: ' + (ctx ? ctx.sampleRate : '-') + ' HZ',
+    'ENGINE: ' + (engine ? 'SCRIPTPROCESSOR 1024' : 'OFF') + '   CALLBACKS: ' + M.cb,
+    'POWER: ' + (S.on ? 'ON' : 'OFF') + '   SOURCE: ' + S.src.toUpperCase() + '   PROFILE: ' + (S.air ? 'LAPTOP PUNCH' : 'FLAT STUDIO'),
+    'MIC: ' + (micNode ? 'CONNECTED' : 'OFF') + '   LAST ERROR: ' + (M.lastErr || 'NONE')
+  ];
+  if (S.on && M.stall >= 5) lines.push('WARNING: NO AUDIO CALLBACKS FOR 1 SECOND. CLICK POWER OFF AND ON, THEN CHECK OUTPUT DEVICE.');
+  if (ctx && ctx.state === 'suspended' && S.on) lines.push('NOTE: AUDIO CONTEXT SUSPENDED. CLICK ANYWHERE ON THE PAGE TO RESUME.');
+  document.getElementById('diag').textContent = lines.join('\n');
+}
+setInterval(updateDiag, 200);
+document.addEventListener('click', () => { if (ctx && ctx.state === 'suspended') ctx.resume(); });
+
+// ===== CRT scope =====
+const canvas = document.getElementById('scope');
+const cx = canvas.getContext('2d');
+const AMBER = '#ff9a2e';
+function fit() {
+  const r = canvas.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+  canvas.width = Math.round(r.width * d); canvas.height = Math.round(r.height * d);
+  cx.setTransform(d, 0, 0, d, 0, 0);
+}
+window.addEventListener('resize', fit); fit();
+const scopeBuf = new Float32Array(2048);
+let sweep = 0;
+function drawFrame() {
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  cx.fillStyle = 'rgba(5,4,3,0.35)'; cx.fillRect(0, 0, W, H);
+  cx.strokeStyle = 'rgba(255,154,46,0.14)'; cx.lineWidth = 1; cx.beginPath();
+  for (let i = 1; i < 10; i++) {
+    const x = Math.round(W * i / 10) + 0.5, y = Math.round(H * i / 10) + 0.5;
+    cx.moveTo(x, 0); cx.lineTo(x, H); cx.moveTo(0, y); cx.lineTo(W, y);
+  }
+  cx.stroke();
+  cx.strokeStyle = 'rgba(255,154,46,0.35)'; cx.beginPath();
+  cx.moveTo(W/2, 0); cx.lineTo(W/2, H); cx.moveTo(0, H/2); cx.lineTo(W, H/2); cx.stroke();
+
+  const dl = Math.pow(10, S.drive / 20), g = Math.pow(10, S.out / 20);
+  const px = x => (x + 1) / 2 * W, py = y => (1 - y) / 2 * H;
+
+  cx.save();
+  cx.shadowColor = AMBER; cx.shadowBlur = 12; cx.strokeStyle = 'rgba(255,154,46,0.9)'; cx.lineWidth = 2;
+  cx.beginPath();
+  for (let i = 0; i <= 200; i++) {
+    const x = -1 + 2 * i / 200;
+    const w = shapeF(x * dl, S.shape);
+    const y = (x * (1 - S.mix) + w * S.mix) * g;
+    const X = px(x), Y = py(Math.max(-1.2, Math.min(1.2, y)) / 1.2 * 0.95);
+    i ? cx.lineTo(X, Y) : cx.moveTo(X, Y);
+  }
+  cx.stroke(); cx.restore();
+
+  if (analyser && S.on) {
+    analyser.getFloatTimeDomainData(scopeBuf);
+    cx.save();
+    cx.shadowColor = AMBER; cx.shadowBlur = 6; cx.strokeStyle = '#ffc27a'; cx.lineWidth = 1.5;
+    cx.beginPath();
+    const N = 512;
+    for (let i = 0; i < N; i++) {
+      const v = Math.max(-1, Math.min(1, scopeBuf[i * 4] * 1.2));
+      const X = i / (N - 1) * W, Y = (1 - v) / 2 * H;
+      i ? cx.lineTo(X, Y) : cx.moveTo(X, Y);
+    }
+    cx.stroke(); cx.restore();
+  } else {
+    sweep = (sweep + 0.01) % 2; const x = sweep - 1;
+    const y = (x * (1 - S.mix) + shapeF(x * dl, S.shape) * S.mix) * g;
+    cx.save(); cx.shadowColor = AMBER; cx.shadowBlur = 16; cx.fillStyle = '#ffd08a';
+    cx.beginPath(); cx.arc(px(x), py(Math.max(-1.2, Math.min(1.2, y)) / 1.2 * 0.95), 3, 0, Math.PI * 2); cx.fill(); cx.restore();
+  }
+  requestAnimationFrame(drawFrame);
+}
+cx.fillStyle = '#050403'; cx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+requestAnimationFrame(drawFrame);
+</script>
+</body>
+</html>
