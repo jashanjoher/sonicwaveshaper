@@ -1,0 +1,41 @@
+name: Build SonicWaveshaper
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: brew install cmake ninja
+
+      - name: Fetch JUCE 8.0.6
+        run: git clone --depth 1 --branch 8.0.6 https://github.com/juce-framework/JUCE.git JUCE
+
+      - name: Configure CMake
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Collect artifacts
+        run: |
+          mkdir -p artifacts
+          cp -R build/SonicWaveshaper_artefacts/Release/VST3/*.vst3 artifacts/ || true
+          cp -R build/SonicWaveshaper_artefacts/Release/AU/*.component artifacts/ || true
+          cp -R build/SonicWaveshaper_artefacts/Release/Standalone/*.app artifacts/ || true
+          ls -la artifacts
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SonicWaveshaper-macOS
+          path: artifacts/
+          if-no-files-found: error
