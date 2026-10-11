@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Waveshaper | Sonic Audio Labs</title>
-<meta name="description" content="Waveshaper by Sonic Audio Labs: analog warmth, neural amp modeling and precise DSP for producers.">
+<title>Maya DSP | WOOF, WOOF Bundle</title>
+<meta name="description" content="Maya DSP: Vedic psychoacoustics meets cybernetic neural sound design. Zero aliasing, analog warmth, zero digital fizz. WOOF, WOOF bundle $75.">
+<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <style>
   :root {
     --pink: #ffd3e4; --pink-hi: #fff2f8; --pink-lo: #efa0c0; --pink-deep: #d9739c;
     --teal: #3fd3c6; --teal-hi: #c8fff7; --teal-deep: #15877d;
     --ink: #2a1a26; --ink-soft: #6b4a5e; --matte: #1b1520; --matte-2: #251c2a; --line: rgba(255,255,255,.08);
+    --metal: #3a3340;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -21,53 +23,53 @@
   a { color: inherit; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-  /* ===== nav ===== */
-  nav.top {
-    position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px);
-    background: rgba(27,21,32,.82); border-bottom: 1px solid var(--line);
-  }
+  nav.top { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px);
+    background: rgba(27,21,32,.82); border-bottom: 1px solid var(--line); }
   nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .logo { font-weight: 900; letter-spacing: 3px; font-size: 14px; text-decoration: none; text-transform: uppercase; }
   .logo span { color: var(--teal); }
   .links { display: flex; gap: 22px; align-items: center; }
   .links a { font-size: 13px; letter-spacing: 1px; text-decoration: none; color: #d9c7d3; }
   .links a:hover { color: var(--teal); }
-  .cart { font-size: 12px; font-weight: 800; letter-spacing: 1px; padding: 9px 14px; border-radius: 999px;
-          background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); border: none; opacity: .55; cursor: not-allowed; }
+  .cart-btn { font-size: 12px; font-weight: 800; letter-spacing: 1px; padding: 9px 14px; border-radius: 999px;
+    background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); border: none; cursor: pointer; }
 
-  /* ===== hero ===== */
   .hero { padding: 96px 0 72px; text-align: center; }
   .eyebrow { font-size: 11px; letter-spacing: 4px; color: var(--teal); font-weight: 800; }
   h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.02; margin: 16px 0 18px; letter-spacing: -1px; }
   h1 em { font-style: normal; color: var(--pink); }
-  .lead { max-width: 620px; margin: 0 auto 32px; color: #cdb8c6; font-size: 17px; }
+  .lead { max-width: 660px; margin: 0 auto 32px; color: #cdb8c6; font-size: 17px; }
   .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; text-decoration: none; font-weight: 800; letter-spacing: 1.2px; font-size: 12px; padding: 14px 22px; border-radius: 12px; }
+  .btn { display: inline-block; text-decoration: none; font-weight: 800; letter-spacing: 1.2px; font-size: 12px;
+    padding: 14px 22px; border-radius: 12px; border: none; cursor: pointer; font-family: inherit; }
   .btn.pink { background: linear-gradient(#ffe0ec, var(--pink)); color: var(--ink); box-shadow: 0 4px 0 var(--pink-deep); }
-  .btn.ghost { border: 1px solid rgba(255,255,255,.22); color: #f6e9f1; }
+  .btn.teal { background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); box-shadow: 0 4px 0 var(--teal-deep); }
+  .btn.ghost { border: 1px solid rgba(255,255,255,.22); color: #f6e9f1; background: transparent; }
   .btn.ghost:hover { border-color: var(--teal); color: var(--teal); }
 
   section { padding: 84px 0; border-top: 1px solid var(--line); }
   h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.5px; margin: 8px 0 14px; }
   h3 { font-size: 20px; margin: 0 0 8px; }
-  .sub { color: #cdb8c6; max-width: 620px; }
+  .sub { color: #cdb8c6; max-width: 640px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 36px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
-  .card { background: var(--matte-2); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
+  .card { background: var(--matte-2); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
   .card p { color: #cdb8c6; font-size: 14px; margin: 0; }
   .tag { display: inline-block; font-size: 10px; letter-spacing: 2px; font-weight: 800; color: var(--ink); background: var(--pink); border-radius: 6px; padding: 3px 8px; margin-bottom: 14px; }
   .tag.soon { background: transparent; color: var(--teal); border: 1px solid var(--teal); }
 
-  /* ===== about ===== */
-  .about-body { max-width: 720px; color: #d9c7d3; font-size: 16px; }
-  .about-body p { margin: 0 0 16px; }
+  .manifesto { max-width: 760px; color: #d9c7d3; font-size: 16px; }
+  .manifesto p { margin: 0 0 16px; }
 
-  /* ===== flagship ===== */
   .flagship { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 36px; }
   .stage { display: flex; justify-content: center; }
   .pedal { position: relative; width: 300px; padding: 18px 18px 16px; border-radius: 20px;
     background: linear-gradient(165deg, var(--pink-hi) 0%, var(--pink) 50%, #f6b9d1 100%);
     box-shadow: 0 1px 0 #f9c7db, 0 2px 0 #eaa0bf, 0 3px 0 #e693b5, 0 4px 0 #d9789f,
       inset 0 2px 0 rgba(255,255,255,.85), 0 30px 50px rgba(0,0,0,.45); color: var(--ink); }
+  .pedal::after { content: ""; position: absolute; inset: 0; border-radius: 20px; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
   .screw { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #d7c4cc 55%, #9d8793); }
   .s1 { left: 9px; top: 9px } .s2 { right: 9px; top: 9px } .s3 { left: 9px; bottom: 9px } .s4 { right: 9px; bottom: 9px }
   .brand { font-size: 16px; font-weight: 900; letter-spacing: 2px; margin: 0; text-align: center; }
@@ -80,12 +82,13 @@
   .knob { position: relative; cursor: ns-resize; touch-action: none; border-radius: 50%; outline: none; }
   .knob.sat { width: 74px; height: 74px; }
   .knob.sm { width: 60px; height: 60px; }
+  .knob:focus-visible { box-shadow: 0 0 0 3px var(--teal); }
   .cap { position: absolute; inset: 0; border-radius: 50%;
-         background: repeating-conic-gradient(from 0deg, #2fb8ac 0deg 4deg, #25a196 4deg 8deg);
-         box-shadow: inset 0 0 0 1.5px #15877d, inset 0 -3px 4px rgba(0,60,55,.35);
-         transform: rotate(var(--rot, 0deg)); }
+    background: repeating-conic-gradient(from 0deg, #2fb8ac 0deg 4deg, #25a196 4deg 8deg);
+    box-shadow: inset 0 0 0 1.5px #15877d, inset 0 -3px 4px rgba(0,60,55,.35), 0 3px 6px rgba(0,0,0,.35);
+    transform: rotate(var(--rot, 0deg)); }
   .cap::before { content: ""; position: absolute; inset: 13%; border-radius: 50%;
-         background: radial-gradient(circle at 36% 28%, #e6fffb, #6fe6da 45%, #2bb3a7 100%); }
+    background: radial-gradient(circle at 36% 28%, #e6fffb, #6fe6da 45%, #2bb3a7 100%); }
   .notch { position: absolute; left: 50%; top: 7%; width: 4px; height: 20%; margin-left: -2px; border-radius: 2px; background: #fff; z-index: 2; }
   .kname { font-size: 9px; letter-spacing: 2px; font-weight: 900; margin-top: 8px; }
   .ro { font-size: 10px; color: var(--teal-deep); font-weight: bold; min-height: 13px; }
@@ -96,26 +99,51 @@
   .spec-list { list-style: none; padding: 0; margin: 0; }
   .spec-list li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 14px; }
   .spec-list li span:first-child { color: #cdb8c6; }
-  .preview-note { font-size: 12px; color: #a98ea0; margin-top: 16px; }
+  .note { font-size: 12px; color: #a98ea0; margin-top: 16px; }
 
-  /* ===== bundle ===== */
+  .demo { margin-top: 36px; background: var(--matte-2); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+  .stems { display: flex; gap: 10px; flex-wrap: wrap; }
+  .stem { flex: 1; min-width: 180px; cursor: pointer; font-family: inherit; text-align: left; padding: 14px 16px; border-radius: 14px;
+    background: #2d2435; color: #f6e9f1; border: 1px solid var(--line); }
+  .stem b { display: block; font-size: 13px; letter-spacing: 1px; }
+  .stem span { font-size: 12px; color: #a98ea0; }
+  .stem.on { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
+  .transport { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 22px; }
+  .toggle { display: inline-flex; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .toggle button { font-family: inherit; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 11px 16px; border: none; cursor: pointer; background: #2d2435; color: #cdb8c6; }
+  .toggle button.on { background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); }
+  .play { font-family: inherit; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 11px 18px; border-radius: 12px; border: none; cursor: pointer; background: linear-gradient(#ffe0ec, var(--pink)); color: var(--ink); box-shadow: 0 3px 0 var(--pink-deep); }
+  .play.stop { background: #2d2435; color: #f6e9f1; box-shadow: none; }
+  .demo-status { font-size: 12px; color: #a98ea0; }
+
   .bundle { background: linear-gradient(135deg, #3a1f36 0%, #1b1520 60%); border-radius: 26px; padding: 44px; border: 1px solid rgba(255,211,228,.18); }
   .bundle-title { font-size: clamp(44px, 8vw, 92px); font-weight: 900; letter-spacing: -2px; color: var(--pink); line-height: .95; margin: 8px 0; }
-  .bundle ul { color: #d9c7d3; padding-left: 20px; }
-  .bundle li { margin: 6px 0; }
+  .price-line { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 18px 0 8px; }
+  .price { font-size: 44px; font-weight: 900; color: #fff; }
+  .price small { font-size: 13px; color: var(--teal); letter-spacing: 1px; font-weight: 800; }
+  .bundle-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+  .plugin-card { position: relative; }
+  .plugin-card h3 { color: var(--pink); }
+  .plugin-card .role { font-size: 11px; letter-spacing: 2px; color: var(--teal); font-weight: 800; margin-bottom: 8px; }
+  .plugin-card ul { padding-left: 18px; color: #cdb8c6; font-size: 14px; margin: 10px 0 0; }
+  .plugin-card li { margin: 4px 0; }
 
-  /* ===== products ===== */
-  .price { font-size: 13px; color: var(--teal); font-weight: 800; letter-spacing: 1px; margin-top: 14px; }
+  .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: #2d2435; border: 1px solid var(--line); margin-top: 28px; }
+  .delivery .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex: 0 0 auto; box-shadow: 0 0 10px var(--teal); }
+  .delivery p { margin: 0; color: #d9c7d3; font-size: 15px; }
 
-  /* ===== downloads ===== */
-  .dl-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-  .dl-note { color: #a98ea0; font-size: 13px; margin-top: 14px; max-width: 640px; }
+  .checkout-status { min-height: 18px; font-size: 13px; color: var(--teal); margin-top: 14px; }
+
+  .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(10,6,12,.72); z-index: 50; padding: 24px; }
+  .modal.open { display: flex; }
+  .modal-card { max-width: 440px; width: 100%; background: var(--matte-2); border: 1px solid rgba(255,211,228,.2); border-radius: 20px; padding: 30px; position: relative; }
+  .modal-card p { color: #cdb8c6; font-size: 14px; }
+  .modal-x { position: absolute; top: 12px; right: 14px; background: none; border: none; color: #cdb8c6; font-size: 22px; cursor: pointer; }
 
   footer { padding: 36px 0 60px; border-top: 1px solid var(--line); color: #a98ea0; font-size: 12px; text-align: center; letter-spacing: 1px; }
 
   @media (max-width: 860px) {
-    .grid3 { grid-template-columns: 1fr; }
-    .flagship { grid-template-columns: 1fr; }
+    .grid2, .grid3, .grid4, .flagship { grid-template-columns: 1fr; }
     .links a.hide-sm { display: none; }
     .bundle { padding: 28px; }
   }
@@ -125,57 +153,66 @@
 
 <nav class="top">
   <div class="wrap">
-    <a class="logo" href="#top">Sonic <span>Audio Labs</span></a>
+    <a class="logo" href="#top">Maya <span>DSP</span></a>
     <div class="links">
-      <a href="#products">Products</a>
-      <a href="#bundles">Bundles</a>
+      <a href="#bundle">Bundle</a>
+      <a href="#waveshaper">SonicWaveshaper</a>
+      <a class="hide-sm" href="#demos">Demos</a>
       <a class="hide-sm" href="#about">About</a>
-      <a href="#downloads">Downloads</a>
-      <button class="cart" disabled aria-label="Cart, checkout not yet open">CART (0)</button>
+      <a href="#delivery">Delivery</a>
+      <button class="cart-btn" data-checkout="bundle">BUY $75</button>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="eyebrow">SONIC AUDIO LABS PRESENTS</div>
-    <h1>Analog warmth.<br><em>Neural precision.</em></h1>
-    <p class="lead">Waveshaper is saturation and neural tube-preamp modeling for producers who want the grit of the stompbox without the digital fizz.</p>
+    <div class="eyebrow">MAYA DSP</div>
+    <h1>Zero aliasing.<br><em>Zero digital fizz.</em></h1>
+    <p class="lead">Vedic psychoacoustics meets cybernetic neural sound design. Brutal analog warmth from a neural tube-preamp engine, built for the producer who needs it loud, tight, and clean.</p>
     <div class="btns">
-      <a class="btn pink" href="#products">EXPLORE WAVESHAPER</a>
-      <a class="btn ghost" href="#bundles">SEE THE BUNDLE</a>
+      <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
+      <button class="btn teal" data-checkout="trial">START 7-DAY FREE TRIAL</button>
     </div>
+    <div class="checkout-status" id="checkoutStatus" role="status"></div>
   </div>
 </header>
 
-<section id="about">
+<section id="bundle">
   <div class="wrap">
-    <div class="eyebrow">ABOUT OUR BRAND</div>
-    <h2>Built by producers, for producers.</h2>
-    <div class="about-body">
-      <p>Sonic Audio Labs makes tools that sit between a physical pedalboard and a modern session. We start from the way real amplifiers and stompboxes behave, then build the digital version with DSP that stays precise at high drive.</p>
-      <p>Waveshaper's core is neural amp modeling (NAM), which learns the response of real gear from captured audio. The plugin pairs that with a saturation stage designed to avoid harsh aliasing, so high gain stays musical rather than fizzy.</p>
-      <p>The look is deliberate too: a vintage stompbox faceplate, tactile knobs, and a palette that makes the tool feel like hardware on your desk.</p>
-    </div>
-    <div class="grid3">
-      <div class="card"><h3>Analog warmth</h3><p>Saturation curves shaped to sound like driven tube and transistor circuits, not sterile clipping.</p></div>
-      <div class="card"><h3>Neural modeling</h3><p>NAM-based models capture real amplifier behaviour. Load your own .nam profile or use the built-in default.</p></div>
-      <div class="card"><h3>DSP precision</h3><p>Oversampled processing and careful gain staging keep the top end clean at high drive settings.</p></div>
+    <div class="bundle">
+      <div class="eyebrow">FLAGSHIP BUNDLE</div>
+      <div class="bundle-title">WOOF, WOOF</div>
+      <p class="sub">Four plugins for heavy-hitting production: neural saturation, transient-safe limiting, aggressive distortion and vocoding, and surgical dynamics with spectral space.</p>
+      <div class="price-line">
+        <div class="price">$75 <small>ONE-TIME</small></div>
+      </div>
+      <div class="bundle-btns">
+        <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
+        <button class="btn teal" data-checkout="trial">START 7-DAY FREE TRIAL</button>
+      </div>
+      <div class="grid4">
+        <div class="card plugin-card"><div class="role">01 &middot; SATURATION</div><h3>SonicWaveshaper</h3><p class="sub" style="font-size:14px">Neural tube preamp and saturation with a NAM runtime engine. Load your own .nam profiles.</p></div>
+        <div class="card plugin-card"><div class="role">02 &middot; LIMITING</div><h3>Kaal Limiter</h3><p class="sub" style="font-size:14px">Brickwall limiter that preserves transients for 150+ BPM, psytrance, hi-tech, and metal.</p></div>
+        <div class="card plugin-card"><div class="role">03 &middot; DISTORTION</div><h3>Rudra Vocoder / Distortion</h3><p class="sub" style="font-size:14px">Vicious breakcore and metal distortion, plus cybernetic vocoding.</p></div>
+        <div class="card plugin-card"><div class="role">04 &middot; DYNAMICS</div><h3>Maya Multiband Compressor &amp; Reverb</h3><p class="sub" style="font-size:14px">Surgical multiband dynamic control and lush, non-muddy spectral reverb.</p></div>
+      </div>
+      <p class="note">Kaal Limiter, Rudra, and Maya Multiband are described from the product brief and are not yet shipped in this repository. Their status and feature details are still being finalised.</p>
     </div>
   </div>
 </section>
 
-<section id="products">
+<section id="waveshaper">
   <div class="wrap">
-    <div class="eyebrow">FLAGSHIP</div>
-    <h2>SonicWaveshaper</h2>
-    <p class="sub">Saturation and neural tube-preamp plugin in VST3, AU and Standalone. Drag the knobs below to preview the layout. The preview only changes the displayed values; it does not process audio.</p>
+    <div class="eyebrow">SONICWAVESHAPER</div>
+    <h2>Turn the knobs. Hear the difference.</h2>
+    <p class="sub">The stompbox below is a live preview. Its saturation knob drives a Web Audio waveshaper on the demos in the next section, so you can hear the drive change as you turn it.</p>
     <div class="flagship">
       <div class="stage">
         <div class="pedal">
           <div class="screw s1"></div><div class="screw s2"></div><div class="screw s3"></div><div class="screw s4"></div>
-          <h3 class="brand">sonic <span>waveshaper</span></h3>
-          <div class="model">SW-74 MK II &middot; ADAA-1 &middot; VST3</div>
+          <h3 class="brand">maya <span>dsp</span></h3>
+          <div class="model">SONICWAVESHAPER &middot; NEURAL TUBE PREAMP</div>
           <div class="knobs">
             <div class="knobwrap">
               <div class="well"><div class="knob sm" id="kMix" tabindex="0" role="slider" aria-label="Mix"><div class="cap"><div class="notch"></div></div></div></div>
@@ -192,7 +229,7 @@
           </div>
           <div class="label">SHAPE</div>
           <div class="row" id="shapeRow">
-            <button class="sel on">TANH</button><button class="sel">CUBIC</button><button class="sel">HARD</button><button class="sel">FOLD</button>
+            <button class="sel on" data-shape="0">TANH</button><button class="sel" data-shape="1">CUBIC</button><button class="sel" data-shape="2">HARD</button><button class="sel" data-shape="3">FOLD</button>
           </div>
         </div>
       </div>
@@ -203,28 +240,61 @@
           <li><span>Output trim</span><span>-12 to +12 dB</span></li>
           <li><span>Shapes</span><span>Tanh, Soft Cubic, Hard Clip, Foldback</span></li>
           <li><span>Neural profiles</span><span>Built-in default, plus load your own .nam file</span></li>
-          <li><span>Price</span><span>To be announced</span></li>
+          <li><span>Platforms</span><span>macOS now, Windows coming soon</span></li>
         </ul>
-        <p class="preview-note">Shape buttons in this preview are visual only. In the plugin, the NAM model path does not use the Shape selector yet.</p>
+        <p class="note">The Shape selector affects only the Web Audio preview on this page. In the current plugin build, the NAM path does not use the Shape selector.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="bundles">
+<section id="demos">
   <div class="wrap">
-    <div class="bundle">
-      <div class="eyebrow">FLAGSHIP BUNDLE</div>
-      <div class="bundle-title">WOOF, WOOF</div>
-      <p class="sub">An aggressive, heavy-hitting production suite built around SonicWaveshaper. Bundle contents and pricing are still being finalised.</p>
-      <ul>
-        <li>SonicWaveshaper (included)</li>
-        <li>Additional drive and distortion tools (in development)</li>
-        <li>Sub and punch exciter (in development)</li>
-        <li>Presets for 150+ BPM rave and bass production (in development)</li>
-      </ul>
-      <div class="price">PRICE: TO BE ANNOUNCED</div>
+    <div class="eyebrow">AUDIO STEM DEMOS</div>
+    <h2>Bypass or processed. You decide.</h2>
+    <p class="sub">These demos are synthesized in your browser with Web Audio, not recorded stems. Processed applies the Saturation, Mix, and Output knobs above. Bypass plays the dry signal.</p>
+    <div class="demo">
+      <div class="stems" id="stemRow">
+        <button class="stem on" data-stem="kick"><b>160 BPM PSY / TECHNO</b><span>Kick and bass</span></button>
+        <button class="stem" data-stem="lead"><b>SCREAMER SYNTH</b><span>Saw lead</span></button>
+        <button class="stem" data-stem="breaks"><b>BREAKCORE DRUMS</b><span>Heavy breaks</span></button>
+      </div>
+      <div class="transport">
+        <div class="toggle" id="abToggle">
+          <button class="on" data-mode="processed">PROCESSED</button><button data-mode="bypass">BYPASS</button>
+        </div>
+        <button class="play" id="playBtn">PLAY</button>
+        <span class="demo-status" id="demoStatus">Stopped</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">ABOUT MAYA DSP</div>
+    <h2>Vedic psychoacoustics. Cybernetic sound design.</h2>
+    <div class="manifesto">
+      <p>Maya DSP builds tools that treat sound as something to be shaped with care. The ethos draws on Vedic ideas about how sound affects perception, and on cybernetic sound design that uses neural models of real gear.</p>
+      <p>Our promise is simple: zero aliasing, brutal analog warmth, and zero digital fizz. The saturation stage is designed to keep high drive musical instead of harsh.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>Zero aliasing</h3><p>Saturation is designed to avoid the harsh artefacts that alias at high drive. Claims about oversampling and antiderivative methods should be checked against the shipping build.</p></div>
+      <div class="card"><h3>Analog warmth</h3><p>Neural tube-preamp modeling via NAM captures real amplifier behaviour, not a generic clipper.</p></div>
+      <div class="card"><h3>Built for producers</h3><p>Tight tools for fast tempos, heavy genres, and surgical mix control.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="wrap">
+    <div class="eyebrow">LICENSING AND DELIVERY</div>
+    <h2>Instant delivery.</h2>
+    <div class="delivery">
+      <div class="dot"></div>
+      <p><strong>Instant delivery.</strong> Drag-and-drop macOS VST3 and AU installer, with an offline serial key included. Windows coming soon.</p>
+    </div>
+    <p class="note">Licensing terms, refund policy, and the trial length will appear on the Lemon Squeezy checkout page once it is configured.</p>
   </div>
 </section>
 
@@ -232,7 +302,7 @@
   <div class="wrap">
     <div class="eyebrow">COMING NEXT</div>
     <h2>More from the lab</h2>
-    <p class="sub">These products are in development. Nothing here is available to buy yet.</p>
+    <p class="sub">In development. Nothing here is available to buy yet.</p>
     <div class="grid3">
       <div class="card"><span class="tag soon">IN DEVELOPMENT</span><h3>Analog Distortion</h3><p>Drive stages voiced after classic pedal circuits.</p></div>
       <div class="card"><span class="tag soon">IN DEVELOPMENT</span><h3>Sub and Punch Exciter</h3><p>Low-end weight and transient snap for drums and bass.</p></div>
@@ -241,36 +311,75 @@
   </div>
 </section>
 
-<section id="downloads">
-  <div class="wrap">
-    <div class="eyebrow">SPECS AND DOWNLOADS</div>
-    <h2>Get Waveshaper</h2>
-    <div class="dl-row">
-      <a class="btn pink" href="https://github.com/jashanjoher/sonicwaveshaper/releases/latest">DOWNLOAD FOR MACOS</a>
-      <a class="btn pink" href="https://github.com/jashanjoher/sonicwaveshaper/releases/latest">DOWNLOAD FOR WINDOWS</a>
-      <a class="btn ghost" href="https://github.com/jashanjoher/sonicwaveshaper/actions">BUILD STATUS</a>
-    </div>
-    <p class="dl-note">Downloads point to the latest GitHub Release. A release is only published when a version tag such as v1.0.0 is pushed, so these links become active after that release exists. Checkout will open at launch.</p>
+<div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button class="modal-x" id="modalClose" aria-label="Close">&times;</button>
+    <div class="eyebrow">CHECKOUT</div>
+    <h3 id="modalTitle">WOOF, WOOF Bundle</h3>
+    <p id="modalBody"></p>
   </div>
-</section>
+</div>
 
 <footer>
-  <div class="wrap">SONIC AUDIO LABS &middot; WAVESHAPER &middot; ADAA-1 ANTIDERIVATIVE ANTIALIASING</div>
+  <div class="wrap">MAYA DSP &middot; VEDIC PSYCHOACOUSTICS &middot; CYBERNETIC SOUND DESIGN</div>
 </footer>
 
 <script>
-// Preview only: knobs and buttons update the display and do not process audio.
+// ---------- Lemon Squeezy checkout ----------
+// Replace these with the real Lemon Squeezy checkout URLs before launch.
+// Until then the buttons show a notice instead of opening a checkout.
+const LEMON_CHECKOUT = {
+  bundle: "REPLACE_WITH_LEMON_SQUEEZY_BUNDLE_CHECKOUT_URL",
+  trial:  "REPLACE_WITH_LEMON_SQUEEZY_TRIAL_CHECKOUT_URL"
+};
+const isConfigured = url => typeof url === "string" && url.startsWith("https://");
+
+const modal = document.getElementById("checkoutModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const statusEl = document.getElementById("checkoutStatus");
+
+function openModal(title, body) {
+  modalTitle.textContent = title;
+  modalBody.textContent = body;
+  modal.classList.add("open");
+}
+document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("open"));
+modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+
+function startCheckout(kind) {
+  const url = LEMON_CHECKOUT[kind];
+  const title = kind === "trial" ? "7-Day Free Trial" : "WOOF, WOOF Bundle - $75";
+  if (!isConfigured(url)) {
+    openModal(title, "Checkout is not connected yet. The Lemon Squeezy checkout link will be added before launch.");
+    statusEl.textContent = "";
+    return;
+  }
+  // Lemon Squeezy overlay: lemon.js handles any link with the lemonsqueezy-button class.
+  // Opening the URL directly keeps this working if the overlay script is blocked.
+  if (window.LemonSqueezy && window.createLemonSqueezy) {
+    window.LemonSqueezy.Url.Open(url);
+  } else {
+    window.open(url, "_blank", "noopener");
+  }
+  statusEl.textContent = "Opening checkout...";
+}
+document.querySelectorAll("[data-checkout]").forEach(b =>
+  b.addEventListener("click", () => startCheckout(b.dataset.checkout)));
+
+// ---------- SonicWaveshaper preview knobs ----------
 const KNOBS = {
-  kDrive: { min: 0,   max: 24, def: 12, out: 'rDrive', fmt: v => v.toFixed(1) + ' dB' },
-  kMix:   { min: 0,   max: 1,  def: 1,  out: 'rMix',   fmt: v => Math.round(v * 100) + '%' },
-  kOut:   { min: -12, max: 12, def: 0,  out: 'rOut',   fmt: v => (v >= 0 ? '+' : '') + v.toFixed(1) + ' dB' },
+  kDrive: { min: 0,   max: 24, def: 12, out: "rDrive", fmt: v => v.toFixed(1) + " dB" },
+  kMix:   { min: 0,   max: 1,  def: 1,  out: "rMix",   fmt: v => Math.round(v * 100) + "%" },
+  kOut:   { min: -12, max: 12, def: 0,  out: "rOut",   fmt: v => (v >= 0 ? "+" : "") + v.toFixed(1) + " dB" },
 };
 const val = {};
+let shapeIndex = 0;
 function norm(id) { const c = KNOBS[id]; return (val[id] - c.min) / (c.max - c.min); }
 function paint(id) {
   const el = document.getElementById(id), c = KNOBS[id];
-  el.querySelector('.cap').style.setProperty('--rot', (-135 + norm(id) * 270) + 'deg');
-  el.setAttribute('aria-valuenow', val[id].toFixed(2));
+  el.querySelector(".cap").style.setProperty("--rot", (-135 + norm(id) * 270) + "deg");
+  el.setAttribute("aria-valuenow", val[id].toFixed(2));
   document.getElementById(c.out).textContent = c.fmt(val[id]);
 }
 function setN(id, n) {
@@ -278,27 +387,169 @@ function setN(id, n) {
   n = Math.max(0, Math.min(1, n));
   val[id] = c.min + n * (c.max - c.min);
   paint(id);
+  if (id === "kDrive" || id === "kMix" || id === "kOut") applyParams();
 }
 Object.keys(KNOBS).forEach(id => {
   val[id] = KNOBS[id].def;
   const el = document.getElementById(id);
   let drag = null;
-  el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); drag = { y: e.clientY, n: norm(id) }; });
-  el.addEventListener('pointermove', e => { if (drag) setN(id, drag.n + (drag.y - e.clientY) / 180 * (e.shiftKey ? 0.2 : 1)); });
+  el.addEventListener("pointerdown", e => { el.setPointerCapture(e.pointerId); drag = { y: e.clientY, n: norm(id) }; });
+  el.addEventListener("pointermove", e => { if (drag) setN(id, drag.n + (drag.y - e.clientY) / 180 * (e.shiftKey ? 0.2 : 1)); });
   const end = () => { drag = null; };
-  el.addEventListener('pointerup', end);
-  el.addEventListener('pointercancel', end);
-  el.addEventListener('dblclick', () => setN(id, (KNOBS[id].def - KNOBS[id].min) / (KNOBS[id].max - KNOBS[id].min)));
-  el.addEventListener('wheel', e => { e.preventDefault(); setN(id, norm(id) - Math.sign(e.deltaY) * 0.02); }, { passive: false });
-  el.addEventListener('keydown', e => {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); setN(id, norm(id) + 0.02); }
-    if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); setN(id, norm(id) - 0.02); }
+  el.addEventListener("pointerup", end);
+  el.addEventListener("pointercancel", end);
+  el.addEventListener("dblclick", () => setN(id, (KNOBS[id].def - KNOBS[id].min) / (KNOBS[id].max - KNOBS[id].min)));
+  el.addEventListener("wheel", e => { e.preventDefault(); setN(id, norm(id) - Math.sign(e.deltaY) * 0.02); }, { passive: false });
+  el.addEventListener("keydown", e => {
+    if (e.key === "ArrowUp" || e.key === "ArrowRight") { e.preventDefault(); setN(id, norm(id) + 0.02); }
+    if (e.key === "ArrowDown" || e.key === "ArrowLeft") { e.preventDefault(); setN(id, norm(id) - 0.02); }
   });
   paint(id);
 });
-document.querySelectorAll('#shapeRow .sel').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('#shapeRow .sel').forEach(x => x.classList.remove('on'));
-  b.classList.add('on');
+document.querySelectorAll("#shapeRow .sel").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#shapeRow .sel").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  shapeIndex = Number(b.dataset.shape);
+  applyParams();
+}));
+
+// ---------- Web Audio stem demos ----------
+let ctx = null, master = null, shaper = null, dryGain = null, wetGain = null, outGain = null;
+let playing = false, mode = "processed", stem = "kick", timers = [];
+
+function curveFor(drive, shape) {
+  const n = 2048, c = new Float32Array(n), k = Math.pow(10, drive / 20) * 2;
+  for (let i = 0; i < n; i++) {
+    const x = (i / (n - 1)) * 2 - 1, y = x * k;
+    let v;
+    if (shape === 1) v = Math.max(-1, Math.min(1, y - (y * y * y) / 3));
+    else if (shape === 2) v = Math.max(-1, Math.min(1, y));
+    else if (shape === 3) v = Math.sin(y * Math.PI / 2);
+    else v = Math.tanh(y);
+    c[i] = v;
+  }
+  return c;
+}
+function applyParams() {
+  if (!ctx) return;
+  const mix = val.kMix / 1;
+  const drive = val.kDrive;
+  shaper.curve = curveFor(drive, shapeIndex);
+  const wet = Math.max(0, Math.min(1, mix));
+  wetGain.gain.setTargetAtTime(wet, ctx.currentTime, 0.02);
+  dryGain.gain.setTargetAtTime(1 - wet, ctx.currentTime, 0.02);
+  outGain.gain.setTargetAtTime(Math.pow(10, val.kOut / 20), ctx.currentTime, 0.02);
+  applyMode();
+}
+function applyMode() {
+  if (!ctx) return;
+  // Bypass forces the dry path only; Processed uses the mix and output knobs.
+  const wet = mode === "bypass" ? 0 : Math.max(0, Math.min(1, val.kMix));
+  wetGain.gain.setTargetAtTime(wet, ctx.currentTime, 0.02);
+  dryGain.gain.setTargetAtTime(mode === "bypass" ? 1 : 1 - wet, ctx.currentTime, 0.02);
+}
+function ensureCtx() {
+  if (ctx) return;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  ctx = new AC();
+  master = ctx.createGain(); master.gain.value = 0.7; master.connect(ctx.destination);
+  shaper = ctx.createWaveShaper(); shaper.oversample = "4x";
+  outGain = ctx.createGain();
+  wetGain = ctx.createGain();
+  dryGain = ctx.createGain();
+  // Bus: source -> dry, source -> shaper -> wet; both -> outGain -> master
+  bus = ctx.createGain();
+  bus.connect(dryGain); bus.connect(shaper); shaper.connect(wetGain);
+  dryGain.connect(outGain); wetGain.connect(outGain); outGain.connect(master);
+  applyParams();
+}
+let bus = null;
+
+function kickBass(t) {
+  // 160 BPM: one kick per beat, sub bass on the off-beats
+  const beat = 60 / 160;
+  for (let i = 0; i < 16; i++) {
+    const s = t + i * beat / 4;
+    if (i % 4 === 0) {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.setValueAtTime(140, s); o.frequency.exponentialRampToValueAtTime(45, s + 0.12);
+      g.gain.setValueAtTime(0.9, s); g.gain.exponentialRampToValueAtTime(0.001, s + 0.25);
+      o.connect(g); g.connect(bus); o.start(s); o.stop(s + 0.3);
+    }
+    if (i % 4 === 2) {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sawtooth"; o.frequency.value = 43.65;
+      g.gain.setValueAtTime(0.35, s); g.gain.exponentialRampToValueAtTime(0.001, s + beat / 2);
+      o.connect(g); g.connect(bus); o.start(s); o.stop(s + beat / 2 + 0.02);
+    }
+  }
+}
+function screamerLead(t) {
+  const beat = 60 / 160, notes = [220, 277.18, 329.63, 440];
+  for (let i = 0; i < 8; i++) {
+    const s = t + i * beat / 2, o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = "sawtooth"; o.frequency.value = notes[i % notes.length];
+    g.gain.setValueAtTime(0.25, s); g.gain.exponentialRampToValueAtTime(0.001, s + beat / 2 * 0.9);
+    o.connect(g); g.connect(bus); o.start(s); o.stop(s + beat / 2);
+  }
+}
+function breakDrums(t) {
+  const beat = 60 / 160;
+  for (let i = 0; i < 32; i++) {
+    const s = t + i * beat / 4;
+    if (i % 8 === 0 || i % 8 === 5) {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.setValueAtTime(180, s); o.frequency.exponentialRampToValueAtTime(60, s + 0.08);
+      g.gain.setValueAtTime(0.8, s); g.gain.exponentialRampToValueAtTime(0.001, s + 0.12);
+      o.connect(g); g.connect(bus); o.start(s); o.stop(s + 0.14);
+    }
+    if (i % 8 === 4) {
+      const len = Math.floor(ctx.sampleRate * 0.08), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+      for (let j = 0; j < len; j++) d[j] = (Math.random() * 2 - 1) * Math.pow(1 - j / len, 3);
+      const src = ctx.createBufferSource(), g = ctx.createGain();
+      src.buffer = buf; g.gain.value = 0.5; src.connect(g); g.connect(bus); src.start(s);
+    }
+  }
+}
+const STEMS = { kick: kickBass, lead: screamerLead, breaks: breakDrums };
+
+function stopDemo() {
+  playing = false;
+  timers.forEach(clearTimeout); timers = [];
+  const btn = document.getElementById("playBtn");
+  btn.textContent = "PLAY"; btn.classList.remove("stop");
+  document.getElementById("demoStatus").textContent = "Stopped";
+  if (bus) { try { bus.disconnect(); } catch (_) {} bus = ctx.createGain(); bus.connect(dryGain); bus.connect(shaper); }
+}
+function playDemo() {
+  ensureCtx();
+  if (ctx.state === "suspended") ctx.resume();
+  stopDemo();
+  playing = true;
+  const btn = document.getElementById("playBtn");
+  btn.textContent = "STOP"; btn.classList.add("stop");
+  document.getElementById("demoStatus").textContent = "Playing: " + stem.toUpperCase() + " (" + mode + ")";
+  const loopLen = 4 * 60 / 160 * 4; // four bars
+  const schedule = t0 => {
+    STEMS[stem](t0);
+    const t = setTimeout(() => { if (playing) schedule(t0 + loopLen); }, (t0 + loopLen - ctx.currentTime - 0.3) * 1000);
+    timers.push(t);
+  };
+  schedule(ctx.currentTime + 0.1);
+}
+document.getElementById("playBtn").addEventListener("click", () => playing ? stopDemo() : playDemo());
+
+document.querySelectorAll("#stemRow .stem").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#stemRow .stem").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  stem = b.dataset.stem;
+  if (playing) playDemo();
+}));
+document.querySelectorAll("#abToggle button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#abToggle button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  mode = b.dataset.mode;
+  applyMode();
 }));
 </script>
 </body>
