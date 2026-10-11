@@ -16,9 +16,11 @@ FetchContent_Declare(nlohmann_json
     URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 
 # NeuralAmpModelerCore at a pinned commit. We only need its source files, not its CMake tree.
+# GIT_SHALLOW fetches only the pinned commit instead of the full history.
 FetchContent_Declare(nam
     GIT_REPOSITORY https://github.com/sdatkinson/NeuralAmpModelerCore.git
     GIT_TAG 0b3d3c97b0859a3a8c92a8628c4dd89a25eb5842
+    GIT_SHALLOW TRUE
     GIT_SUBMODULES "")
 
 FetchContent_MakeAvailable(eigen nlohmann_json)
@@ -39,7 +41,10 @@ set(NAM_MODEL_HEADER "${NAM_GEN_DIR}/EmbeddedModel.h")
 set(NAM_MODEL_EXPECTED_BYTES 407452)
 
 if (NOT EXISTS "${NAM_MODEL_FILE}")
-    file(DOWNLOAD "${NAM_MODEL_URL}" "${NAM_MODEL_FILE}" STATUS NAM_DL_STATUS TLS_VERIFY ON)
+    # TIMEOUT caps the whole download at 120 seconds; INACTIVITY_TIMEOUT fails it after 30 seconds with no data.
+    file(DOWNLOAD "${NAM_MODEL_URL}" "${NAM_MODEL_FILE}"
+         TIMEOUT 120 INACTIVITY_TIMEOUT 30
+         STATUS NAM_DL_STATUS TLS_VERIFY ON)
     list(GET NAM_DL_STATUS 0 NAM_DL_CODE)
     if (NOT NAM_DL_CODE EQUAL 0)
         file(REMOVE "${NAM_MODEL_FILE}")
