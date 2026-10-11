@@ -134,8 +134,8 @@ void SonicWaveshaperAudioProcessor::prepareToPlay (double sampleRate, int sample
 
     for (int ch = 0; ch < 2; ++ch)
     {
-        namInput[ch].assign ((size_t) preparedBlockSize, 0.0);
-        namOutput[ch].assign ((size_t) preparedBlockSize, 0.0);
+        namInput[ch].assign ((size_t) preparedBlockSize, 0.0f);
+        namOutput[ch].assign ((size_t) preparedBlockSize, 0.0f);
     }
 
     {
@@ -213,16 +213,17 @@ void SonicWaveshaperAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
             auto& out = namOutput[ch];
 
             for (int i = 0; i < n; ++i)
-                in[(size_t) i] = (double) channelData[i] * (double) inputGain;
+                in[(size_t) i] = channelData[i] * inputGain;
 
-            double* inPtr = in.data();
-            double* outPtr = out.data();
+            // NAM_SAMPLE is float (NAM_SAMPLE_FLOAT), so the channel pointers must be float* arrays.
+            float* inPtr = in.data();
+            float* outPtr = out.data();
             namModels[ch]->process (&inPtr, &outPtr, n);
 
             const float* dry = dryBuffer.getReadPointer (ch);
 
             for (int i = 0; i < n; ++i)
-                channelData[i] = dry[i] * dryGain + (float) outPtr[i] * wetGain;
+                channelData[i] = dry[i] * dryGain + outPtr[i] * wetGain;
         }
     }
 }
