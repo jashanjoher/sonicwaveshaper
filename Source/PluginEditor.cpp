@@ -8,6 +8,8 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
       outputAttachment (p.apvts, ParamIDs::output, outputSlider),
       shapeAttachment (p.apvts, ParamIDs::shape, shapeBox)
 {
+    setLookAndFeel (&lookAndFeel);
+
     driveSlider.setTextValueSuffix (" dB");
     mixSlider.setTextValueSuffix (" %");
     outputSlider.setTextValueSuffix (" dB");
@@ -17,8 +19,12 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
     for (auto* l : { &driveLabel, &mixLabel, &outputLabel, &shapeLabel })
     {
         l->setJustificationType (juce::Justification::centred);
-        l->setFont (juce::FontOptions (14.0f, juce::Font::bold));
+        l->setFont (juce::FontOptions (13.0f, juce::Font::bold));
+        l->setColour (juce::Label::textColourId, SonicLookAndFeel::ink());
     }
+
+    for (auto* s : { &driveSlider, &mixSlider, &outputSlider })
+        s->setColour (juce::Slider::textBoxTextColourId, SonicLookAndFeel::ink());
 
     for (auto* c : { static_cast<juce::Component*> (&driveSlider),
                      static_cast<juce::Component*> (&mixSlider),
@@ -30,37 +36,55 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
                      static_cast<juce::Component*> (&shapeLabel) })
         addAndMakeVisible (c);
 
-    setSize (560, 320);
+    setSize (600, 360);
+}
+
+SonicWaveshaperAudioProcessorEditor::~SonicWaveshaperAudioProcessorEditor()
+{
+    setLookAndFeel (nullptr);
 }
 
 void SonicWaveshaperAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colour (0xff1b1d22));
+    // matte cream faceplate with recessed chassis edge
+    juce::ColourGradient face (SonicLookAndFeel::faceplateTop(), 0.0f, 0.0f,
+                               SonicLookAndFeel::faceplateBottom(), 0.0f, (float) getHeight(), false);
+    g.setGradientFill (face);
+    g.fillAll();
 
-    g.setColour (juce::Colours::white);
-    g.setFont (juce::FontOptions (22.0f, juce::Font::bold));
-    g.drawText ("SonicWaveshaper", getLocalBounds().removeFromTop (50), juce::Justification::centred);
+    g.setColour (juce::Colour (0xff2a2c2f));
+    g.drawRect (getLocalBounds(), 3);
+
+    g.setColour (SonicLookAndFeel::ink());
+    g.setFont (juce::FontOptions (20.0f, juce::Font::bold));
+    g.drawText ("SONIC AUDIO LABS  //  SW-74 MK II", getLocalBounds().removeFromTop (46), juce::Justification::centred);
+
+    g.setColour (SonicLookAndFeel::accent());
+    g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
+    g.drawText ("ADAA-1 WAVESHAPER", getLocalBounds().removeFromBottom (22), juce::Justification::centred);
 }
 
 void SonicWaveshaperAudioProcessorEditor::resized()
 {
     auto area = getLocalBounds().reduced (20);
-    area.removeFromTop (50);
+    area.removeFromTop (46);
+    area.removeFromBottom (18);
 
-    auto shapeArea = area.removeFromTop (60);
-    shapeLabel.setBounds (shapeArea.removeFromTop (20));
-    shapeBox.setBounds (shapeArea.reduced (120, 4));
+    auto shapeArea = area.removeFromTop (58);
+    shapeLabel.setBounds (shapeArea.removeFromTop (18));
+    shapeBox.setBounds (shapeArea.reduced (120, 6));
 
+    area.removeFromTop (6);
     const int knobWidth = area.getWidth() / 3;
 
     auto driveArea = area.removeFromLeft (knobWidth);
-    driveLabel.setBounds (driveArea.removeFromTop (20));
+    driveLabel.setBounds (driveArea.removeFromTop (18));
     driveSlider.setBounds (driveArea.reduced (8));
 
     auto mixArea = area.removeFromLeft (knobWidth);
-    mixLabel.setBounds (mixArea.removeFromTop (20));
+    mixLabel.setBounds (mixArea.removeFromTop (18));
     mixSlider.setBounds (mixArea.reduced (8));
 
-    outputLabel.setBounds (area.removeFromTop (20));
+    outputLabel.setBounds (area.removeFromTop (18));
     outputSlider.setBounds (area.reduced (8));
 }

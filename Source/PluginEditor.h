@@ -6,18 +6,20 @@
 #include <juce_gui_extra/juce_gui_extra.h>
 
 #include "PluginProcessor.h"
+#include "SonicLookAndFeel.h"
 
 class SonicWaveshaperAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
     explicit SonicWaveshaperAudioProcessorEditor (SonicWaveshaperAudioProcessor&);
-    ~SonicWaveshaperAudioProcessorEditor() override = default;
+    ~SonicWaveshaperAudioProcessorEditor() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
     SonicWaveshaperAudioProcessor& processorRef;
+    SonicLookAndFeel lookAndFeel;
 
     juce::Slider driveSlider { juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow };
     juce::Slider mixSlider { juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow };
