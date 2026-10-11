@@ -19,7 +19,7 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
     for (auto* l : { &driveLabel, &mixLabel, &outputLabel, &shapeLabel })
     {
         l->setJustificationType (juce::Justification::centred);
-        l->setFont (juce::FontOptions (11.0f, juce::Font::bold));
+        l->setFont (juce::FontOptions (9.0f, juce::Font::bold));
         l->setColour (juce::Label::textColourId, SonicLookAndFeel::ink());
     }
 
@@ -36,7 +36,7 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
                      static_cast<juce::Component*> (&shapeLabel) })
         addAndMakeVisible (c);
 
-    setSize (380, 300);
+    setSize (340, 300);
 }
 
 SonicWaveshaperAudioProcessorEditor::~SonicWaveshaperAudioProcessorEditor()
@@ -46,44 +46,51 @@ SonicWaveshaperAudioProcessorEditor::~SonicWaveshaperAudioProcessorEditor()
 
 void SonicWaveshaperAudioProcessorEditor::paint (juce::Graphics& g)
 {
+    auto body = getLocalBounds().toFloat().reduced (6.0f);
+
+    // soft drop shadow under the pedal
+    g.setColour (juce::Colour (0x40501a33));
+    g.fillRoundedRectangle (body.translated (0.0f, 6.0f), 20.0f);
+
     // bubblegum faceplate
-    juce::ColourGradient face (SonicLookAndFeel::pinkTop(), 0.0f, 0.0f,
-                               SonicLookAndFeel::pinkBottom(), 0.0f, (float) getHeight(), false);
+    juce::ColourGradient face (SonicLookAndFeel::pinkTop(), 0.0f, body.getY(),
+                               SonicLookAndFeel::pinkBottom(), 0.0f, body.getBottom(), false);
     g.setGradientFill (face);
-    g.fillRoundedRectangle (getLocalBounds().toFloat(), 18.0f);
+    g.fillRoundedRectangle (body, 20.0f);
 
     g.setColour (SonicLookAndFeel::pinkDeep());
-    g.drawRoundedRectangle (getLocalBounds().toFloat().reduced (1.5f), 18.0f, 2.5f);
+    g.drawRoundedRectangle (body.reduced (1.0f), 20.0f, 2.0f);
 
     g.setColour (SonicLookAndFeel::ink());
-    g.setFont (juce::FontOptions (18.0f, juce::Font::bold));
-    g.drawText ("sonic waveshaper", getLocalBounds().removeFromTop (38), juce::Justification::centred);
+    g.setFont (juce::FontOptions (16.0f, juce::Font::bold));
+    g.drawText ("sonic waveshaper", getLocalBounds().removeFromTop (34), juce::Justification::centred);
 
     g.setColour (SonicLookAndFeel::tealDeep());
-    g.setFont (juce::FontOptions (9.0f, juce::Font::bold));
-    g.drawText ("SW-74 MK II  ADAA-1", getLocalBounds().removeFromBottom (18), juce::Justification::centred);
+    g.setFont (juce::FontOptions (8.0f, juce::Font::bold));
+    g.drawText ("SW-74 MK II  ADAA-1", getLocalBounds().removeFromBottom (16), juce::Justification::centred);
 }
 
 void SonicWaveshaperAudioProcessorEditor::resized()
 {
     auto area = getLocalBounds().reduced (16);
-    area.removeFromTop (34);
-    area.removeFromBottom (20);
+    area.removeFromTop (30);
+    area.removeFromBottom (18);
 
-    auto shapeArea = area.removeFromTop (46);
-    shapeLabel.setBounds (shapeArea.removeFromTop (16));
-    shapeBox.setBounds (shapeArea.reduced (70, 4));
+    auto shapeArea = area.removeFromBottom (48);
+    shapeLabel.setBounds (shapeArea.removeFromTop (14));
+    shapeBox.setBounds (shapeArea.reduced (60, 4));
 
-    const int knobWidth = area.getWidth() / 3;
+    // small, balanced knob row: saturation is the centre knob and is only slightly larger
+    const int colW = area.getWidth() / 3;
 
-    auto driveArea = area.removeFromLeft (knobWidth);
-    driveLabel.setBounds (driveArea.removeFromTop (16));
-    driveSlider.setBounds (driveArea.reduced (4));
+    auto mixArea = area.removeFromLeft (colW);
+    mixLabel.setBounds (mixArea.removeFromTop (14));
+    mixSlider.setBounds (mixArea.reduced (2));
 
-    auto mixArea = area.removeFromLeft (knobWidth);
-    mixLabel.setBounds (mixArea.removeFromTop (16));
-    mixSlider.setBounds (mixArea.reduced (4));
+    auto satArea = area.removeFromLeft (colW);
+    driveLabel.setBounds (satArea.removeFromTop (14));
+    driveSlider.setBounds (satArea.reduced (0, 0).withSizeKeepingCentre (juce::jmin (satArea.getWidth(), 120), satArea.getHeight()));
 
-    outputLabel.setBounds (area.removeFromTop (16));
-    outputSlider.setBounds (area.reduced (4));
+    outputLabel.setBounds (area.removeFromTop (14));
+    outputSlider.setBounds (area.reduced (2));
 }
