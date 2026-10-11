@@ -66,10 +66,11 @@ file(GLOB NAM_CORE_SOURCES
 add_library(nam_core STATIC ${NAM_CORE_SOURCES})
 target_compile_features(nam_core PUBLIC cxx_std_20)
 target_compile_definitions(nam_core PUBLIC NAM_SAMPLE_FLOAT)
+# Include root is include/ so that <nlohmann/...> resolves to include/nlohmann/...
 target_include_directories(nam_core PUBLIC
     "${nam_SOURCE_DIR}"
     "${eigen_SOURCE_DIR}"
-    "${nlohmann_json_SOURCE_DIR}/include/nlohmann")
+    "${nlohmann_json_SOURCE_DIR}/include")
 set_target_properties(nam_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 juce_add_plugin(SonicWaveshaper
