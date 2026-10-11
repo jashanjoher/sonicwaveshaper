@@ -26,6 +26,11 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel
 
+      - name: Locate build outputs
+        run: |
+          echo "Searching for plugin bundles under build/:"
+          find build -maxdepth 6 \( -name "SonicWaveshaper.vst3" -o -name "SonicWaveshaper.component" -o -name "SonicWaveshaper.app" \) -print || true
+
       - name: Collect artifacts
         run: |
           mkdir -p artifacts
@@ -39,32 +44,45 @@ jobs:
         run: |
           set -euo pipefail
           STAGE="dmg-stage"
-          rm -rf "$STAGE" && mkdir -p "$STAGE"
+          rm -rf "$STAGE"
+          mkdir -p "$STAGE"
 
-          # Copy the plugin bundles into the staging folder.
-          cp -R build/SonicWaveshaper_artefacts/Release/VST3/SonicWaveshaper.vst3 "$STAGE/"
-          cp -R build/SonicWaveshaper_artefacts/Release/AU/SonicWaveshaper.component "$STAGE/"
-          cp -R build/SonicWaveshaper_artefacts/Release/Standalone/SonicWaveshaper.app "$STAGE/"
+          VST3_SRC="build/SonicWaveshaper_artefacts/Release/VST3/SonicWaveshaper.vst3"
+          AU_SRC="build/SonicWaveshaper_artefacts/Release/AU/SonicWaveshaper.component"
+          APP_SRC="build/SonicWaveshaper_artefacts/Release/Standalone/SonicWaveshaper.app"
 
-          # Symlinks to the system plugin folders, so the user drags each bundle onto its folder in Finder.
-          ln -s /Library/Audio/Plug-Ins/VST3 "$STAGE/VST3 Plug-Ins (drop SonicWaveshaper.vst3 here)"
-          ln -s /Library/Audio/Plug-Ins/Components "$STAGE/AU Components (drop SonicWaveshaper.component here)"
+          for p in "$VST3_SRC" "$AU_SRC" "$APP_SRC"; do
+            if [ ! -e "$p" ]; then
+              echo "ERROR: missing build output: $p"
+              echo "Found these SonicWaveshaper bundles:"
+              find build -maxdepth 6 -name "SonicWaveshaper*" -print || true
+              exit 1
+            fi
+          done
+
+          cp -R "$VST3_SRC" "$STAGE/"
+          cp -R "$AU_SRC" "$STAGE/"
+          cp -R "$APP_SRC" "$STAGE/"
+
+          ln -s /Library/Audio/Plug-Ins/VST3 "$STAGE/VST3 folder - drag SonicWaveshaper.vst3 here"
+          ln -s /Library/Audio/Plug-Ins/Components "$STAGE/AU folder - drag SonicWaveshaper.component here"
           ln -s /Applications "$STAGE/Applications"
 
-          cat > "$STAGE/README - Install.txt" <<'EOF'
-SonicWaveshaper - install on macOS
-
-1. Drag SonicWaveshaper.vst3 onto the "VST3 Plug-Ins" folder link.
-2. Drag SonicWaveshaper.component onto the "AU Components" folder link.
-3. Drag SonicWaveshaper.app onto Applications (optional, standalone app).
-4. Enter your administrator password if macOS asks. These folders are system-wide.
-5. Restart your DAW so it scans for the new plugin.
-
-The build is not notarized. If macOS blocks the standalone app on first launch, right-click it and choose Open, or run:
-  xattr -dr com.apple.quarantine /Applications/SonicWaveshaper.app
-
-Windows: coming soon.
-EOF
+          {
+            echo "SonicWaveshaper - install on macOS"
+            echo ""
+            echo "1. Drag SonicWaveshaper.vst3 onto the 'VST3 folder' link."
+            echo "2. Drag SonicWaveshaper.component onto the 'AU folder' link."
+            echo "3. Drag SonicWaveshaper.app onto Applications (optional standalone app)."
+            echo "4. Enter your administrator password if macOS asks. These folders are system-wide."
+            echo "5. Restart your DAW so it scans for the new plugin."
+            echo ""
+            echo "The build is not notarized. If macOS blocks the standalone app on first launch,"
+            echo "right-click it and choose Open, or run:"
+            echo "  xattr -dr com.apple.quarantine /Applications/SonicWaveshaper.app"
+            echo ""
+            echo "Windows: coming soon."
+          } > "$STAGE/README - Install.txt"
 
           hdiutil create -volname "SonicWaveshaper" -srcfolder "$STAGE" -ov -format UDZO SonicWaveshaper-macOS.dmg
           hdiutil verify SonicWaveshaper-macOS.dmg
