@@ -76,10 +76,11 @@ private:
     juce::String customModelPath;
 
     // Scratch storage sized in prepareToPlay so processBlock does not allocate.
+    // NAM_SAMPLE is float (NAM_SAMPLE_FLOAT), so these must be float to match nam::DSP::process().
     int preparedBlockSize = 0;
     juce::AudioBuffer<float> dryBuffer;
-    std::vector<double> namInput[2];
-    std::vector<double> namOutput[2];
+    std::vector<float> namInput[2];
+    std::vector<float> namOutput[2];
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SonicWaveshaperAudioProcessor)
 };
