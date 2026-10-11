@@ -5,6 +5,7 @@
 #include <juce_audio_utils/juce_audio_utils.h>
 #include <juce_dsp/juce_dsp.h>
 
+#include <array>
 #include <memory>
 #include <vector>
 
@@ -50,13 +51,29 @@ public:
 
     juce::AudioProcessorValueTreeState apvts;
 
-private:
-    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    void loadEmbeddedNamModel();
+    // Loads a user-selected .nam file. If it is missing, empty, or invalid, the embedded default is restored
+    // and the returned Result carries the reason.
+    juce::Result loadCustomNamModel (const juce::File& file);
 
-    // One NAM model instance per channel, because each instance holds its own recurrent state.
-    std::unique_ptr<nam::DSP> namModels[2];
-    bool namReady = false;
+    // Name shown in the UI: "Default: WaveNet A1" or the loaded file's name.
+    juce::String getActiveModelName() const { return activeModelName; }
+
+private:
+    using NamPair = std::array<std::unique_ptr<nam::DSP>, 2>;
+
+    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
+    bool loadEmbeddedNamModel();
+    void resetModels (NamPair& models) const;
+    void installNamModels (NamPair&& models, const juce::String& name);
+
+    // Guards namModels. processBlock only try-locks it, so it never waits on a model swap.
+    juce::SpinLock namLock;
+    NamPair namModels;
+
+    double currentSampleRate = 0.0;
+    juce::String activeModelName;
+    juce::String customModelPath;
 
     // Scratch storage sized in prepareToPlay so processBlock does not allocate.
     int preparedBlockSize = 0;

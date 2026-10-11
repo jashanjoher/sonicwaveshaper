@@ -23,6 +23,15 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
         l->setColour (juce::Label::textColourId, SonicLookAndFeel::ink());
     }
 
+    namLabel.setText (processorRef.getActiveModelName(), juce::dontSendNotification);
+    namLabel.setJustificationType (juce::Justification::centred);
+    namLabel.setFont (juce::FontOptions (9.0f, juce::Font::bold));
+    namLabel.setColour (juce::Label::textColourId, SonicLookAndFeel::tealDeep());
+
+    namButton.setColour (juce::TextButton::buttonColourId, SonicLookAndFeel::pinkTop());
+    namButton.setColour (juce::TextButton::textColourOffId, SonicLookAndFeel::ink());
+    namButton.onClick = [this] { chooseNamProfile(); };
+
     for (auto* s : { &driveSlider, &mixSlider, &outputSlider })
         s->setColour (juce::Slider::textBoxTextColourId, SonicLookAndFeel::tealDeep());
 
@@ -33,15 +42,49 @@ SonicWaveshaperAudioProcessorEditor::SonicWaveshaperAudioProcessorEditor (SonicW
                      static_cast<juce::Component*> (&driveLabel),
                      static_cast<juce::Component*> (&mixLabel),
                      static_cast<juce::Component*> (&outputLabel),
-                     static_cast<juce::Component*> (&shapeLabel) })
+                     static_cast<juce::Component*> (&shapeLabel),
+                     static_cast<juce::Component*> (&namButton),
+                     static_cast<juce::Component*> (&namLabel) })
         addAndMakeVisible (c);
 
-    setSize (340, 300);
+    startTimerHz (4);
+    setSize (340, 340);
 }
 
 SonicWaveshaperAudioProcessorEditor::~SonicWaveshaperAudioProcessorEditor()
 {
+    stopTimer();
     setLookAndFeel (nullptr);
+}
+
+void SonicWaveshaperAudioProcessorEditor::chooseNamProfile()
+{
+    fileChooser = std::make_unique<juce::FileChooser> ("Choose a NAM profile", juce::File {}, "*.nam");
+
+    fileChooser->launchAsync (juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles,
+                              [this] (const juce::FileChooser& chooser)
+                              {
+                                  const auto file = chooser.getResult();
+
+                                  if (! file.existsAsFile())
+                                      return;
+
+                                  const auto result = processorRef.loadCustomNamModel (file);
+                                  namLabel.setText (processorRef.getActiveModelName(), juce::dontSendNotification);
+
+                                  if (result.failed())
+                                      juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::WarningIcon,
+                                                                              "NAM Profile",
+                                                                              result.getErrorMessage());
+                              });
+}
+
+void SonicWaveshaperAudioProcessorEditor::timerCallback()
+{
+    const auto name = processorRef.getActiveModelName();
+
+    if (namLabel.getText() != name)
+        namLabel.setText (name, juce::dontSendNotification);
 }
 
 void SonicWaveshaperAudioProcessorEditor::paint (juce::Graphics& g)
@@ -79,6 +122,11 @@ void SonicWaveshaperAudioProcessorEditor::resized()
     auto shapeArea = area.removeFromBottom (48);
     shapeLabel.setBounds (shapeArea.removeFromTop (14));
     shapeBox.setBounds (shapeArea.reduced (60, 4));
+
+    // NAM profile picker sits above the shape selector
+    auto namArea = area.removeFromBottom (36);
+    namLabel.setBounds (namArea.removeFromTop (14));
+    namButton.setBounds (namArea.reduced (50, 3));
 
     // small, balanced knob row: saturation is the centre knob and is only slightly larger
     const int colW = area.getWidth() / 3;

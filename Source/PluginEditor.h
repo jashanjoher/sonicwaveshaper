@@ -5,10 +5,13 @@
 #include <juce_gui_basics/juce_gui_basics.h>
 #include <juce_gui_extra/juce_gui_extra.h>
 
+#include <memory>
+
 #include "PluginProcessor.h"
 #include "SonicLookAndFeel.h"
 
-class SonicWaveshaperAudioProcessorEditor : public juce::AudioProcessorEditor
+class SonicWaveshaperAudioProcessorEditor : public juce::AudioProcessorEditor,
+                                            private juce::Timer
 {
 public:
     explicit SonicWaveshaperAudioProcessorEditor (SonicWaveshaperAudioProcessor&);
@@ -18,6 +21,9 @@ public:
     void resized() override;
 
 private:
+    void timerCallback() override;
+    void chooseNamProfile();
+
     SonicWaveshaperAudioProcessor& processorRef;
     SonicLookAndFeel lookAndFeel;
 
@@ -30,6 +36,10 @@ private:
     juce::Label mixLabel { {}, "MIX" };
     juce::Label outputLabel { {}, "OUTPUT" };
     juce::Label shapeLabel { {}, "SHAPE" };
+
+    juce::TextButton namButton { "NAM PROFILE" };
+    juce::Label namLabel;
+    std::unique_ptr<juce::FileChooser> fileChooser;
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using ComboAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
