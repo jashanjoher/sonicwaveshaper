@@ -63,6 +63,13 @@ string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1," NAM_MODEL_ARRAY "${NAM_MODEL_
 file(WRITE "${NAM_MODEL_HEADER}"
 "#pragma once\n\n#include <cstddef>\n\n// Generated at configure time from NeuralAmpModelerCore wavenet_a1_standard.nam.\ninline constexpr unsigned char kWavenetA1Model[] = {\n${NAM_MODEL_ARRAY}\n};\n\ninline constexpr std::size_t kWavenetA1ModelSize = ${NAM_MODEL_BYTES};\n")
 
+# Include paths for nlohmann/json. NAM uses both forms:
+#   #include <nlohmann/json.hpp>  needs  include/
+#   #include "json.hpp"          (in NAM/activations.h) needs  include/nlohmann/
+set(NLOHMANN_INCLUDE_DIRS
+    "${nlohmann_json_SOURCE_DIR}/include"
+    "${nlohmann_json_SOURCE_DIR}/include/nlohmann")
+
 # NAM core compiled directly from its sources with float samples.
 file(GLOB NAM_CORE_SOURCES
     "${nam_SOURCE_DIR}/NAM/*.cpp"
@@ -71,11 +78,10 @@ file(GLOB NAM_CORE_SOURCES
 add_library(nam_core STATIC ${NAM_CORE_SOURCES})
 target_compile_features(nam_core PUBLIC cxx_std_20)
 target_compile_definitions(nam_core PUBLIC NAM_SAMPLE_FLOAT)
-# Include root is include/ so that <nlohmann/...> resolves to include/nlohmann/...
 target_include_directories(nam_core PUBLIC
     "${nam_SOURCE_DIR}"
     "${eigen_SOURCE_DIR}"
-    "${nlohmann_json_SOURCE_DIR}/include")
+    ${NLOHMANN_INCLUDE_DIRS})
 set_target_properties(nam_core PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 juce_add_plugin(SonicWaveshaper
@@ -98,7 +104,8 @@ target_sources(SonicWaveshaper
 
 target_include_directories(SonicWaveshaper
     PRIVATE
-        "${NAM_GEN_DIR}")
+        "${NAM_GEN_DIR}"
+        ${NLOHMANN_INCLUDE_DIRS})
 
 target_compile_definitions(SonicWaveshaper
     PUBLIC
