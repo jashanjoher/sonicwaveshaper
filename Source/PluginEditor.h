@@ -26,10 +26,10 @@ private:
     juce::Slider outputSlider { juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow };
     juce::ComboBox shapeBox;
 
-    juce::Label driveLabel { {}, "Drive" };
-    juce::Label mixLabel { {}, "Mix" };
-    juce::Label outputLabel { {}, "Output" };
-    juce::Label shapeLabel { {}, "Shape" };
+    juce::Label driveLabel { {}, "SATURATION" };
+    juce::Label mixLabel { {}, "MIX" };
+    juce::Label outputLabel { {}, "OUTPUT" };
+    juce::Label shapeLabel { {}, "SHAPE" };
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using ComboAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
