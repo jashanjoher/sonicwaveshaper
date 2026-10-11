@@ -7,11 +7,11 @@ add_subdirectory(JUCE)
 
 include(FetchContent)
 
-# Eigen 3.4.0 (header-only, required by NAM). Populated without running Eigen's own CMake.
+# Eigen 3.4.0 (header-only, required by NAM).
 FetchContent_Declare(eigen
     URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz)
 
-# nlohmann/json 3.11.3 (header-only, required by NAM). Populated without running its own CMake.
+# nlohmann/json 3.11.3 (header-only, required by NAM).
 FetchContent_Declare(nlohmann_json
     URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 
@@ -21,9 +21,8 @@ FetchContent_Declare(nam
     GIT_TAG 0b3d3c97b0859a3a8c92a8628c4dd89a25eb5842
     GIT_SUBMODULES "")
 
-FetchContent_Populate(eigen)
-FetchContent_Populate(nlohmann_json)
-FetchContent_Populate(nam)
+# Downloads and makes all three available. Sets eigen_SOURCE_DIR, nlohmann_json_SOURCE_DIR, nam_SOURCE_DIR.
+FetchContent_MakeAvailable(eigen nlohmann_json nam)
 
 # Download the bundled model at configure time and turn it into a C++ byte array.
 set(NAM_GEN_DIR "${CMAKE_BINARY_DIR}/generated")
