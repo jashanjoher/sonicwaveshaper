@@ -52,11 +52,23 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Upload Windows build
+      - name: Package the Windows zip
+        shell: pwsh
+        run: |
+          $out = "build/SonicWaveshaper_artefacts/Release"
+          $stage = "windows-stage"
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+          Copy-Item -Recurse -Force "$out/VST3/SonicWaveshaper.vst3" $stage
+          Copy-Item -Force "$out/Standalone/SonicWaveshaper.exe" $stage
+          Copy-Item -Force "packaging/README-install-windows.txt" "$stage/READ ME FIRST.txt"
+          Compress-Archive -Path "$stage/*" -DestinationPath "SonicWaveshaper-Windows.zip" -Force
+          Get-ChildItem "SonicWaveshaper-Windows.zip"
+
+      - name: Upload the Windows zip
         uses: actions/upload-artifact@v4
         with:
-          name: SonicWaveshaper-Windows
-          path: build/SonicWaveshaper_artefacts/Release/VST3
+          name: SonicWaveshaper-Windows-zip
+          path: SonicWaveshaper-Windows.zip
           if-no-files-found: error
 
   release:
@@ -72,8 +84,16 @@ jobs:
           name: SonicWaveshaper-macOS-dmg
           path: release
 
+      - name: Download the Windows zip
+        uses: actions/download-artifact@v4
+        with:
+          name: SonicWaveshaper-Windows-zip
+          path: release
+
       - name: Publish the release
         uses: softprops/action-gh-release@v2
         with:
-          files: release/SonicWaveshaper-macOS.dmg
+          files: |
+            release/SonicWaveshaper-macOS.dmg
+            release/SonicWaveshaper-Windows.zip
           generate_release_notes: true
