@@ -3,149 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maya DSP | WOOF, WOOF Bundle</title>
-<meta name="description" content="Maya DSP: Vedic psychoacoustics meets cybernetic neural sound design. Zero aliasing, analog warmth, zero digital fizz. WOOF, WOOF bundle $75.">
+<title>Maya DSP | SonicWaveshaper and WOOF, WOOF Bundle</title>
+<meta name="description" content="Maya DSP makes saturation and neural tone plugins for electronic and heavy music. SonicWaveshaper and the WOOF, WOOF bundle for $75.">
 <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <style>
   :root {
-    --pink: #ffd3e4; --pink-hi: #fff2f8; --pink-lo: #efa0c0; --pink-deep: #d9739c;
-    --teal: #3fd3c6; --teal-hi: #c8fff7; --teal-deep: #15877d;
-    --ink: #2a1a26; --ink-soft: #6b4a5e; --matte: #1b1520; --matte-2: #251c2a; --line: rgba(255,255,255,.08);
-    --metal: #3a3340;
+    --pink: #ffd3e4; --pink-hi: #fff2f8; --pink-deep: #d9739c;
+    --teal: #3fd3c6; --teal-deep: #15877d;
+    --ink: #2a1a26; --ink-soft: #6b4a5e; --matte: #1b1520; --matte-2: #251c2a; --panel: #2d2435; --line: rgba(255,255,255,.08);
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    margin: 0; font-family: "Avenir Next", "Trebuchet MS", Arial, sans-serif; color: #f6e9f1;
-    background: radial-gradient(ellipse at 70% -10%, #3b2a40 0%, var(--matte) 55%, #100c12 100%);
-    line-height: 1.55;
-  }
+  body { margin: 0; font-family: "Avenir Next", "Trebuchet MS", Arial, sans-serif; color: #f6e9f1; line-height: 1.55;
+    background: radial-gradient(ellipse at 70% -10%, #3b2a40 0%, var(--matte) 55%, #100c12 100%); }
   a { color: inherit; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-  nav.top { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px);
-    background: rgba(27,21,32,.82); border-bottom: 1px solid var(--line); }
+  nav.top { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); background: rgba(27,21,32,.85); border-bottom: 1px solid var(--line); }
   nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .logo { font-weight: 900; letter-spacing: 3px; font-size: 14px; text-decoration: none; text-transform: uppercase; }
   .logo span { color: var(--teal); }
   .links { display: flex; gap: 22px; align-items: center; }
   .links a { font-size: 13px; letter-spacing: 1px; text-decoration: none; color: #d9c7d3; }
   .links a:hover { color: var(--teal); }
-  .cart-btn { font-size: 12px; font-weight: 800; letter-spacing: 1px; padding: 9px 14px; border-radius: 999px;
-    background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); border: none; cursor: pointer; }
+  .nav-buy { font-family: inherit; font-size: 12px; font-weight: 800; letter-spacing: 1px; padding: 9px 14px; border-radius: 999px; border: none; cursor: pointer;
+    background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); }
 
   .hero { padding: 96px 0 72px; text-align: center; }
-  .eyebrow { font-size: 11px; letter-spacing: 4px; color: var(--teal); font-weight: 800; }
-  h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.02; margin: 16px 0 18px; letter-spacing: -1px; }
+  .eyebrow { font-size: 11px; letter-spacing: 4px; color: var(--teal); font-weight: 800; text-transform: uppercase; }
+  h1 { font-size: clamp(38px, 6.5vw, 70px); line-height: 1.04; margin: 16px 0 18px; letter-spacing: -1px; }
   h1 em { font-style: normal; color: var(--pink); }
-  .lead { max-width: 660px; margin: 0 auto 32px; color: #cdb8c6; font-size: 17px; }
+  .lead { max-width: 640px; margin: 0 auto 32px; color: #cdb8c6; font-size: 17px; }
   .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn { display: inline-block; text-decoration: none; font-weight: 800; letter-spacing: 1.2px; font-size: 12px;
-    padding: 14px 22px; border-radius: 12px; border: none; cursor: pointer; font-family: inherit; }
+  .btn { display: inline-block; text-decoration: none; font-family: inherit; font-weight: 800; letter-spacing: 1.2px; font-size: 12px;
+    padding: 14px 22px; border-radius: 12px; border: none; cursor: pointer; }
   .btn.pink { background: linear-gradient(#ffe0ec, var(--pink)); color: var(--ink); box-shadow: 0 4px 0 var(--pink-deep); }
   .btn.teal { background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); box-shadow: 0 4px 0 var(--teal-deep); }
   .btn.ghost { border: 1px solid rgba(255,255,255,.22); color: #f6e9f1; background: transparent; }
   .btn.ghost:hover { border-color: var(--teal); color: var(--teal); }
+  .checkout-status { min-height: 18px; font-size: 13px; color: var(--teal); margin-top: 14px; }
 
   section { padding: 84px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.5px; margin: 8px 0 14px; }
-  h3 { font-size: 20px; margin: 0 0 8px; }
-  .sub { color: #cdb8c6; max-width: 640px; }
-  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 36px; }
+  h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.5px; margin: 8px 0 14px; line-height: 1.12; }
+  h3 { font-size: 19px; margin: 0 0 8px; }
+  .sub { color: #cdb8c6; max-width: 660px; }
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
   .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
   .card { background: var(--matte-2); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
   .card p { color: #cdb8c6; font-size: 14px; margin: 0; }
-  .tag { display: inline-block; font-size: 10px; letter-spacing: 2px; font-weight: 800; color: var(--ink); background: var(--pink); border-radius: 6px; padding: 3px 8px; margin-bottom: 14px; }
-  .tag.soon { background: transparent; color: var(--teal); border: 1px solid var(--teal); }
+  .tag { display: inline-block; font-size: 10px; letter-spacing: 2px; font-weight: 800; border-radius: 6px; padding: 3px 8px; margin-bottom: 12px; }
+  .tag.live { background: var(--pink); color: var(--ink); }
+  .tag.soon { color: var(--teal); border: 1px solid var(--teal); }
+  .note { font-size: 12px; color: #a98ea0; margin-top: 16px; max-width: 760px; }
 
-  .manifesto { max-width: 760px; color: #d9c7d3; font-size: 16px; }
-  .manifesto p { margin: 0 0 16px; }
+  .about-body { max-width: 760px; color: #d9c7d3; font-size: 16px; }
+  .about-body p { margin: 0 0 16px; }
 
   .flagship { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 36px; }
   .stage { display: flex; justify-content: center; }
-  .pedal { position: relative; width: 300px; padding: 18px 18px 16px; border-radius: 20px;
+  .pedal { position: relative; width: 300px; padding: 18px 18px 18px; border-radius: 20px; color: var(--ink);
     background: linear-gradient(165deg, var(--pink-hi) 0%, var(--pink) 50%, #f6b9d1 100%);
-    box-shadow: 0 1px 0 #f9c7db, 0 2px 0 #eaa0bf, 0 3px 0 #e693b5, 0 4px 0 #d9789f,
-      inset 0 2px 0 rgba(255,255,255,.85), 0 30px 50px rgba(0,0,0,.45); color: var(--ink); }
-  .pedal::after { content: ""; position: absolute; inset: 0; border-radius: 20px; pointer-events: none;
-    background: repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
+    box-shadow: 0 1px 0 #f9c7db, 0 2px 0 #eaa0bf, 0 3px 0 #e693b5, 0 4px 0 #d9789f, inset 0 2px 0 rgba(255,255,255,.85), 0 30px 50px rgba(0,0,0,.45); }
   .screw { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #d7c4cc 55%, #9d8793); }
   .s1 { left: 9px; top: 9px } .s2 { right: 9px; top: 9px } .s3 { left: 9px; bottom: 9px } .s4 { right: 9px; bottom: 9px }
   .brand { font-size: 16px; font-weight: 900; letter-spacing: 2px; margin: 0; text-align: center; }
   .brand span { color: var(--teal-deep); }
   .model { font-size: 9px; letter-spacing: 3px; color: var(--ink-soft); text-align: center; margin-top: 2px; font-weight: bold; }
-  .knobs { display: flex; justify-content: space-around; align-items: flex-end; margin-top: 10px; }
+  .knobs { display: flex; justify-content: space-around; align-items: flex-end; margin-top: 14px; }
   .knobwrap { display: flex; flex-direction: column; align-items: center; }
-  .well { border-radius: 50%; padding: 6px; background: radial-gradient(circle at 50% 40%, #f5b1cb, #eb9ab9 70%);
-    box-shadow: inset 0 3px 5px rgba(90,20,55,.45), 0 1px 0 #fff; }
+  .well { border-radius: 50%; padding: 6px; background: radial-gradient(circle at 50% 40%, #f5b1cb, #eb9ab9 70%); box-shadow: inset 0 3px 5px rgba(90,20,55,.45), 0 1px 0 #fff; }
   .knob { position: relative; cursor: ns-resize; touch-action: none; border-radius: 50%; outline: none; }
-  .knob.sat { width: 74px; height: 74px; }
-  .knob.sm { width: 60px; height: 60px; }
+  .knob.sat { width: 80px; height: 80px; }
+  .knob.sm { width: 62px; height: 62px; }
   .knob:focus-visible { box-shadow: 0 0 0 3px var(--teal); }
   .cap { position: absolute; inset: 0; border-radius: 50%;
     background: repeating-conic-gradient(from 0deg, #2fb8ac 0deg 4deg, #25a196 4deg 8deg);
     box-shadow: inset 0 0 0 1.5px #15877d, inset 0 -3px 4px rgba(0,60,55,.35), 0 3px 6px rgba(0,0,0,.35);
     transform: rotate(var(--rot, 0deg)); }
-  .cap::before { content: ""; position: absolute; inset: 13%; border-radius: 50%;
-    background: radial-gradient(circle at 36% 28%, #e6fffb, #6fe6da 45%, #2bb3a7 100%); }
+  .cap::before { content: ""; position: absolute; inset: 13%; border-radius: 50%; background: radial-gradient(circle at 36% 28%, #e6fffb, #6fe6da 45%, #2bb3a7 100%); }
   .notch { position: absolute; left: 50%; top: 7%; width: 4px; height: 20%; margin-left: -2px; border-radius: 2px; background: #fff; z-index: 2; }
   .kname { font-size: 9px; letter-spacing: 2px; font-weight: 900; margin-top: 8px; }
   .ro { font-size: 10px; color: var(--teal-deep); font-weight: bold; min-height: 13px; }
-  .label { font-size: 9px; letter-spacing: 2px; color: var(--ink-soft); font-weight: 900; margin: 12px 0 5px 2px; }
-  .row { display: flex; gap: 6px; }
-  .sel { flex: 1; cursor: pointer; font-family: inherit; font-weight: 900; letter-spacing: 1px; font-size: 10px; padding: 8px 2px; border: none; border-radius: 11px; color: var(--ink); background: linear-gradient(#fffafd, #ffe0ec); box-shadow: 0 3px 0 #e58fb0; }
-  .sel.on { color: #fff; background: linear-gradient(#6fe6da, var(--teal)); box-shadow: 0 1px 0 var(--teal-deep); }
   .spec-list { list-style: none; padding: 0; margin: 0; }
   .spec-list li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 14px; }
   .spec-list li span:first-child { color: #cdb8c6; }
-  .note { font-size: 12px; color: #a98ea0; margin-top: 16px; }
 
-  .demo { margin-top: 36px; background: var(--matte-2); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
-  .stems { display: flex; gap: 10px; flex-wrap: wrap; }
-  .stem { flex: 1; min-width: 180px; cursor: pointer; font-family: inherit; text-align: left; padding: 14px 16px; border-radius: 14px;
-    background: #2d2435; color: #f6e9f1; border: 1px solid var(--line); }
-  .stem b { display: block; font-size: 13px; letter-spacing: 1px; }
-  .stem span { font-size: 12px; color: #a98ea0; }
-  .stem.on { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
-  .transport { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 22px; }
-  .toggle { display: inline-flex; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
-  .toggle button { font-family: inherit; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 11px 16px; border: none; cursor: pointer; background: #2d2435; color: #cdb8c6; }
-  .toggle button.on { background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); }
-  .play { font-family: inherit; font-weight: 900; font-size: 11px; letter-spacing: 1.5px; padding: 11px 18px; border-radius: 12px; border: none; cursor: pointer; background: linear-gradient(#ffe0ec, var(--pink)); color: var(--ink); box-shadow: 0 3px 0 var(--pink-deep); }
-  .play.stop { background: #2d2435; color: #f6e9f1; box-shadow: none; }
-  .demo-status { font-size: 12px; color: #a98ea0; }
+  .demo { background: var(--matte-2); border: 1px solid var(--line); border-radius: 22px; padding: 30px; margin-top: 36px; }
+  .demo-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: start; }
+  .block-label { font-size: 10px; letter-spacing: 2px; font-weight: 800; color: #a98ea0; margin: 0 0 10px; text-transform: uppercase; }
+  .tracks { display: flex; flex-direction: column; gap: 8px; }
+  .track { text-align: left; cursor: pointer; font-family: inherit; color: #f6e9f1; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .track b { display: block; font-size: 13px; letter-spacing: .5px; }
+  .track span { font-size: 12px; color: #a98ea0; }
+  .track.on { border-color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal); }
+  .seg { display: inline-flex; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .seg button { font-family: inherit; font-weight: 800; font-size: 11px; letter-spacing: 1px; padding: 12px 16px; border: none; cursor: pointer; background: var(--panel); color: #cdb8c6; }
+  .seg button.on { background: linear-gradient(#6fe6da, var(--teal)); color: var(--matte); }
+  .transport { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
+  .play { font-family: inherit; font-weight: 900; font-size: 12px; letter-spacing: 1.5px; min-width: 120px; padding: 13px 18px; border-radius: 12px; border: none; cursor: pointer;
+    background: linear-gradient(#ffe0ec, var(--pink)); color: var(--ink); box-shadow: 0 3px 0 var(--pink-deep); }
+  .play.playing { background: var(--panel); color: #f6e9f1; box-shadow: none; }
+  .status { font-size: 12px; color: #a98ea0; }
+  .demo-controls { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ctl { background: var(--panel); border-radius: 14px; padding: 14px 10px; text-align: center; }
+  .ctl .kname { margin-top: 4px; }
+  .ctl input[type=range] { width: 100%; accent-color: var(--teal); margin-top: 8px; }
+  .ctl .ro { margin-top: 2px; }
+  .demo-foot { font-size: 12px; color: #a98ea0; margin-top: 16px; }
 
   .bundle { background: linear-gradient(135deg, #3a1f36 0%, #1b1520 60%); border-radius: 26px; padding: 44px; border: 1px solid rgba(255,211,228,.18); }
-  .bundle-title { font-size: clamp(44px, 8vw, 92px); font-weight: 900; letter-spacing: -2px; color: var(--pink); line-height: .95; margin: 8px 0; }
-  .price-line { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 18px 0 8px; }
-  .price { font-size: 44px; font-weight: 900; color: #fff; }
-  .price small { font-size: 13px; color: var(--teal); letter-spacing: 1px; font-weight: 800; }
+  .bundle-title { font-size: clamp(42px, 7vw, 84px); font-weight: 900; letter-spacing: -2px; color: var(--pink); line-height: .95; margin: 8px 0; }
+  .price { font-size: 44px; font-weight: 900; color: #fff; margin-top: 16px; }
+  .price small { font-size: 13px; color: var(--teal); letter-spacing: 1px; font-weight: 800; margin-left: 10px; }
   .bundle-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
-  .plugin-card { position: relative; }
-  .plugin-card h3 { color: var(--pink); }
-  .plugin-card .role { font-size: 11px; letter-spacing: 2px; color: var(--teal); font-weight: 800; margin-bottom: 8px; }
-  .plugin-card ul { padding-left: 18px; color: #cdb8c6; font-size: 14px; margin: 10px 0 0; }
-  .plugin-card li { margin: 4px 0; }
+  .plugin h3 { color: var(--pink); }
+  .plugin p { color: #cdb8c6; font-size: 14px; margin: 0; }
 
-  .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: #2d2435; border: 1px solid var(--line); margin-top: 28px; }
+  .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); margin-top: 28px; }
   .delivery .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex: 0 0 auto; box-shadow: 0 0 10px var(--teal); }
   .delivery p { margin: 0; color: #d9c7d3; font-size: 15px; }
-
-  .checkout-status { min-height: 18px; font-size: 13px; color: var(--teal); margin-top: 14px; }
-
-  .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(10,6,12,.72); z-index: 50; padding: 24px; }
-  .modal.open { display: flex; }
-  .modal-card { max-width: 440px; width: 100%; background: var(--matte-2); border: 1px solid rgba(255,211,228,.2); border-radius: 20px; padding: 30px; position: relative; }
-  .modal-card p { color: #cdb8c6; font-size: 14px; }
-  .modal-x { position: absolute; top: 12px; right: 14px; background: none; border: none; color: #cdb8c6; font-size: 22px; cursor: pointer; }
 
   footer { padding: 36px 0 60px; border-top: 1px solid var(--line); color: #a98ea0; font-size: 12px; text-align: center; letter-spacing: 1px; }
 
   @media (max-width: 860px) {
-    .grid2, .grid3, .grid4, .flagship { grid-template-columns: 1fr; }
+    .grid3, .grid4, .flagship, .demo-grid { grid-template-columns: 1fr; }
     .links a.hide-sm { display: none; }
-    .bundle { padding: 28px; }
+    .bundle { padding: 26px; }
+    .demo { padding: 22px; }
   }
 </style>
 </head>
@@ -155,116 +139,123 @@
   <div class="wrap">
     <a class="logo" href="#top">Maya <span>DSP</span></a>
     <div class="links">
-      <a href="#bundle">Bundle</a>
       <a href="#waveshaper">SonicWaveshaper</a>
-      <a class="hide-sm" href="#demos">Demos</a>
+      <a href="#demo">Demo</a>
+      <a class="hide-sm" href="#bundle">Bundle</a>
       <a class="hide-sm" href="#about">About</a>
-      <a href="#delivery">Delivery</a>
-      <button class="cart-btn" data-checkout="bundle">BUY $75</button>
+      <button class="nav-buy" data-checkout="bundle">BUY $75</button>
     </div>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="eyebrow">MAYA DSP</div>
-    <h1>Zero aliasing.<br><em>Zero digital fizz.</em></h1>
-    <p class="lead">Vedic psychoacoustics meets cybernetic neural sound design. Brutal analog warmth from a neural tube-preamp engine, built for the producer who needs it loud, tight, and clean.</p>
+    <div class="eyebrow">Maya DSP</div>
+    <h1>Saturation and neural tone<br><em>for loud, fast music.</em></h1>
+    <p class="lead">Maya DSP builds processing for electronic and heavy genres. Our flagship, SonicWaveshaper, combines a neural tube-preamp engine with a saturation stage for controlled clipping, high headroom, and transients that stay intact.</p>
     <div class="btns">
-      <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
+      <button class="btn pink" data-checkout="bundle">BUY WOOF, WOOF BUNDLE - $75</button>
       <button class="btn teal" data-checkout="trial">START 7-DAY FREE TRIAL</button>
+      <a class="btn ghost" href="#demo">HEAR THE DEMO</a>
     </div>
     <div class="checkout-status" id="checkoutStatus" role="status"></div>
   </div>
 </header>
 
-<section id="bundle">
-  <div class="wrap">
-    <div class="bundle">
-      <div class="eyebrow">FLAGSHIP BUNDLE</div>
-      <div class="bundle-title">WOOF, WOOF</div>
-      <p class="sub">Four plugins for heavy-hitting production: neural saturation, transient-safe limiting, aggressive distortion and vocoding, and surgical dynamics with spectral space.</p>
-      <div class="price-line">
-        <div class="price">$75 <small>ONE-TIME</small></div>
-      </div>
-      <div class="bundle-btns">
-        <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
-        <button class="btn teal" data-checkout="trial">START 7-DAY FREE TRIAL</button>
-      </div>
-      <div class="grid4">
-        <div class="card plugin-card"><div class="role">01 &middot; SATURATION</div><h3>SonicWaveshaper</h3><p class="sub" style="font-size:14px">Neural tube preamp and saturation with a NAM runtime engine. Load your own .nam profiles.</p></div>
-        <div class="card plugin-card"><div class="role">02 &middot; LIMITING</div><h3>Kaal Limiter</h3><p class="sub" style="font-size:14px">Brickwall limiter that preserves transients for 150+ BPM, psytrance, hi-tech, and metal.</p></div>
-        <div class="card plugin-card"><div class="role">03 &middot; DISTORTION</div><h3>Rudra Vocoder / Distortion</h3><p class="sub" style="font-size:14px">Vicious breakcore and metal distortion, plus cybernetic vocoding.</p></div>
-        <div class="card plugin-card"><div class="role">04 &middot; DYNAMICS</div><h3>Maya Multiband Compressor &amp; Reverb</h3><p class="sub" style="font-size:14px">Surgical multiband dynamic control and lush, non-muddy spectral reverb.</p></div>
-      </div>
-      <p class="note">Kaal Limiter, Rudra, and Maya Multiband are described from the product brief and are not yet shipped in this repository. Their status and feature details are still being finalised.</p>
-    </div>
-  </div>
-</section>
-
 <section id="waveshaper">
   <div class="wrap">
-    <div class="eyebrow">SONICWAVESHAPER</div>
-    <h2>Turn the knobs. Hear the difference.</h2>
-    <p class="sub">The stompbox below is a live preview. Its saturation knob drives a Web Audio waveshaper on the demos in the next section, so you can hear the drive change as you turn it.</p>
+    <div class="eyebrow">Flagship plugin</div>
+    <h2>SonicWaveshaper</h2>
+    <p class="sub">A neural tube-preamp and saturation plugin for macOS. Drive, Mix, and Output set how hard the signal is pushed and how much of the processed sound you hear. The controls on this panel are a preview; the demo below runs the same controls on audio.</p>
     <div class="flagship">
       <div class="stage">
         <div class="pedal">
           <div class="screw s1"></div><div class="screw s2"></div><div class="screw s3"></div><div class="screw s4"></div>
           <h3 class="brand">maya <span>dsp</span></h3>
-          <div class="model">SONICWAVESHAPER &middot; NEURAL TUBE PREAMP</div>
+          <div class="model">SONICWAVESHAPER</div>
           <div class="knobs">
             <div class="knobwrap">
               <div class="well"><div class="knob sm" id="kMix" tabindex="0" role="slider" aria-label="Mix"><div class="cap"><div class="notch"></div></div></div></div>
               <div class="kname">MIX</div><div class="ro" id="rMix"></div>
             </div>
             <div class="knobwrap">
-              <div class="well"><div class="knob sat" id="kDrive" tabindex="0" role="slider" aria-label="Saturation"><div class="cap"><div class="notch"></div></div></div></div>
-              <div class="kname">SATURATION</div><div class="ro" id="rDrive"></div>
+              <div class="well"><div class="knob sat" id="kDrive" tabindex="0" role="slider" aria-label="Drive"><div class="cap"><div class="notch"></div></div></div></div>
+              <div class="kname">DRIVE</div><div class="ro" id="rDrive"></div>
             </div>
             <div class="knobwrap">
               <div class="well"><div class="knob sm" id="kOut" tabindex="0" role="slider" aria-label="Output"><div class="cap"><div class="notch"></div></div></div></div>
               <div class="kname">OUTPUT</div><div class="ro" id="rOut"></div>
             </div>
           </div>
-          <div class="label">SHAPE</div>
-          <div class="row" id="shapeRow">
-            <button class="sel on" data-shape="0">TANH</button><button class="sel" data-shape="1">CUBIC</button><button class="sel" data-shape="2">HARD</button><button class="sel" data-shape="3">FOLD</button>
-          </div>
         </div>
       </div>
       <div>
         <ul class="spec-list">
-          <li><span>Formats</span><span>VST3, AU, Standalone</span></li>
-          <li><span>Saturation range</span><span>0 to 24 dB</span></li>
-          <li><span>Output trim</span><span>-12 to +12 dB</span></li>
-          <li><span>Shapes</span><span>Tanh, Soft Cubic, Hard Clip, Foldback</span></li>
-          <li><span>Neural profiles</span><span>Built-in default, plus load your own .nam file</span></li>
-          <li><span>Platforms</span><span>macOS now, Windows coming soon</span></li>
+          <li><span>Formats</span><span>VST3, AU, Standalone (macOS)</span></li>
+          <li><span>Drive</span><span>0 to 24 dB</span></li>
+          <li><span>Mix</span><span>0 to 100%</span></li>
+          <li><span>Output</span><span>-12 to +12 dB</span></li>
+          <li><span>Neural profiles</span><span>Built-in WaveNet A1 default, plus your own .nam files</span></li>
+          <li><span>Windows</span><span>Coming soon</span></li>
         </ul>
-        <p class="note">The Shape selector affects only the Web Audio preview on this page. In the current plugin build, the NAM path does not use the Shape selector.</p>
+        <p class="note">The Shape selector from earlier previews is not active in the current build. Saturation runs through the neural model path.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="demos">
+<section id="demo">
   <div class="wrap">
-    <div class="eyebrow">AUDIO STEM DEMOS</div>
-    <h2>Bypass or processed. You decide.</h2>
-    <p class="sub">These demos are synthesized in your browser with Web Audio, not recorded stems. Processed applies the Saturation, Mix, and Output knobs above. Bypass plays the dry signal.</p>
+    <div class="eyebrow">Audio demo</div>
+    <h2>Before and after, on the same loop.</h2>
+    <p class="sub">Pick a loop, press play, and switch between Before (Dry) and After (Saturated). Turn Drive, Mix, and Output while it plays to hear the change. The loops are synthesized in your browser, not recorded from a session.</p>
     <div class="demo">
-      <div class="stems" id="stemRow">
-        <button class="stem on" data-stem="kick"><b>160 BPM PSY / TECHNO</b><span>Kick and bass</span></button>
-        <button class="stem" data-stem="lead"><b>SCREAMER SYNTH</b><span>Saw lead</span></button>
-        <button class="stem" data-stem="breaks"><b>BREAKCORE DRUMS</b><span>Heavy breaks</span></button>
-      </div>
-      <div class="transport">
-        <div class="toggle" id="abToggle">
-          <button class="on" data-mode="processed">PROCESSED</button><button data-mode="bypass">BYPASS</button>
+      <div class="demo-grid">
+        <div>
+          <div class="block-label">Loop</div>
+          <div class="tracks" id="trackList">
+            <button class="track on" data-track="kick"><b>160 BPM kick and bass</b><span>Four-on-the-floor kick with a sub bass line</span></button>
+            <button class="track" data-track="lead"><b>Saw lead</b><span>Arpeggiated sawtooth lead at 160 BPM</span></button>
+            <button class="track" data-track="breaks"><b>Breakbeat drums</b><span>Syncopated kick, snare, and hats at 160 BPM</span></button>
+          </div>
         </div>
-        <button class="play" id="playBtn">PLAY</button>
-        <span class="demo-status" id="demoStatus">Stopped</span>
+        <div>
+          <div class="block-label">Playback</div>
+          <div class="seg" id="abSeg">
+            <button class="on" data-ab="before">BEFORE (DRY)</button><button data-ab="after">AFTER (SATURATED)</button>
+          </div>
+          <div class="transport">
+            <button class="play" id="playBtn">PLAY</button>
+            <span class="status" id="status">Stopped</span>
+          </div>
+          <div class="demo-controls">
+            <div class="ctl"><div class="kname">DRIVE</div><input type="range" id="sDrive" min="0" max="24" step="0.1"><div class="ro" id="vDrive"></div></div>
+            <div class="ctl"><div class="kname">MIX</div><input type="range" id="sMix" min="0" max="100" step="1"><div class="ro" id="vMix"></div></div>
+            <div class="ctl"><div class="kname">OUTPUT</div><input type="range" id="sOut" min="-12" max="12" step="0.1"><div class="ro" id="vOut"></div></div>
+          </div>
+          <p class="demo-foot">Drive sets how hard the signal is pushed into the saturation curve. Mix sets how much processed signal is blended with the dry signal. Output sets the level after processing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bundle">
+  <div class="wrap">
+    <div class="bundle">
+      <div class="eyebrow">Bundle</div>
+      <div class="bundle-title">WOOF, WOOF</div>
+      <p class="sub">Four plugins for heavy, fast production. SonicWaveshaper is included now. The other three are in development and will be added to the bundle when they ship.</p>
+      <div class="price">$75 <small>ONE-TIME</small></div>
+      <div class="bundle-btns">
+        <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
+        <button class="btn teal" data-checkout="trial">START 7-DAY FREE TRIAL</button>
+      </div>
+      <div class="grid4">
+        <div class="card plugin"><span class="tag live">AVAILABLE</span><h3>SonicWaveshaper</h3><p>Neural tube-preamp and saturation with a runtime NAM engine. Load your own .nam profiles.</p></div>
+        <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Kaal Limiter</h3><p>Brickwall limiter that keeps transient impact at 150+ BPM, for psytrance, hi-tech, and metal.</p></div>
+        <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Rudra Distortion and Vocoder</h3><p>Aggressive distortion for breakcore and metal, plus vocoding for synthetic textures.</p></div>
+        <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Maya Multiband Compressor and Reverb</h3><p>Multiband dynamics for precise control, and a reverb with separate decay times per band so the low end stays tight.</p></div>
       </div>
     </div>
   </div>
@@ -272,285 +263,279 @@
 
 <section id="about">
   <div class="wrap">
-    <div class="eyebrow">ABOUT MAYA DSP</div>
-    <h2>Vedic psychoacoustics. Cybernetic sound design.</h2>
-    <div class="manifesto">
-      <p>Maya DSP builds tools that treat sound as something to be shaped with care. The ethos draws on Vedic ideas about how sound affects perception, and on cybernetic sound design that uses neural models of real gear.</p>
-      <p>Our promise is simple: zero aliasing, brutal analog warmth, and zero digital fizz. The saturation stage is designed to keep high drive musical instead of harsh.</p>
+    <div class="eyebrow">About Maya DSP</div>
+    <h2>Engineering for producers working at high gain and high tempo.</h2>
+    <div class="about-body">
+      <p>Maya DSP makes audio plugins for psytrance, hi-tech, breakcore, metal, and bass music. Each tool is built around three areas: analog-style saturation, neural modeling of real amplifiers, and DSP that keeps the top end clean when drive is pushed.</p>
+      <p>SonicWaveshaper is the first product. Its neural engine runs captured amplifier models, and you can load your own .nam profiles to change the tone.</p>
     </div>
     <div class="grid3">
-      <div class="card"><h3>Zero aliasing</h3><p>Saturation is designed to avoid the harsh artefacts that alias at high drive. Claims about oversampling and antiderivative methods should be checked against the shipping build.</p></div>
-      <div class="card"><h3>Analog warmth</h3><p>Neural tube-preamp modeling via NAM captures real amplifier behaviour, not a generic clipper.</p></div>
-      <div class="card"><h3>Built for producers</h3><p>Tight tools for fast tempos, heavy genres, and surgical mix control.</p></div>
+      <div class="card"><h3>Analog-style saturation</h3><p>A waveshaping stage with adjustable drive, mix, and output, designed for controlled clipping rather than harsh digital distortion.</p></div>
+      <div class="card"><h3>Neural tone</h3><p>NAM-based models capture the behaviour of real tube amplifiers. Load a .nam profile or use the built-in default.</p></div>
+      <div class="card"><h3>Transient control</h3><p>Dynamics tools for kick and bass that keep attack intact at fast tempos. Currently in development.</p></div>
     </div>
   </div>
 </section>
 
 <section id="delivery">
   <div class="wrap">
-    <div class="eyebrow">LICENSING AND DELIVERY</div>
-    <h2>Instant delivery.</h2>
+    <div class="eyebrow">Delivery</div>
+    <h2>Licensing and delivery</h2>
     <div class="delivery">
       <div class="dot"></div>
-      <p><strong>Instant delivery.</strong> Drag-and-drop macOS VST3 and AU installer, with an offline serial key included. Windows coming soon.</p>
+      <p><strong>Instant delivery.</strong> Drag-and-drop macOS VST3 / AU installer + offline serial key included. Windows coming soon.</p>
     </div>
-    <p class="note">Licensing terms, refund policy, and the trial length will appear on the Lemon Squeezy checkout page once it is configured.</p>
+    <p class="note">Licence terms, refund policy, and the trial length are shown on the checkout page.</p>
   </div>
 </section>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow">COMING NEXT</div>
-    <h2>More from the lab</h2>
-    <p class="sub">In development. Nothing here is available to buy yet.</p>
-    <div class="grid3">
-      <div class="card"><span class="tag soon">IN DEVELOPMENT</span><h3>Analog Distortion</h3><p>Drive stages voiced after classic pedal circuits.</p></div>
-      <div class="card"><span class="tag soon">IN DEVELOPMENT</span><h3>Sub and Punch Exciter</h3><p>Low-end weight and transient snap for drums and bass.</p></div>
-      <div class="card"><span class="tag soon">IN DEVELOPMENT</span><h3>Rave Tools</h3><p>Utilities and presets for 150+ BPM dance production.</p></div>
-    </div>
-  </div>
-</section>
-
-<div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-card">
-    <button class="modal-x" id="modalClose" aria-label="Close">&times;</button>
-    <div class="eyebrow">CHECKOUT</div>
-    <h3 id="modalTitle">WOOF, WOOF Bundle</h3>
-    <p id="modalBody"></p>
-  </div>
-</div>
 
 <footer>
-  <div class="wrap">MAYA DSP &middot; VEDIC PSYCHOACOUSTICS &middot; CYBERNETIC SOUND DESIGN</div>
+  <div class="wrap">&copy; 2026 Maya DSP. All rights reserved.</div>
 </footer>
 
 <script>
 // ---------- Lemon Squeezy checkout ----------
-// Replace these with the real Lemon Squeezy checkout URLs before launch.
-// Until then the buttons show a notice instead of opening a checkout.
+// Replace these with the live Lemon Squeezy checkout URLs before launch.
+// Until a URL starts with https://, the buttons show a notice instead of opening checkout.
 const LEMON_CHECKOUT = {
   bundle: "REPLACE_WITH_LEMON_SQUEEZY_BUNDLE_CHECKOUT_URL",
   trial:  "REPLACE_WITH_LEMON_SQUEEZY_TRIAL_CHECKOUT_URL"
 };
-const isConfigured = url => typeof url === "string" && url.startsWith("https://");
-
-const modal = document.getElementById("checkoutModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
 const statusEl = document.getElementById("checkoutStatus");
-
-function openModal(title, body) {
-  modalTitle.textContent = title;
-  modalBody.textContent = body;
-  modal.classList.add("open");
-}
-document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("open"));
-modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
-
 function startCheckout(kind) {
   const url = LEMON_CHECKOUT[kind];
-  const title = kind === "trial" ? "7-Day Free Trial" : "WOOF, WOOF Bundle - $75";
-  if (!isConfigured(url)) {
-    openModal(title, "Checkout is not connected yet. The Lemon Squeezy checkout link will be added before launch.");
-    statusEl.textContent = "";
+  if (typeof url !== "string" || !url.startsWith("https://")) {
+    statusEl.textContent = "Checkout is not connected yet. The Lemon Squeezy link will be added before launch.";
     return;
   }
-  // Lemon Squeezy overlay: lemon.js handles any link with the lemonsqueezy-button class.
-  // Opening the URL directly keeps this working if the overlay script is blocked.
-  if (window.LemonSqueezy && window.createLemonSqueezy) {
-    window.LemonSqueezy.Url.Open(url);
-  } else {
-    window.open(url, "_blank", "noopener");
-  }
   statusEl.textContent = "Opening checkout...";
+  window.open(url, "_blank", "noopener");
 }
 document.querySelectorAll("[data-checkout]").forEach(b =>
   b.addEventListener("click", () => startCheckout(b.dataset.checkout)));
 
-// ---------- SonicWaveshaper preview knobs ----------
-const KNOBS = {
-  kDrive: { min: 0,   max: 24, def: 12, out: "rDrive", fmt: v => v.toFixed(1) + " dB" },
-  kMix:   { min: 0,   max: 1,  def: 1,  out: "rMix",   fmt: v => Math.round(v * 100) + "%" },
-  kOut:   { min: -12, max: 12, def: 0,  out: "rOut",   fmt: v => (v >= 0 ? "+" : "") + v.toFixed(1) + " dB" },
+// ---------- Shared controls (stompbox and demo sliders) ----------
+const PARAMS = {
+  drive: { min: 0,   max: 24,  def: 12, knob: "kDrive", readout: "rDrive", slider: "sDrive", sliderOut: "vDrive", fmt: v => v.toFixed(1) + " dB" },
+  mix:   { min: 0,   max: 100, def: 100, knob: "kMix",  readout: "rMix",   slider: "sMix",   sliderOut: "vMix",   fmt: v => Math.round(v) + "%" },
+  output:{ min: -12, max: 12,  def: 0,  knob: "kOut",  readout: "rOut",   slider: "sOut",   sliderOut: "vOut",   fmt: v => (v >= 0 ? "+" : "") + v.toFixed(1) + " dB" }
 };
 const val = {};
-let shapeIndex = 0;
-function norm(id) { const c = KNOBS[id]; return (val[id] - c.min) / (c.max - c.min); }
-function paint(id) {
-  const el = document.getElementById(id), c = KNOBS[id];
-  el.querySelector(".cap").style.setProperty("--rot", (-135 + norm(id) * 270) + "deg");
-  el.setAttribute("aria-valuenow", val[id].toFixed(2));
-  document.getElementById(c.out).textContent = c.fmt(val[id]);
+function toNorm(p, v) { return (v - PARAMS[p].min) / (PARAMS[p].max - PARAMS[p].min); }
+
+function setParam(p, v) {
+  const c = PARAMS[p];
+  v = Math.max(c.min, Math.min(c.max, v));
+  val[p] = v;
+  const knob = document.getElementById(c.knob);
+  knob.querySelector(".cap").style.setProperty("--rot", (-135 + toNorm(p, v) * 270) + "deg");
+  knob.setAttribute("aria-valuenow", v.toFixed(2));
+  document.getElementById(c.readout).textContent = c.fmt(v);
+  document.getElementById(c.slider).value = v;
+  document.getElementById(c.sliderOut).textContent = c.fmt(v);
+  applyParam(p);
 }
-function setN(id, n) {
-  const c = KNOBS[id];
-  n = Math.max(0, Math.min(1, n));
-  val[id] = c.min + n * (c.max - c.min);
-  paint(id);
-  if (id === "kDrive" || id === "kMix" || id === "kOut") applyParams();
-}
-Object.keys(KNOBS).forEach(id => {
-  val[id] = KNOBS[id].def;
-  const el = document.getElementById(id);
+
+Object.keys(PARAMS).forEach(p => {
+  const c = PARAMS[p];
+  const knob = document.getElementById(c.knob);
   let drag = null;
-  el.addEventListener("pointerdown", e => { el.setPointerCapture(e.pointerId); drag = { y: e.clientY, n: norm(id) }; });
-  el.addEventListener("pointermove", e => { if (drag) setN(id, drag.n + (drag.y - e.clientY) / 180 * (e.shiftKey ? 0.2 : 1)); });
-  const end = () => { drag = null; };
-  el.addEventListener("pointerup", end);
-  el.addEventListener("pointercancel", end);
-  el.addEventListener("dblclick", () => setN(id, (KNOBS[id].def - KNOBS[id].min) / (KNOBS[id].max - KNOBS[id].min)));
-  el.addEventListener("wheel", e => { e.preventDefault(); setN(id, norm(id) - Math.sign(e.deltaY) * 0.02); }, { passive: false });
-  el.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp" || e.key === "ArrowRight") { e.preventDefault(); setN(id, norm(id) + 0.02); }
-    if (e.key === "ArrowDown" || e.key === "ArrowLeft") { e.preventDefault(); setN(id, norm(id) - 0.02); }
+  knob.addEventListener("pointerdown", e => { knob.setPointerCapture(e.pointerId); drag = { y: e.clientY, n: toNorm(p, val[p]) }; });
+  knob.addEventListener("pointermove", e => {
+    if (drag) setParam(p, c.min + (drag.n + (drag.y - e.clientY) / 180 * (e.shiftKey ? 0.2 : 1)) * (c.max - c.min));
   });
-  paint(id);
+  const end = () => { drag = null; };
+  knob.addEventListener("pointerup", end);
+  knob.addEventListener("pointercancel", end);
+  knob.addEventListener("dblclick", () => setParam(p, c.def));
+  knob.addEventListener("wheel", e => {
+    e.preventDefault();
+    setParam(p, val[p] - Math.sign(e.deltaY) * (c.max - c.min) * 0.02);
+  }, { passive: false });
+  knob.addEventListener("keydown", e => {
+    const step = (c.max - c.min) * 0.02;
+    if (e.key === "ArrowUp" || e.key === "ArrowRight") { e.preventDefault(); setParam(p, val[p] + step); }
+    if (e.key === "ArrowDown" || e.key === "ArrowLeft") { e.preventDefault(); setParam(p, val[p] - step); }
+  });
+  document.getElementById(c.slider).addEventListener("input", e => setParam(p, Number(e.target.value)));
+  val[p] = c.def;
+  setParam(p, c.def);
 });
-document.querySelectorAll("#shapeRow .sel").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("#shapeRow .sel").forEach(x => x.classList.remove("on"));
-  b.classList.add("on");
-  shapeIndex = Number(b.dataset.shape);
-  applyParams();
-}));
 
-// ---------- Web Audio stem demos ----------
-let ctx = null, master = null, shaper = null, dryGain = null, wetGain = null, outGain = null;
-let playing = false, mode = "processed", stem = "kick", timers = [];
+// ---------- Web Audio demo ----------
+const BPM = 160, BEAT = 60 / BPM, BARS = 4;
+const LOOP_SEC = BARS * 4 * BEAT;
 
-function curveFor(drive, shape) {
-  const n = 2048, c = new Float32Array(n), k = Math.pow(10, drive / 20) * 2;
+let ctx = null, nodes = {}, buffers = {};
+let trackName = "kick", abMode = "after";
+let src = null, playing = false, pausedAt = 0, startedAt = 0;
+
+function lcg(seed) {
+  let s = seed >>> 0;
+  return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return (s / 4294967296) * 2 - 1; };
+}
+function addKick(d, t0, sr, amp) {
+  const n = Math.floor(0.4 * sr); let ph = 0;
   for (let i = 0; i < n; i++) {
-    const x = (i / (n - 1)) * 2 - 1, y = x * k;
-    let v;
-    if (shape === 1) v = Math.max(-1, Math.min(1, y - (y * y * y) / 3));
-    else if (shape === 2) v = Math.max(-1, Math.min(1, y));
-    else if (shape === 3) v = Math.sin(y * Math.PI / 2);
-    else v = Math.tanh(y);
-    c[i] = v;
+    const idx = t0 + i; if (idx >= d.length) break;
+    const t = i / sr, f = 45 + 95 * Math.exp(-t * 30);
+    ph += 2 * Math.PI * f / sr;
+    d[idx] += amp * Math.sin(ph) * Math.exp(-t * 10);
   }
-  return c;
 }
-function applyParams() {
-  if (!ctx) return;
-  const mix = val.kMix / 1;
-  const drive = val.kDrive;
-  shaper.curve = curveFor(drive, shapeIndex);
-  const wet = Math.max(0, Math.min(1, mix));
-  wetGain.gain.setTargetAtTime(wet, ctx.currentTime, 0.02);
-  dryGain.gain.setTargetAtTime(1 - wet, ctx.currentTime, 0.02);
-  outGain.gain.setTargetAtTime(Math.pow(10, val.kOut / 20), ctx.currentTime, 0.02);
-  applyMode();
+function addSaw(d, t0, sr, dur, freq, amp, harm, decay) {
+  const n = Math.floor(dur * sr);
+  for (let i = 0; i < n; i++) {
+    const idx = t0 + i; if (idx >= d.length) break;
+    const t = i / sr, env = Math.min(1, t / 0.004) * Math.exp(-t * decay);
+    let s = 0;
+    for (let k = 1; k <= harm; k++) s += Math.sin(2 * Math.PI * freq * k * t) / k;
+    d[idx] += amp * env * s * (2 / Math.PI);
+  }
 }
-function applyMode() {
-  if (!ctx) return;
-  // Bypass forces the dry path only; Processed uses the mix and output knobs.
-  const wet = mode === "bypass" ? 0 : Math.max(0, Math.min(1, val.kMix));
-  wetGain.gain.setTargetAtTime(wet, ctx.currentTime, 0.02);
-  dryGain.gain.setTargetAtTime(mode === "bypass" ? 1 : 1 - wet, ctx.currentTime, 0.02);
+function addNoise(d, t0, sr, dur, amp, decay, rnd, highpass) {
+  const n = Math.floor(dur * sr); let prev = 0;
+  for (let i = 0; i < n; i++) {
+    const idx = t0 + i; if (idx >= d.length) break;
+    const t = i / sr; let x = rnd();
+    if (highpass) { const y = x - prev; prev = x; x = y; }
+    d[idx] += amp * x * Math.exp(-t * decay);
+  }
 }
-function ensureCtx() {
+function renderTrack(name, sr) {
+  const len = Math.floor(LOOP_SEC * sr), d = new Float32Array(len), rnd = lcg(7);
+  const at = beats => Math.round(beats * BEAT * sr);
+  if (name === "kick") {
+    for (let b = 0; b < BARS * 4; b++) addKick(d, at(b), sr, 0.9);
+    const pat = [43.65, 43.65, 36.71, 43.65];
+    for (let j = 0; j < BARS * 8; j++) addSaw(d, at(j / 2), sr, BEAT * 0.45, pat[j % 4], 0.35, 10, 9);
+  } else if (name === "lead") {
+    const notes = [220, 277.18, 329.63, 440];
+    for (let j = 0; j < BARS * 8; j++) addSaw(d, at(j / 2), sr, BEAT * 0.45, notes[j % 4], 0.22, 16, 4);
+  } else {
+    for (let b = 0; b < BARS; b++) for (let s = 0; s < 16; s++) {
+      const t = (b * 16 + s) / 4;
+      if (s === 0 || s === 6 || s === 10) addKick(d, at(t), sr, 0.8);
+      if (s === 4 || s === 12) addNoise(d, at(t), sr, 0.2, 0.5, 22, rnd, false);
+      if (s % 2 === 0) addNoise(d, at(t), sr, 0.05, 0.12, 80, rnd, true);
+    }
+  }
+  let peak = 0;
+  for (let i = 0; i < len; i++) peak = Math.max(peak, Math.abs(d[i]));
+  if (peak > 0) for (let i = 0; i < len; i++) d[i] *= 0.85 / peak;
+  return d;
+}
+function getBuffer(name) {
+  if (!buffers[name]) {
+    const b = ctx.createBuffer(1, Math.floor(LOOP_SEC * ctx.sampleRate), ctx.sampleRate);
+    b.copyToChannel(renderTrack(name, ctx.sampleRate), 0);
+    buffers[name] = b;
+  }
+  return buffers[name];
+}
+
+// Graph: source -> pre -> shaper -> wet -> out ; source -> dry -> out ; out -> speakers
+function ensureGraph() {
   if (ctx) return;
   const AC = window.AudioContext || window.webkitAudioContext;
   ctx = new AC();
-  master = ctx.createGain(); master.gain.value = 0.7; master.connect(ctx.destination);
-  shaper = ctx.createWaveShaper(); shaper.oversample = "4x";
-  outGain = ctx.createGain();
-  wetGain = ctx.createGain();
-  dryGain = ctx.createGain();
-  // Bus: source -> dry, source -> shaper -> wet; both -> outGain -> master
-  bus = ctx.createGain();
-  bus.connect(dryGain); bus.connect(shaper); shaper.connect(wetGain);
-  dryGain.connect(outGain); wetGain.connect(outGain); outGain.connect(master);
-  applyParams();
+  nodes.shaper = ctx.createWaveShaper();
+  nodes.shaper.oversample = "4x";
+  nodes.pre = ctx.createGain();
+  nodes.wet = ctx.createGain();
+  nodes.dry = ctx.createGain();
+  nodes.out = ctx.createGain();
+  nodes.pre.connect(nodes.shaper);
+  nodes.shaper.connect(nodes.wet);
+  nodes.wet.connect(nodes.out);
+  nodes.dry.connect(nodes.out);
+  nodes.out.connect(ctx.destination);
+  applyParam("drive");
+  applyParam("mix");
+  applyParam("output");
 }
-let bus = null;
 
-function kickBass(t) {
-  // 160 BPM: one kick per beat, sub bass on the off-beats
-  const beat = 60 / 160;
-  for (let i = 0; i < 16; i++) {
-    const s = t + i * beat / 4;
-    if (i % 4 === 0) {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.frequency.setValueAtTime(140, s); o.frequency.exponentialRampToValueAtTime(45, s + 0.12);
-      g.gain.setValueAtTime(0.9, s); g.gain.exponentialRampToValueAtTime(0.001, s + 0.25);
-      o.connect(g); g.connect(bus); o.start(s); o.stop(s + 0.3);
+// Drive: the curve is tanh(a*x) / tanh(a), with a = 10^(drive/20). Output stays within -1..1.
+function applyParam(p) {
+  if (!ctx) return;
+  if (p === "drive") {
+    const a = Math.pow(10, val.drive / 20), n = 2048, curve = new Float32Array(n);
+    for (let i = 0; i < n; i++) {
+      const x = (i / (n - 1)) * 2 - 1;
+      curve[i] = Math.tanh(a * x) / Math.tanh(a);
     }
-    if (i % 4 === 2) {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.type = "sawtooth"; o.frequency.value = 43.65;
-      g.gain.setValueAtTime(0.35, s); g.gain.exponentialRampToValueAtTime(0.001, s + beat / 2);
-      o.connect(g); g.connect(bus); o.start(s); o.stop(s + beat / 2 + 0.02);
-    }
+    nodes.shaper.curve = curve;
+  } else if (p === "mix" || p === "output") {
+    applyMix();
+    if (p === "output") nodes.out.gain.setTargetAtTime(Math.pow(10, val.output / 20), ctx.currentTime, 0.02);
   }
 }
-function screamerLead(t) {
-  const beat = 60 / 160, notes = [220, 277.18, 329.63, 440];
-  for (let i = 0; i < 8; i++) {
-    const s = t + i * beat / 2, o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = "sawtooth"; o.frequency.value = notes[i % notes.length];
-    g.gain.setValueAtTime(0.25, s); g.gain.exponentialRampToValueAtTime(0.001, s + beat / 2 * 0.9);
-    o.connect(g); g.connect(bus); o.start(s); o.stop(s + beat / 2);
-  }
+function applyMix() {
+  if (!ctx) return;
+  const wet = abMode === "after" ? val.mix / 100 : 0;
+  nodes.wet.gain.setTargetAtTime(wet, ctx.currentTime, 0.02);
+  nodes.dry.gain.setTargetAtTime(1 - wet, ctx.currentTime, 0.02);
 }
-function breakDrums(t) {
-  const beat = 60 / 160;
-  for (let i = 0; i < 32; i++) {
-    const s = t + i * beat / 4;
-    if (i % 8 === 0 || i % 8 === 5) {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.frequency.setValueAtTime(180, s); o.frequency.exponentialRampToValueAtTime(60, s + 0.08);
-      g.gain.setValueAtTime(0.8, s); g.gain.exponentialRampToValueAtTime(0.001, s + 0.12);
-      o.connect(g); g.connect(bus); o.start(s); o.stop(s + 0.14);
-    }
-    if (i % 8 === 4) {
-      const len = Math.floor(ctx.sampleRate * 0.08), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
-      for (let j = 0; j < len; j++) d[j] = (Math.random() * 2 - 1) * Math.pow(1 - j / len, 3);
-      const src = ctx.createBufferSource(), g = ctx.createGain();
-      src.buffer = buf; g.gain.value = 0.5; src.connect(g); g.connect(bus); src.start(s);
-    }
-  }
-}
-const STEMS = { kick: kickBass, lead: screamerLead, breaks: breakDrums };
 
-function stopDemo() {
-  playing = false;
-  timers.forEach(clearTimeout); timers = [];
-  const btn = document.getElementById("playBtn");
-  btn.textContent = "PLAY"; btn.classList.remove("stop");
-  document.getElementById("demoStatus").textContent = "Stopped";
-  if (bus) { try { bus.disconnect(); } catch (_) {} bus = ctx.createGain(); bus.connect(dryGain); bus.connect(shaper); }
+function stopSource() {
+  if (!src) return;
+  src.onended = null;
+  try { src.stop(); } catch (_) {}
+  src.disconnect();
+  src = null;
 }
-function playDemo() {
-  ensureCtx();
-  if (ctx.state === "suspended") ctx.resume();
-  stopDemo();
-  playing = true;
-  const btn = document.getElementById("playBtn");
-  btn.textContent = "STOP"; btn.classList.add("stop");
-  document.getElementById("demoStatus").textContent = "Playing: " + stem.toUpperCase() + " (" + mode + ")";
-  const loopLen = 4 * 60 / 160 * 4; // four bars
-  const schedule = t0 => {
-    STEMS[stem](t0);
-    const t = setTimeout(() => { if (playing) schedule(t0 + loopLen); }, (t0 + loopLen - ctx.currentTime - 0.3) * 1000);
-    timers.push(t);
+function play() {
+  ensureGraph();
+  const go = () => {
+    stopSource();
+    const buf = getBuffer(trackName);
+    const offset = pausedAt % buf.duration;
+    const s = ctx.createBufferSource();
+    s.buffer = buf;
+    s.loop = true;
+    s.connect(nodes.pre);
+    s.connect(nodes.dry);
+    s.start(ctx.currentTime, offset);
+    startedAt = ctx.currentTime - offset;
+    src = s;
+    playing = true;
+    updateUI();
   };
-  schedule(ctx.currentTime + 0.1);
+  if (ctx.state === "suspended") ctx.resume().then(go); else go();
 }
-document.getElementById("playBtn").addEventListener("click", () => playing ? stopDemo() : playDemo());
+function pause() {
+  if (!playing || !ctx) return;
+  pausedAt = (ctx.currentTime - startedAt) % getBuffer(trackName).duration;
+  stopSource();
+  playing = false;
+  updateUI();
+}
+function selectTrack(name) {
+  const wasPlaying = playing;
+  if (wasPlaying) pause();
+  trackName = name;
+  pausedAt = 0;
+  document.querySelectorAll("#trackList .track").forEach(b => b.classList.toggle("on", b.dataset.track === name));
+  if (wasPlaying) play(); else updateUI();
+}
+function selectAB(mode) {
+  abMode = mode;
+  document.querySelectorAll("#abSeg button").forEach(b => b.classList.toggle("on", b.dataset.ab === mode));
+  applyMix();
+}
+function updateUI() {
+  const btn = document.getElementById("playBtn");
+  btn.textContent = playing ? "PAUSE" : "PLAY";
+  btn.classList.toggle("playing", playing);
+  document.getElementById("status").textContent = playing
+    ? "Playing: " + (abMode === "after" ? "after (saturated)" : "before (dry)")
+    : (pausedAt > 0 ? "Paused" : "Stopped");
+}
 
-document.querySelectorAll("#stemRow .stem").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("#stemRow .stem").forEach(x => x.classList.remove("on"));
-  b.classList.add("on");
-  stem = b.dataset.stem;
-  if (playing) playDemo();
-}));
-document.querySelectorAll("#abToggle button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("#abToggle button").forEach(x => x.classList.remove("on"));
-  b.classList.add("on");
-  mode = b.dataset.mode;
-  applyMode();
-}));
+document.getElementById("playBtn").addEventListener("click", () => { if (playing) pause(); else play(); });
+document.querySelectorAll("#trackList .track").forEach(b => b.addEventListener("click", () => selectTrack(b.dataset.track)));
+document.querySelectorAll("#abSeg button").forEach(b => b.addEventListener("click", () => selectAB(b.dataset.ab)));
+updateUI();
 </script>
 </body>
 </html>
