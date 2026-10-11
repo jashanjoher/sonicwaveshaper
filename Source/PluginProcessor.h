@@ -5,6 +5,10 @@
 #include <juce_audio_utils/juce_audio_utils.h>
 #include <juce_dsp/juce_dsp.h>
 
+#include <memory>
+#include <vector>
+
+#include "NAM/get_dsp.h"
 #include "WaveshaperDSP.h"
 
 namespace ParamIDs
@@ -48,8 +52,17 @@ public:
 
 private:
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    void loadEmbeddedNamModel();
 
-    WaveshaperDSP dsp;
+    // One NAM model instance per channel, because each instance holds its own recurrent state.
+    std::unique_ptr<nam::DSP> namModels[2];
+    bool namReady = false;
+
+    // Scratch storage sized in prepareToPlay so processBlock does not allocate.
+    int preparedBlockSize = 0;
+    juce::AudioBuffer<float> dryBuffer;
+    std::vector<double> namInput[2];
+    std::vector<double> namOutput[2];
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SonicWaveshaperAudioProcessor)
 };

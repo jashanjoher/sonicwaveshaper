@@ -1,5 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "EmbeddedModel.h"
 
 SonicWaveshaperAudioProcessor::SonicWaveshaperAudioProcessor()
     : AudioProcessor (BusesProperties()
@@ -7,6 +8,7 @@ SonicWaveshaperAudioProcessor::SonicWaveshaperAudioProcessor()
                         .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
       apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
 {
+    loadEmbeddedNamModel();
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout SonicWaveshaperAudioProcessor::createParameterLayout()
@@ -32,15 +34,47 @@ juce::AudioProcessorValueTreeState::ParameterLayout SonicWaveshaperAudioProcesso
     return { params.begin(), params.end() };
 }
 
+void SonicWaveshaperAudioProcessor::loadEmbeddedNamModel()
+{
+    try
+    {
+        const std::string modelText (reinterpret_cast<const char*> (kWavenetA1Model), kWavenetA1ModelSize);
+        const nlohmann::json config = nlohmann::json::parse (modelText);
+
+        for (auto& model : namModels)
+            model = nam::get_dsp (config);
+
+        namReady = true;
+    }
+    catch (const std::exception& e)
+    {
+        DBG ("NAM model load failed: " << e.what());
+        namReady = false;
+    }
+}
+
 void SonicWaveshaperAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    dsp.prepare (sampleRate, samplesPerBlock, juce::jmax (1, getTotalNumOutputChannels()));
-    setLatencySamples (dsp.getLatencySamples());
+    preparedBlockSize = juce::jmax (1, samplesPerBlock);
+
+    dryBuffer.setSize (2, preparedBlockSize);
+    dryBuffer.clear();
+
+    for (int ch = 0; ch < 2; ++ch)
+    {
+        namInput[ch].assign ((size_t) preparedBlockSize, 0.0);
+        namOutput[ch].assign ((size_t) preparedBlockSize, 0.0);
+
+        if (namModels[ch] != nullptr)
+            namModels[ch]->Reset (sampleRate, preparedBlockSize);
+    }
+
+    // The NAM wavenet adds no fixed latency.
+    setLatencySamples (0);
 }
 
 void SonicWaveshaperAudioProcessor::releaseResources()
 {
-    dsp.reset();
 }
 
 bool SonicWaveshaperAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
@@ -63,17 +97,49 @@ void SonicWaveshaperAudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    const int numChannels = juce::jmin (buffer.getNumChannels(), 2);
+    const int numSamples = buffer.getNumSamples();
+
+    // If the model failed to load, pass audio through unchanged.
+    if (! namReady || preparedBlockSize <= 0 || numChannels == 0 || numSamples == 0)
+        return;
+
+    // Saturation (Drive) sets the input gain into the neural model.
     const float driveDb = apvts.getRawParameterValue (ParamIDs::drive)->load();
-    const int shapeIndex = juce::roundToInt (apvts.getRawParameterValue (ParamIDs::shape)->load());
     const float mixPercent = apvts.getRawParameterValue (ParamIDs::mix)->load();
     const float outputDb = apvts.getRawParameterValue (ParamIDs::output)->load();
 
-    dsp.setParameters (juce::Decibels::decibelsToGain (driveDb),
-                       static_cast<WaveshaperDSP::Shape> (juce::jlimit (0, 3, shapeIndex)),
-                       mixPercent / 100.0f,
-                       juce::Decibels::decibelsToGain (outputDb));
+    const float inputGain = juce::Decibels::decibelsToGain (driveDb);
+    const float mix = juce::jlimit (0.0f, 1.0f, mixPercent / 100.0f);
+    const float dryGain = 1.0f - mix;
+    const float wetGain = mix * juce::Decibels::decibelsToGain (outputDb);
 
-    dsp.process (buffer);
+    // Process in chunks no larger than the size prepared in prepareToPlay.
+    for (int start = 0; start < numSamples; start += preparedBlockSize)
+    {
+        const int n = juce::jmin (preparedBlockSize, numSamples - start);
+
+        for (int ch = 0; ch < numChannels; ++ch)
+        {
+            float* channelData = buffer.getWritePointer (ch, start);
+            dryBuffer.copyFrom (ch, 0, buffer, ch, start, n);
+
+            auto& in = namInput[ch];
+            auto& out = namOutput[ch];
+
+            for (int i = 0; i < n; ++i)
+                in[(size_t) i] = (double) channelData[i] * (double) inputGain;
+
+            double* inPtr = in.data();
+            double* outPtr = out.data();
+            namModels[ch]->process (&inPtr, &outPtr, n);
+
+            const float* dry = dryBuffer.getReadPointer (ch);
+
+            for (int i = 0; i < n; ++i)
+                channelData[i] = dry[i] * dryGain + (float) outPtr[i] * wetGain;
+        }
+    }
 }
 
 juce::AudioProcessorEditor* SonicWaveshaperAudioProcessor::createEditor()
