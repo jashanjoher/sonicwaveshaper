@@ -87,28 +87,29 @@
   .spec-list li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; font-size: 14px; }
   .spec-list li span:first-child { color: #cdb8c6; }
 
-  /* Maya Chamber: neon violet and cyan faceplate */
-  .chamber-pedal { position: relative; width: 300px; padding: 18px; border-radius: 20px; color: #f4ecff;
-    background: linear-gradient(165deg, #2a0f4a 0%, #4b1a8a 45%, #1a0a33 100%);
-    box-shadow: 0 0 0 1px #7b3fe4, 0 0 28px rgba(0,229,255,.35), 0 0 42px rgba(168,85,247,.45), inset 0 2px 0 rgba(255,255,255,.18), 0 30px 50px rgba(0,0,0,.5); }
-  .chamber-brand { font-size: 16px; font-weight: 900; letter-spacing: 2px; margin: 0; text-align: center; color: #fff; text-shadow: 0 0 10px #00e5ff, 0 0 18px #a855f7; }
-  .chamber-brand span { color: #00e5ff; }
-  .chamber-model { font-size: 9px; letter-spacing: 3px; color: #d8b4fe; text-align: center; margin-top: 2px; font-weight: bold; }
-  .chamber-well { border-radius: 50%; padding: 6px; background: radial-gradient(circle at 50% 40%, #6d28d9, #2e1065 75%); box-shadow: 0 0 14px rgba(0,229,255,.55), inset 0 3px 5px rgba(0,0,0,.6); }
+  /* Maya Chamber: Cute Bubblegum Pink and Turquoise faceplate */
+  .chamber-pedal { position: relative; width: 300px; padding: 18px; border-radius: 20px; color: #3A1F33;
+    background: linear-gradient(145deg, #FFF2F8 0%, #F6B9D1 100%);
+    border: 2px solid #D9739C;
+    box-shadow: 0 1px 0 #f9c7db, 0 2px 0 #eaa0bf, 0 3px 0 #e693b5, 0 4px 0 #D9739C, inset 0 2px 0 rgba(255,255,255,.85), 0 30px 50px rgba(0,0,0,.45); }
+  .chamber-brand { font-size: 16px; font-weight: 900; letter-spacing: 2px; margin: 0; text-align: center; color: #3A1F33; }
+  .chamber-brand span { color: #15877D; }
+  .chamber-model { font-size: 9px; letter-spacing: 3px; color: #3A1F33; text-align: center; margin-top: 2px; font-weight: bold; }
+  .chamber-well { border-radius: 50%; padding: 6px; background: radial-gradient(circle at 50% 40%, #f5b1cb, #eb9ab9 70%); box-shadow: inset 0 3px 5px rgba(90,20,55,.45), 0 1px 0 #fff; }
   .chamber-cap { position: absolute; inset: 0; border-radius: 50%;
-    background: repeating-conic-gradient(from 0deg, #00e5ff 0deg 4deg, #0891b2 4deg 8deg);
-    box-shadow: 0 0 12px #00e5ff, inset 0 0 0 1.5px #0e7490, inset 0 -3px 4px rgba(0,0,0,.4); transform: rotate(var(--rot, 0deg)); }
-  .chamber-cap::before { content: ""; position: absolute; inset: 13%; border-radius: 50%; background: radial-gradient(circle at 36% 28%, #ecfeff, #22d3ee 45%, #7e22ce 100%); }
-  .chamber-cap .notch { background: #fdf4ff; box-shadow: 0 0 6px #f0abfc; }
-  .chamber-kname { font-size: 9px; letter-spacing: 2px; font-weight: 900; margin-top: 8px; color: #e9d5ff; text-shadow: 0 0 6px #a855f7; }
-  .chamber-ro { font-size: 10px; color: #67e8f9; font-weight: bold; min-height: 13px; text-shadow: 0 0 6px #22d3ee; }
-  .chamber-env { margin-top: 14px; border: 1px solid #a855f7; border-radius: 8px; background: rgba(15,5,30,.7); padding: 8px 10px; box-shadow: inset 0 0 12px rgba(168,85,247,.5), 0 0 10px rgba(0,229,255,.35); }
-  .chamber-env label { display: block; font-size: 9px; letter-spacing: 2px; color: #a5f3fc; margin-bottom: 4px; text-shadow: 0 0 6px #22d3ee; }
-  .chamber-env select { width: 100%; background: transparent; color: #fdf4ff; border: none; font-family: inherit; font-size: 12px; outline: none; }
-  .chamber-env select option { background: #1e0b3d; color: #fdf4ff; }
-  .chamber-now { font-size: 10px; color: #f0abfc; letter-spacing: 1px; margin-top: 4px; text-shadow: 0 0 6px #d946ef; }
-  .chamber-meter { margin-top: 14px; height: 8px; border-radius: 4px; background: #1e0b3d; box-shadow: inset 0 0 6px rgba(0,0,0,.6); overflow: hidden; }
-  .chamber-meter i { display: block; height: 100%; width: 62%; background: linear-gradient(90deg, #00e5ff, #a855f7, #f0abfc); box-shadow: 0 0 10px #00e5ff; }
+    background: repeating-conic-gradient(from 0deg, #2FB8AC 0deg 4deg, #25A196 4deg 8deg);
+    box-shadow: inset 0 0 0 1.5px #15877D, inset 0 -3px 4px rgba(0,60,55,.35), 0 3px 6px rgba(0,0,0,.35); transform: rotate(var(--rot, 0deg)); }
+  .chamber-cap::before { content: ""; position: absolute; inset: 13%; border-radius: 50%; background: radial-gradient(circle at 36% 28%, #E6FAF8, #6fe6da 45%, #25A196 100%); }
+  .chamber-cap .notch { background: #FFFFFF; box-shadow: 0 0 3px rgba(58,31,51,.35); }
+  .chamber-kname { font-size: 9px; letter-spacing: 2px; font-weight: 900; margin-top: 8px; color: #3A1F33; }
+  .chamber-ro { font-size: 10px; color: #15877D; font-weight: bold; min-height: 13px; }
+  .chamber-env { margin-top: 14px; border: 1px solid #D9739C; border-radius: 8px; background: rgba(255,255,255,.6); padding: 8px 10px; }
+  .chamber-env label { display: block; font-size: 9px; letter-spacing: 2px; color: #15877D; margin-bottom: 4px; }
+  .chamber-env select { width: 100%; background: transparent; color: #3A1F33; border: none; font-family: inherit; font-size: 12px; outline: none; }
+  .chamber-env select option { background: #FFF2F8; color: #3A1F33; }
+  .chamber-now { font-size: 10px; color: #3A1F33; letter-spacing: 1px; margin-top: 4px; }
+  .chamber-meter { margin-top: 14px; height: 8px; border-radius: 4px; background: #FFF2F8; box-shadow: inset 0 0 6px rgba(217,115,156,.4); overflow: hidden; }
+  .chamber-meter i { display: block; height: 100%; width: 62%; background: linear-gradient(90deg, #3FD3C6, #15877D); }
 
   .demo { background: var(--matte-2); border: 1px solid var(--line); border-radius: 22px; padding: 30px; margin-top: 36px; }
   .demo-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: start; }
@@ -140,13 +141,13 @@
   .bundle-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
   .plugin h3 { color: var(--pink); }
   .plugin p { color: #cdb8c6; font-size: 14px; margin: 0; }
-  .card.chamber-card { background: linear-gradient(160deg, #2a0f4a, #1a0a33); border: 1px solid #a855f7; box-shadow: 0 0 18px rgba(168,85,247,.35); }
-  .card.chamber-card h3 { color: #f0abfc; }
-  .card.chamber-card p { color: #e9d5ff; }
-  .card.chamber-card .tag { background: #00e5ff; color: #1a0a33; }
+  .card.chamber-card { background: linear-gradient(145deg, #FFF2F8 0%, #F6B9D1 100%); border: 1px solid #D9739C; box-shadow: 0 6px 18px rgba(217,115,156,.35); }
+  .card.chamber-card h3 { color: #3A1F33; }
+  .card.chamber-card p { color: #3A1F33; }
+  .card.chamber-card .tag { background: #3FD3C6; color: #3A1F33; }
   .eco-line { margin-top: 16px; color: #d9c7d3; font-size: 14px; }
   .eco-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; border: 1px solid var(--teal); color: var(--teal); padding: 4px 8px; margin: 0 6px 6px 0; text-transform: uppercase; }
-  .eco-tag.chamber { border-color: #a855f7; color: #f0abfc; }
+  .eco-tag.chamber { border-color: #D9739C; color: #3A1F33; }
 
   .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); margin-top: 28px; }
   .delivery .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex: 0 0 auto; box-shadow: 0 0 10px var(--teal); }
@@ -238,7 +239,7 @@
   <div class="wrap">
     <div class="eyebrow">Flagship plugin</div>
     <h2>Maya Chamber</h2>
-    <p class="headline-tag" style="font-size:15px;font-weight:800;letter-spacing:2px;color:#f0abfc;margin:0 0 8px;text-transform:uppercase;">Procedural Space. Neural Warmth.</p>
+    <p class="headline-tag" style="font-size:15px;font-weight:800;letter-spacing:2px;color:#D9739C;margin:0 0 8px;text-transform:uppercase;">Procedural Space. Neural Warmth.</p>
     <p class="sub">Maya Chamber merges 28 algorithmic acoustic environments with deep neural hardware modeling. Procedural early reflections and a dense Hadamard FDN deliver lush spatial depth, while the onboard Neural Drive, powered by Neural Amp Modeler (NAM), injects authentic analog harmonic saturation and tube weight straight into your wet reverb tail.</p>
     <div class="flagship">
       <div class="stage">
