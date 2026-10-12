@@ -119,36 +119,35 @@
   .plugin h3 { color: var(--pink); }
   .plugin p { color: #cdb8c6; font-size: 14px; margin: 0; }
 
-
-  .chamber { background: #2B2C2E; color: #E8E4DC; border-radius: 4px; padding: 44px; border: 1px solid #000; font-family: "Courier New", Courier, monospace; }
-  .chamber .eyebrow { color: #B5532F; }
-  .chamber h2 { font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; color: #F2EEE6; }
-  .chamber .sub { color: #B9B4AA; }
-  .chamber-panel { background: #232425; border: 2px solid #B5532F; padding: 26px; margin-top: 28px; }
-  .chamber-silk { font-size: 12px; letter-spacing: 3px; color: #B5532F; text-transform: uppercase; border-bottom: 1px solid #B5532F; padding-bottom: 10px; margin-bottom: 18px; }
-  .chamber-model { font-size: clamp(22px, 4vw, 36px); font-weight: 700; color: #F2EEE6; letter-spacing: 2px; margin: 0; }
-  .chamber-model span { color: #B5532F; }
-  .spec-table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 13px; }
-  .spec-table td { border-top: 1px solid #3d3f41; padding: 11px 6px; vertical-align: top; }
-  .spec-table td:first-child { color: #B5532F; text-transform: uppercase; letter-spacing: 2px; width: 36%; }
-  .chamber-note { font-size: 12px; color: #8f8a80; margin-top: 16px; }
-  .eco-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; border: 1px solid #B5532F; color: #B5532F; padding: 4px 8px; margin: 0 6px 6px 0; text-transform: uppercase; }
+  .mc-unit { max-width: 520px; margin: 0 auto; background: linear-gradient(180deg, #34363a, #2B2C2E); border: 1px solid #111; border-radius: 6px; padding: 18px; font-family: "Courier New", Courier, monospace; color: #E8E4DC; box-shadow: 0 10px 24px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06); }
+  .mc-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #B5532F; padding-bottom: 8px; margin-bottom: 14px; }
+  .mc-brand { font-size: 13px; letter-spacing: 3px; font-weight: 700; color: #F2EEE6; }
+  .mc-model { font-size: 10px; letter-spacing: 2px; color: #B5532F; }
+  .mc-sel label { display: block; font-size: 9px; letter-spacing: 2px; color: #8f8a80; margin-bottom: 4px; }
+  .mc-sel select { width: 100%; background: #1d1e20; color: #F2EEE6; border: 1px solid #B5532F; border-radius: 3px; padding: 7px 8px; font-family: inherit; font-size: 12px; }
+  .mc-now { font-size: 10px; color: #B5532F; letter-spacing: 1px; margin-top: 6px; }
+  .mc-knobs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 6px; margin: 16px 0 12px; }
+  .mc-k { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .mc-k span { font-size: 8px; letter-spacing: 1px; color: #B9B4AA; }
+  .mc-knob { width: 40px; height: 40px; border-radius: 50%; position: relative; background: repeating-conic-gradient(#4a4c4f 0 5deg, #2b2c2e 5deg 10deg); box-shadow: inset 0 0 0 1px #111, 0 1px 0 rgba(255,255,255,.05); }
+  .mc-knob i { position: absolute; left: 50%; top: 3px; width: 2px; height: 12px; margin-left: -1px; background: #B5532F; border-radius: 1px; transform-origin: 50% 17px; transform: rotate(var(--rot)); }
+  .mc-acc { display: grid; gap: 6px; margin-top: 4px; }
+  .mc-acc details { border: 1px solid #3d3f41; border-radius: 3px; background: #232425; }
+  .mc-acc summary { cursor: pointer; list-style: none; display: flex; align-items: center; padding: 9px 10px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #F2EEE6; }
+  .mc-acc summary::-webkit-details-marker { display: none; }
+  .mc-acc summary span { color: #8f8a80; font-size: 9px; letter-spacing: 1px; margin-left: auto; margin-right: 10px; }
+  .mc-acc summary::after { content: "+"; color: #B5532F; }
+  .mc-acc details[open] summary::after { content: "-"; }
+  .mc-acc ul { margin: 0; padding: 0 12px 10px 26px; font-size: 11px; color: #E8E4DC; }
+  .mc-acc details p { margin: 0; padding: 0 12px 10px; font-size: 11px; color: #B9B4AA; line-height: 1.5; }
+  .mc-acc li { margin: 2px 0; }
   .lineup .card.chamber-card { background: #2B2C2E; border: 1px solid #B5532F; border-radius: 2px; color: #E8E4DC; font-family: "Courier New", Courier, monospace; }
-  .lineup .chamber-card h3 { color: #F2EEE6; text-transform: uppercase; letter-spacing: 1px; font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif; }
+  .lineup .chamber-card h3 { color: #F2EEE6; text-transform: uppercase; letter-spacing: 1px; }
   .lineup .chamber-card p { color: #B9B4AA; }
   .lineup .chamber-card .tag { color: #B5532F; border: 1px solid #B5532F; background: transparent; }
+  .eco-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; border: 1px solid #B5532F; color: #B5532F; padding: 4px 8px; margin: 0 6px 6px 0; text-transform: uppercase; }
   .eco-line { margin-top: 16px; color: #d9c7d3; font-size: 14px; }
-
-  .env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 12px; }
-  .env-group { background: #232425; border: 1px solid #3d3f41; padding: 16px; }
-  .env-title { color: #B5532F; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .env-group ul { margin: 0; padding-left: 18px; font-size: 13px; color: #E8E4DC; }
-  .env-group li { margin: 3px 0; }
-  .flow { background: #232425; border-left: 3px solid #B5532F; padding: 14px; font-size: 12px; letter-spacing: 1px; color: #E8E4DC; margin-top: 10px; line-height: 1.8; }
-  .ctrl-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
-  .ctrl { background: #232425; border: 1px solid #3d3f41; text-align: center; padding: 12px 6px; font-size: 11px; letter-spacing: 2px; color: #F2EEE6; }
-  .chamber .block-label { color: #B5532F; margin-top: 28px; }
-  @media (max-width: 860px) { .env-grid { grid-template-columns: 1fr; } .ctrl-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .mc-knobs { grid-template-columns: repeat(5, 1fr); } }
   .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); margin-top: 28px; }
   .delivery .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex: 0 0 auto; box-shadow: 0 0 10px var(--teal); }
   .delivery p { margin: 0; color: #d9c7d3; font-size: 15px; }
@@ -157,7 +156,6 @@
 
   @media (max-width: 860px) {
     .grid3, .grid4, .flagship, .demo-grid { grid-template-columns: 1fr; }
-    .chamber { padding: 26px; }
     .links a.hide-sm { display: none; }
     .bundle { padding: 26px; }
     .demo { padding: 22px; }
@@ -297,38 +295,23 @@
 
 <section id="chamber">
   <div class="wrap">
-    <div class="chamber">
-      <div class="eyebrow">Maya DSP ecosystem // Reverb</div>
-      <h2>Maya Chamber</h2>
-      <p class="sub">Maya Chamber is an acoustic environment engine. Instead of generic room presets, the input sound is placed inside another world or resonating object, and that environment changes its reflections, resonance, decay and spectrum before the output.</p>
-      <div class="chamber-panel">
-        <div class="chamber-silk">Maya DSP // Archival reverb unit</div>
-        <p class="chamber-model">MAYA CHAMBER <span>// MODEL MC-24</span></p>
-        <table class="spec-table">
-          <tr><td>Model</td><td>MC-24</td></tr>
-          <tr><td>Environments</td><td>24 across four categories</td></tr>
-          <tr><td>Engine</td><td>Hybrid: partitioned convolution early reflections, diffusion, modal resonator banks, feedback delay network (FDN)</td></tr>
-          <tr><td>Neural path</td><td>NAM (Neural Amp Modeler) for analog coloration and neural saturation in the reverb path</td></tr>
-          <tr><td>Ecosystem</td><td>Maya DSP, bundled with SonicWaveshaper</td></tr>
-        </table>
+    <div class="mc-unit">
+      <div class="mc-head"><span class="mc-brand">MAYA CHAMBER</span><span class="mc-model">MODEL MC-24</span></div>
+      <div class="mc-sel">
+        <label for="mcEnv">ENVIRONMENT</label>
+        <select id="mcEnv"><optgroup label="Natural"><option value="Deep Forest" data-cat="Natural">Deep Forest</option><option value="Cave" data-cat="Natural">Cave</option><option value="Ice Cave" data-cat="Natural">Ice Cave</option><option value="Canyon" data-cat="Natural">Canyon</option><option value="Mountain Valley" data-cat="Natural">Mountain Valley</option><option value="Underground Tunnel" data-cat="Natural">Underground Tunnel</option></optgroup><optgroup label="Architectural"><option value="Abandoned Church" data-cat="Architectural">Abandoned Church</option><option value="Swimming Pool" data-cat="Architectural">Swimming Pool</option><option value="Concrete Atrium" data-cat="Architectural">Concrete Atrium</option><option value="Theatre" data-cat="Architectural">Theatre</option><option value="Factory" data-cat="Architectural">Factory</option><option value="Stairwell / Warehouse / Metro Station" data-cat="Architectural">Stairwell / Warehouse / Metro Station</option></optgroup><optgroup label="Resonant"><option value="Steel Pipe" data-cat="Resonant">Steel Pipe</option><option value="Metal Tank" data-cat="Resonant">Metal Tank</option><option value="Giant Spring" data-cat="Resonant">Giant Spring</option><option value="Glass Chamber" data-cat="Resonant">Glass Chamber</option><option value="Wooden Box" data-cat="Resonant">Wooden Box</option><option value="Instrument Bodies (Piano, Violin, Cello, Guitar)" data-cat="Resonant">Instrument Bodies (Piano, Violin, Cello, Guitar)</option><option value="Giant Bell / Gong" data-cat="Resonant">Giant Bell / Gong</option><option value="Concrete Tube" data-cat="Resonant">Concrete Tube</option></optgroup><optgroup label="Impossible"><option value="Infinite Corridor" data-cat="Impossible">Infinite Corridor</option><option value="Black Room" data-cat="Impossible">Black Room</option><option value="Glass Forest" data-cat="Impossible">Glass Forest</option><option value="Metal Cathedral" data-cat="Impossible">Metal Cathedral</option><option value="Rotating Room" data-cat="Impossible">Rotating Room</option><option value="Dream Chamber" data-cat="Impossible">Dream Chamber</option><option value="Machine Room" data-cat="Impossible">Machine Room</option><option value="Planetary Cave" data-cat="Impossible">Planetary Cave</option></optgroup></select>
+        <div class="mc-now" id="mcNow">Deep Forest // Natural</div>
       </div>
-
-      <div class="block-label">Signal flow</div>
-      <div class="flow">INPUT -> PRE-DELAY -> EARLY REFLECTIONS (PARTITIONED CONVOLUTION) -> DIFFUSION -> MODAL RESONATOR BANKS -> FEEDBACK DELAY NETWORK (FDN) -> SPECTRAL SHAPING -> PITCH / MODULATION -> OUTPUT</div>
-
-      <div class="block-label">24 environments</div>
-      <div class="env-grid">
-        <div class="env-group"><div class="env-title">01 Natural</div><ul><li>Deep Forest</li><li>Cave</li><li>Ice Cave</li><li>Canyon</li><li>Mountain Valley</li><li>Underground Tunnel</li></ul></div>
-        <div class="env-group"><div class="env-title">02 Architectural</div><ul><li>Abandoned Church</li><li>Swimming Pool</li><li>Concrete Atrium</li><li>Theatre</li><li>Factory</li><li>Stairwell / Warehouse / Metro Station</li></ul></div>
-        <div class="env-group"><div class="env-title">03 Resonant Objects</div><ul><li>Steel Pipe</li><li>Metal Tank</li><li>Giant Spring</li><li>Glass Chamber</li><li>Wooden Box</li><li>Instrument Bodies (Piano, Violin, Cello, Guitar)</li><li>Giant Bell / Gong</li><li>Concrete Tube</li></ul></div>
-        <div class="env-group"><div class="env-title">04 Impossible / Abstract</div><ul><li>Infinite Corridor</li><li>Black Room</li><li>Glass Forest</li><li>Metal Cathedral</li><li>Rotating Room</li><li>Dream Chamber</li><li>Machine Room</li><li>Planetary Cave</li></ul></div>
+      <div class="mc-knobs"><div class="mc-k"><div class="mc-knob"><i style="--rot:-120deg"></i></div><span>SIZE</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:-93deg"></i></div><span>DECAY</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:-66deg"></i></div><span>DENSITY</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:-39deg"></i></div><span>DIFFUSION</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:-12deg"></i></div><span>RESONANCE</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:15deg"></i></div><span>BRIGHTNESS</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:42deg"></i></div><span>MODULATION</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:69deg"></i></div><span>PRE-DELAY</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:96deg"></i></div><span>WIDTH</span></div><div class="mc-k"><div class="mc-knob"><i style="--rot:123deg"></i></div><span>MIX</span></div></div>
+      <div class="mc-acc">
+        <details><summary>Natural<span>6</span></summary><ul><li>Deep Forest</li><li>Cave</li><li>Ice Cave</li><li>Canyon</li><li>Mountain Valley</li><li>Underground Tunnel</li></ul></details>
+        <details><summary>Architectural<span>6</span></summary><ul><li>Abandoned Church</li><li>Swimming Pool</li><li>Concrete Atrium</li><li>Theatre</li><li>Factory</li><li>Stairwell / Warehouse / Metro Station</li></ul></details>
+        <details><summary>Resonant<span>8</span></summary><ul><li>Steel Pipe</li><li>Metal Tank</li><li>Giant Spring</li><li>Glass Chamber</li><li>Wooden Box</li><li>Instrument Bodies (Piano, Violin, Cello, Guitar)</li><li>Giant Bell / Gong</li><li>Concrete Tube</li></ul></details>
+        <details><summary>Impossible<span>8</span></summary><ul><li>Infinite Corridor</li><li>Black Room</li><li>Glass Forest</li><li>Metal Cathedral</li><li>Rotating Room</li><li>Dream Chamber</li><li>Machine Room</li><li>Planetary Cave</li></ul></details>
+        <details><summary>Signal path<span>hybrid</span></summary><p>Pre-delay, partitioned convolution early reflections, diffusion, modal resonator banks, FDN, spectral shaping, pitch and modulation.</p></details>
+        <details><summary>NAM path<span>neural</span></summary><p>NAM (Neural Amp Modeler) handles analog coloration and neural saturation inside the reverb path.</p></details>
+        <details><summary>Assets<span>licensed</span></summary><p>Every included impulse response and model has tracked origin and license.</p></details>
       </div>
-
-      <div class="block-label">Controls</div>
-      <div class="ctrl-grid">
-        <div class="ctrl">SIZE</div><div class="ctrl">DECAY</div><div class="ctrl">DENSITY</div><div class="ctrl">DIFFUSION</div><div class="ctrl">RESONANCE</div><div class="ctrl">BRIGHTNESS</div><div class="ctrl">MODULATION</div><div class="ctrl">PRE-DELAY</div><div class="ctrl">WIDTH</div><div class="ctrl">MIX</div>
-      </div>
-      <p class="chamber-note">Asset discipline: every included impulse response and model has tracked origin and license (proprietary recording, CC0 or verified redistributable, formally licensed IR, procedural raytraced IR, or in-house trained NAM model).</p>
     </div>
   </div>
 </section>
@@ -608,6 +591,16 @@ document.getElementById("playBtn").addEventListener("click", () => { if (playing
 document.querySelectorAll("#trackList .track").forEach(b => b.addEventListener("click", () => selectTrack(b.dataset.track)));
 document.querySelectorAll("#abSeg button").forEach(b => b.addEventListener("click", () => selectAB(b.dataset.ab)));
 updateUI();
+</script>
+<script>
+(function () {
+  var sel = document.getElementById("mcEnv");
+  var now = document.getElementById("mcNow");
+  if (!sel || !now) return;
+  function update() { var o = sel.options[sel.selectedIndex]; now.textContent = o.value + " // " + o.dataset.cat; }
+  sel.addEventListener("change", update);
+  update();
+})();
 </script>
 </body>
 </html>
