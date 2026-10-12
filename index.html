@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maya DSP | SonicWaveshaper and WOOF, WOOF Bundle</title>
-<meta name="description" content="Maya DSP makes saturation and neural tone plugins for electronic and heavy music. SonicWaveshaper and the WOOF, WOOF bundle for $75.">
+<title>Maya DSP | SonicWaveshaper, Maya Chamber and WOOF, WOOF Bundle</title>
+<meta name="description" content="Maya DSP makes saturation and neural tone plugins for electronic and heavy music. SonicWaveshaper, Maya Chamber reverb (MC-24), and the WOOF, WOOF bundle for $75.">
 <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
 <style>
   :root {
@@ -119,6 +119,36 @@
   .plugin h3 { color: var(--pink); }
   .plugin p { color: #cdb8c6; font-size: 14px; margin: 0; }
 
+
+  .chamber { background: #2B2C2E; color: #E8E4DC; border-radius: 4px; padding: 44px; border: 1px solid #000; font-family: "Courier New", Courier, monospace; }
+  .chamber .eyebrow { color: #B5532F; }
+  .chamber h2 { font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; color: #F2EEE6; }
+  .chamber .sub { color: #B9B4AA; }
+  .chamber-panel { background: #232425; border: 2px solid #B5532F; padding: 26px; margin-top: 28px; }
+  .chamber-silk { font-size: 12px; letter-spacing: 3px; color: #B5532F; text-transform: uppercase; border-bottom: 1px solid #B5532F; padding-bottom: 10px; margin-bottom: 18px; }
+  .chamber-model { font-size: clamp(22px, 4vw, 36px); font-weight: 700; color: #F2EEE6; letter-spacing: 2px; margin: 0; }
+  .chamber-model span { color: #B5532F; }
+  .spec-table { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 13px; }
+  .spec-table td { border-top: 1px solid #3d3f41; padding: 11px 6px; vertical-align: top; }
+  .spec-table td:first-child { color: #B5532F; text-transform: uppercase; letter-spacing: 2px; width: 36%; }
+  .chamber-note { font-size: 12px; color: #8f8a80; margin-top: 16px; }
+  .eco-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; border: 1px solid #B5532F; color: #B5532F; padding: 4px 8px; margin: 0 6px 6px 0; text-transform: uppercase; }
+  .lineup .card.chamber-card { background: #2B2C2E; border: 1px solid #B5532F; border-radius: 2px; color: #E8E4DC; font-family: "Courier New", Courier, monospace; }
+  .lineup .chamber-card h3 { color: #F2EEE6; text-transform: uppercase; letter-spacing: 1px; font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif; }
+  .lineup .chamber-card p { color: #B9B4AA; }
+  .lineup .chamber-card .tag { color: #B5532F; border: 1px solid #B5532F; background: transparent; }
+  .eco-line { margin-top: 16px; color: #d9c7d3; font-size: 14px; }
+
+  .env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 12px; }
+  .env-group { background: #232425; border: 1px solid #3d3f41; padding: 16px; }
+  .env-title { color: #B5532F; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .env-group ul { margin: 0; padding-left: 18px; font-size: 13px; color: #E8E4DC; }
+  .env-group li { margin: 3px 0; }
+  .flow { background: #232425; border-left: 3px solid #B5532F; padding: 14px; font-size: 12px; letter-spacing: 1px; color: #E8E4DC; margin-top: 10px; line-height: 1.8; }
+  .ctrl-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
+  .ctrl { background: #232425; border: 1px solid #3d3f41; text-align: center; padding: 12px 6px; font-size: 11px; letter-spacing: 2px; color: #F2EEE6; }
+  .chamber .block-label { color: #B5532F; margin-top: 28px; }
+  @media (max-width: 860px) { .env-grid { grid-template-columns: 1fr; } .ctrl-grid { grid-template-columns: repeat(2, 1fr); } }
   .delivery { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); margin-top: 28px; }
   .delivery .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-top: 7px; flex: 0 0 auto; box-shadow: 0 0 10px var(--teal); }
   .delivery p { margin: 0; color: #d9c7d3; font-size: 15px; }
@@ -127,6 +157,7 @@
 
   @media (max-width: 860px) {
     .grid3, .grid4, .flagship, .demo-grid { grid-template-columns: 1fr; }
+    .chamber { padding: 26px; }
     .links a.hide-sm { display: none; }
     .bundle { padding: 26px; }
     .demo { padding: 22px; }
@@ -140,6 +171,7 @@
     <a class="logo" href="#top">Maya <span>DSP</span></a>
     <div class="links">
       <a href="#waveshaper">SonicWaveshaper</a>
+      <a href="#chamber">Maya Chamber</a>
       <a href="#demo">Demo</a>
       <a class="hide-sm" href="#bundle">Bundle</a>
       <a class="hide-sm" href="#about">About</a>
@@ -245,7 +277,8 @@
     <div class="bundle">
       <div class="eyebrow">Bundle</div>
       <div class="bundle-title">WOOF, WOOF</div>
-      <p class="sub">Four plugins for heavy, fast production. SonicWaveshaper is included now. The other three are in development and will be added to the bundle when they ship.</p>
+      <p class="sub">The Maya DSP ecosystem for heavy, fast production: SonicWaveshaper for saturation and Maya Chamber for reverb, with more plugins in development. SonicWaveshaper is included now. The other plugins will be added to the bundle when they ship.</p>
+      <div class="eco-line">Maya DSP ecosystem: <span class="eco-tag">SonicWaveshaper</span><span class="eco-tag">Maya Chamber Reverb</span><span class="eco-tag">In development: Kaal, Rudra, Maya Multiband</span></div>
       <div class="price">$75 <small>ONE-TIME</small></div>
       <div class="bundle-btns">
         <button class="btn pink" data-checkout="bundle">BUY NOW - $75</button>
@@ -255,8 +288,47 @@
         <div class="card plugin"><span class="tag live">AVAILABLE</span><h3>SonicWaveshaper</h3><p>Neural tube-preamp and saturation with a runtime NAM engine. Load your own .nam profiles.</p></div>
         <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Kaal Limiter</h3><p>Brickwall limiter that keeps transient impact at 150+ BPM, for psytrance, hi-tech, and metal.</p></div>
         <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Rudra Distortion and Vocoder</h3><p>Aggressive distortion for breakcore and metal, plus vocoding for synthetic textures.</p></div>
+        <div class="card plugin chamber-card"><span class="tag">MODEL MC-24</span><h3>Maya Chamber Reverb</h3><p>Hybrid FDN and convolution reverb with 24 environments. See the Maya Chamber section above for details.</p></div>
         <div class="card plugin"><span class="tag soon">IN DEVELOPMENT</span><h3>Maya Multiband Compressor and Reverb</h3><p>Multiband dynamics for precise control, and a reverb with separate decay times per band so the low end stays tight.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="chamber">
+  <div class="wrap">
+    <div class="chamber">
+      <div class="eyebrow">Maya DSP ecosystem // Reverb</div>
+      <h2>Maya Chamber</h2>
+      <p class="sub">Maya Chamber is an acoustic environment engine. Instead of generic room presets, the input sound is placed inside another world or resonating object, and that environment changes its reflections, resonance, decay and spectrum before the output.</p>
+      <div class="chamber-panel">
+        <div class="chamber-silk">Maya DSP // Archival reverb unit</div>
+        <p class="chamber-model">MAYA CHAMBER <span>// MODEL MC-24</span></p>
+        <table class="spec-table">
+          <tr><td>Model</td><td>MC-24</td></tr>
+          <tr><td>Environments</td><td>24 across four categories</td></tr>
+          <tr><td>Engine</td><td>Hybrid: partitioned convolution early reflections, diffusion, modal resonator banks, feedback delay network (FDN)</td></tr>
+          <tr><td>Neural path</td><td>NAM (Neural Amp Modeler) for analog coloration and neural saturation in the reverb path</td></tr>
+          <tr><td>Ecosystem</td><td>Maya DSP, bundled with SonicWaveshaper</td></tr>
+        </table>
+      </div>
+
+      <div class="block-label">Signal flow</div>
+      <div class="flow">INPUT -> PRE-DELAY -> EARLY REFLECTIONS (PARTITIONED CONVOLUTION) -> DIFFUSION -> MODAL RESONATOR BANKS -> FEEDBACK DELAY NETWORK (FDN) -> SPECTRAL SHAPING -> PITCH / MODULATION -> OUTPUT</div>
+
+      <div class="block-label">24 environments</div>
+      <div class="env-grid">
+        <div class="env-group"><div class="env-title">01 Natural</div><ul><li>Deep Forest</li><li>Cave</li><li>Ice Cave</li><li>Canyon</li><li>Mountain Valley</li><li>Underground Tunnel</li></ul></div>
+        <div class="env-group"><div class="env-title">02 Architectural</div><ul><li>Abandoned Church</li><li>Swimming Pool</li><li>Concrete Atrium</li><li>Theatre</li><li>Factory</li><li>Stairwell / Warehouse / Metro Station</li></ul></div>
+        <div class="env-group"><div class="env-title">03 Resonant Objects</div><ul><li>Steel Pipe</li><li>Metal Tank</li><li>Giant Spring</li><li>Glass Chamber</li><li>Wooden Box</li><li>Instrument Bodies (Piano, Violin, Cello, Guitar)</li><li>Giant Bell / Gong</li><li>Concrete Tube</li></ul></div>
+        <div class="env-group"><div class="env-title">04 Impossible / Abstract</div><ul><li>Infinite Corridor</li><li>Black Room</li><li>Glass Forest</li><li>Metal Cathedral</li><li>Rotating Room</li><li>Dream Chamber</li><li>Machine Room</li><li>Planetary Cave</li></ul></div>
+      </div>
+
+      <div class="block-label">Controls</div>
+      <div class="ctrl-grid">
+        <div class="ctrl">SIZE</div><div class="ctrl">DECAY</div><div class="ctrl">DENSITY</div><div class="ctrl">DIFFUSION</div><div class="ctrl">RESONANCE</div><div class="ctrl">BRIGHTNESS</div><div class="ctrl">MODULATION</div><div class="ctrl">PRE-DELAY</div><div class="ctrl">WIDTH</div><div class="ctrl">MIX</div>
+      </div>
+      <p class="chamber-note">Asset discipline: every included impulse response and model has tracked origin and license (proprietary recording, CC0 or verified redistributable, formally licensed IR, procedural raytraced IR, or in-house trained NAM model).</p>
     </div>
   </div>
 </section>
