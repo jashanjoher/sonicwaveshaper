@@ -7,8 +7,9 @@
 <meta name="description" content="Maya DSP makes boutique audio plugins. Maya Chamber MC-24 is a $49 reverb with 28 acoustic environments and NAM neural drive. Maya Echo ME-24 is coming soon.">
 <style>
   :root {
-    --bg: #FFF2F8; --bg2: #F6B9D1; --pink-deep: #D9739C;
-    --teal: #3FD3C6; --teal-deep: #15877D; --ink: #3A1F33; --ink-soft: #6B4A5E; --white: #FFFFFF;
+    --bg: #FFF2F8; --bg2: #F6B9D1; --pink-deep: #D9739C; --pink-shadow: #b8567e;
+    --teal: #3FD3C6; --teal-deep: #15877D; --teal-rim: #2FB8AC; --teal-rim2: #25A196;
+    --ink: #3A1F33; --ink-soft: #6B4A5E; --white: #FFFFFF; --face: #E6FAF8;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -27,8 +28,8 @@
 
   .btn { display: inline-block; text-decoration: none; font-family: inherit; font-weight: 800; letter-spacing: 1.2px; font-size: 12px;
     padding: 14px 22px; border-radius: 999px; border: 2px solid var(--pink-deep); cursor: pointer; background: var(--white); color: var(--ink);
-    box-shadow: 0 4px 0 var(--pink-deep); }
-  .btn.teal { background: var(--teal); border-color: var(--teal-deep); box-shadow: 0 4px 0 var(--teal-deep); color: var(--ink); }
+    box-shadow: 0 4px 0 var(--pink-deep), 0 8px 16px rgba(120,40,80,.18); }
+  .btn.teal { background: linear-gradient(#6fe6da, var(--teal)); border-color: var(--teal-deep); box-shadow: 0 4px 0 var(--teal-deep), 0 8px 16px rgba(21,135,125,.25); }
   .btn.ghost { background: transparent; box-shadow: none; border-color: var(--teal-deep); color: var(--teal-deep); }
 
   .hero { padding: 90px 0 60px; text-align: center; }
@@ -43,10 +44,12 @@
   h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.5px; margin: 8px 0 12px; line-height: 1.15; }
   .sub { color: var(--ink-soft); max-width: 640px; }
 
-  .card { background: var(--white); border: 2px solid var(--pink-deep); border-radius: 28px; padding: 36px; box-shadow: 0 8px 0 var(--bg2); margin-top: 34px; }
-  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .showcase { margin-top: 40px; display: flex; flex-direction: column; gap: 56px; }
+  .vst { background: var(--white); border: 2px solid var(--pink-deep); border-radius: 28px; padding: 36px;
+    box-shadow: 0 10px 0 var(--bg2), 0 22px 40px rgba(120,40,80,.22); }
+  .vst-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 36px; align-items: center; }
   .badge { display: inline-block; font-size: 10px; letter-spacing: 2px; font-weight: 800; border-radius: 999px; padding: 5px 12px; background: var(--teal); color: var(--ink); margin-bottom: 14px; }
-  .badge.soon { background: var(--bg2); color: var(--ink); }
+  .badge.soon { background: var(--bg2); }
   .product-name { font-size: 26px; font-weight: 900; margin: 0 0 8px; }
   .product-name span { color: var(--teal-deep); }
   .price { font-size: 40px; font-weight: 900; margin: 14px 0 4px; }
@@ -54,24 +57,89 @@
   .features { list-style: none; padding: 0; margin: 18px 0 0; }
   .features li { padding: 10px 0; border-bottom: 1px dashed var(--bg2); font-size: 14px; color: var(--ink-soft); }
   .features li b { color: var(--ink); }
-  .orb { width: 220px; height: 220px; margin: 0 auto; border-radius: 50%;
-    background: repeating-conic-gradient(from 0deg, #3FD3C6 0deg 4deg, #25A196 4deg 8deg);
-    box-shadow: inset 0 0 0 6px var(--white), inset 0 0 0 8px var(--teal-deep), 0 10px 0 var(--bg2); position: relative; }
-  .orb::after { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F0FFFC, #3FD3C6 60%, #25A196); }
-  .orb-label { text-align: center; margin-top: 18px; font-weight: 900; letter-spacing: 2px; font-size: 12px; color: var(--ink); }
-
-  .about-body { max-width: 720px; color: var(--ink-soft); font-size: 16px; }
-  .about-body p { margin: 0 0 14px; }
-
   .pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
   .pill { font-size: 12px; letter-spacing: 1px; font-weight: 800; padding: 8px 14px; border-radius: 999px; background: var(--white); border: 2px solid var(--teal); color: var(--teal-deep); }
 
+  /* ---------- Faceplate chassis ---------- */
+  .stage { position: relative; padding: 26px; border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, #ffe6f1, #f3c2d6 70%); box-shadow: inset 0 2px 6px rgba(255,255,255,.8), inset 0 -4px 10px rgba(120,40,80,.12); }
+  .faceplate { position: relative; border-radius: 18px; padding: 26px 24px 22px; color: var(--ink);
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,.9), transparent 40%),
+      radial-gradient(rgba(217,115,156,.14) 1px, transparent 1.2px) 0 0 / 5px 5px,
+      linear-gradient(160deg, #FFF8FB 0%, #FFF2F8 35%, #F6B9D1 100%);
+    box-shadow: inset 0 2px 0 #fff, inset 0 -3px 0 rgba(184,86,126,.35), inset 0 0 0 1px rgba(217,115,156,.55),
+      0 14px 24px rgba(120,40,80,.28), 0 2px 0 #e9a1c0, 0 4px 0 #d9789f; }
+  .bolt { position: absolute; width: 13px; height: 13px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff, #e9d3dc 40%, #a88797 80%);
+    box-shadow: inset 0 -1px 1px rgba(0,0,0,.25), 0 1px 2px rgba(120,40,80,.35); }
+  .bolt::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 1.5px; margin: -.75px 0 0 -4px; background: #8c6a7b; transform: rotate(35deg); border-radius: 1px; }
+  .b1 { left: 10px; top: 10px } .b2 { right: 10px; top: 10px } .b3 { left: 10px; bottom: 10px } .b4 { right: 10px; bottom: 10px }
+  .fp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .fp-brand { font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--ink); }
+  .fp-brand span { color: var(--teal-deep); }
+  .fp-model { font-size: 9px; letter-spacing: 3px; font-weight: 800; color: var(--ink-soft); }
+
+  /* ---------- OLED / backlit display ---------- */
+  .screen { position: relative; border-radius: 10px; padding: 12px 14px; margin-bottom: 18px; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 0%, #0f3b39, #072524 70%);
+    box-shadow: inset 0 0 0 2px #bfeee9, inset 0 3px 10px rgba(0,0,0,.6), 0 0 14px rgba(63,211,198,.35), 0 2px 0 #fff; }
+  .screen::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px); pointer-events: none; }
+  .screen .l1 { font-size: 11px; letter-spacing: 2px; font-weight: 800; color: #6fe6da; text-shadow: 0 0 6px rgba(63,211,198,.9); }
+  .screen .l2 { font-size: 10px; letter-spacing: 1.5px; color: #9ff3ea; margin-top: 3px; text-shadow: 0 0 5px rgba(63,211,198,.7); }
+  .screen .env { font-size: 15px; font-weight: 900; color: #e8fffc; text-shadow: 0 0 8px rgba(63,211,198,.95); margin-top: 2px; }
+
+  /* ---------- Knobs ---------- */
+  .knobs { display: flex; justify-content: space-around; align-items: flex-start; flex-wrap: wrap; gap: 14px 6px; }
+  .kw { display: flex; flex-direction: column; align-items: center; width: 74px; }
+  .kw.lg { width: 92px; }
+  .well { position: relative; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 35%, #fff, #f2c5d7 65%, #e7a6c2);
+    box-shadow: inset 0 3px 5px rgba(120,40,80,.4), 0 1px 0 #fff, 0 3px 6px rgba(120,40,80,.25); }
+  .kw.lg .well { width: 78px; height: 78px; }
+  .knob { position: relative; width: 52px; height: 52px; border-radius: 50%; --rot: -135deg;
+    background: conic-gradient(from 0deg, #2FB8AC, #25A196 12%, #3cc9bb 25%, #25A196 37%, #2FB8AC 50%, #25A196 62%, #3cc9bb 75%, #25A196 88%, #2FB8AC);
+    box-shadow: 0 8px 16px rgba(0,0,0,.22), 0 3px 4px rgba(0,60,55,.35), inset 0 -2px 3px rgba(0,50,45,.4), inset 0 1px 1px rgba(255,255,255,.5); }
+  .kw.lg .knob { width: 66px; height: 66px; }
+  .knob .face { position: absolute; inset: 14%; border-radius: 50%; transform: rotate(var(--rot));
+    background: radial-gradient(circle at 36% 28%, #ffffff 0%, #E6FAF8 45%, #bff3ec 100%);
+    box-shadow: inset 0 -2px 3px rgba(21,135,125,.35), inset 0 1px 1px #fff, 0 1px 2px rgba(0,0,0,.2); }
+  .knob .face::before { content: ""; position: absolute; left: 50%; top: 7%; width: 3px; height: 26%; margin-left: -1.5px; border-radius: 2px;
+    background: #fff; box-shadow: 0 0 3px rgba(21,135,125,.8), 0 0 0 .5px rgba(21,135,125,.5); }
+  .knob .face::after { content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.85), transparent 45%); }
+  .kname { font-size: 9px; letter-spacing: 2px; font-weight: 900; margin-top: 10px; color: var(--ink); }
+  .kval { font-size: 9px; letter-spacing: 1px; color: var(--teal-deep); font-weight: 800; margin-top: 2px; }
+
+  /* ---------- LEDs ---------- */
+  .leds { display: flex; gap: 18px; justify-content: center; margin-top: 16px; align-items: center; }
+  .led { display: flex; align-items: center; gap: 6px; font-size: 9px; letter-spacing: 1.5px; font-weight: 800; color: var(--ink-soft); }
+  .led i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .led.on i { background: radial-gradient(circle at 40% 35%, #fff, var(--teal) 60%); box-shadow: 0 0 6px var(--teal), 0 0 14px rgba(63,211,198,.8); }
+  .led.pk i { background: radial-gradient(circle at 40% 35%, #fff, #ff8fbd 60%); box-shadow: 0 0 6px #ff8fbd, 0 0 14px rgba(255,143,189,.8); }
+  .led.off i { background: #e9c3d4; box-shadow: inset 0 1px 2px rgba(120,40,80,.4); }
+
+  /* ---------- Echo: tape window + VU ---------- */
+  .tape { position: relative; height: 72px; border-radius: 12px; margin-bottom: 18px; overflow: hidden;
+    background: linear-gradient(#0f3b39, #072524); box-shadow: inset 0 0 0 2px #bfeee9, inset 0 4px 10px rgba(0,0,0,.6), 0 0 14px rgba(63,211,198,.3); }
+  .reel { position: absolute; top: 14px; width: 42px; height: 42px; border-radius: 50%;
+    background: repeating-conic-gradient(#e7fffb 0 30deg, #9fe9e0 30deg 60deg); box-shadow: inset 0 0 0 4px #15877D, 0 0 10px rgba(63,211,198,.6); }
+  .reel.r1 { left: 18%; } .reel.r2 { right: 18%; }
+  .tape-win { position: absolute; left: 30%; right: 30%; top: 26px; height: 18px; border-radius: 4px; background: #03201f; box-shadow: inset 0 0 6px rgba(63,211,198,.5); }
+  .vu { position: relative; height: 70px; border-radius: 12px; margin-bottom: 18px; overflow: hidden; display: flex; justify-content: center; align-items: flex-end;
+    background: radial-gradient(ellipse at 50% 100%, #bff3ec, #6fe6da 65%, #3FD3C6);
+    box-shadow: inset 0 0 0 2px #fff, inset 0 -6px 10px rgba(21,135,125,.35), 0 0 14px rgba(63,211,198,.45); }
+  .vu .needle { position: absolute; bottom: 6px; left: 50%; width: 2px; height: 56px; margin-left: -1px; background: #3A1F33; transform-origin: 50% 100%; transform: rotate(-22deg); border-radius: 2px; }
+  .vu .hub { position: absolute; bottom: 2px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #3A1F33; }
+  .vu .vu-l { position: absolute; left: 12px; top: 8px; font-size: 9px; font-weight: 900; letter-spacing: 2px; color: #0f4d48; }
+
+  .about-body { max-width: 720px; color: var(--ink-soft); font-size: 16px; }
+  .about-body p { margin: 0 0 14px; }
   footer { padding: 36px 0 60px; text-align: center; color: var(--ink-soft); font-size: 12px; letter-spacing: 1px; border-top: 2px solid var(--bg2); }
 
   @media (max-width: 860px) {
-    .card-grid { grid-template-columns: 1fr; }
+    .vst-grid { grid-template-columns: 1fr; }
     .links a.hide-sm { display: none; }
-    .card { padding: 24px; }
+    .vst { padding: 22px; }
   }
 </style>
 </head>
@@ -107,8 +175,9 @@
     <div class="eyebrow">Available now</div>
     <h2>Maya Chamber MC-24</h2>
     <p class="sub">Procedural space with neural warmth. A reverb built on 28 algorithmic acoustic environments, with optional NAM neural drive for analog harmonic weight in the reverb tail.</p>
-    <div class="card">
-      <div class="card-grid">
+
+    <div class="showcase">
+      <div class="vst vst-grid">
         <div>
           <span class="badge">REVERB PLUGIN</span>
           <h3 class="product-name">maya <span>chamber</span> MC-24</h3>
@@ -123,9 +192,32 @@
             <button class="btn teal" data-checkout="chamber">BUY NOW - $49</button>
           </div>
         </div>
-        <div>
-          <div class="orb" aria-hidden="true"></div>
-          <div class="orb-label">MC-24</div>
+
+        <div class="stage" aria-label="Maya Chamber MC-24 faceplate preview">
+          <div class="faceplate">
+            <span class="bolt b1"></span><span class="bolt b2"></span><span class="bolt b3"></span><span class="bolt b4"></span>
+            <div class="fp-head"><div class="fp-brand">maya <span>chamber</span></div><div class="fp-model">MC-24</div></div>
+            <div class="screen">
+              <div class="l1">24 CHAMBER ENVIRONMENTS</div>
+              <div class="env">Deep Forest</div>
+              <div class="l2">// NAM DRIVE ACTIVE</div>
+            </div>
+            <div class="knobs">
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:-120deg"></div></div></div><div class="kname">SIZE</div><div class="kval">62%</div></div>
+              <div class="kw lg"><div class="well"><div class="knob"><div class="face" style="--rot:-30deg"></div></div></div><div class="kname">DECAY</div><div class="kval">4.2 s</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:60deg"></div></div></div><div class="kname">MIX</div><div class="kval">45%</div></div>
+            </div>
+            <div class="knobs" style="margin-top:14px;">
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:-60deg"></div></div></div><div class="kname">PRE-DELAY</div><div class="kval">18 ms</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:10deg"></div></div></div><div class="kname">DAMP</div><div class="kval">5.1 kHz</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:-90deg"></div></div></div><div class="kname">NEURAL DRIVE</div><div class="kval">+6 dB</div></div>
+            </div>
+            <div class="leds">
+              <div class="led on"><i></i>NAM</div>
+              <div class="led pk"><i></i>BYPASS</div>
+              <div class="led off"><i></i>FREEZE</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -136,22 +228,47 @@
   <div class="wrap">
     <div class="eyebrow">Coming soon</div>
     <h2>Maya Echo ME-24</h2>
-    <p class="sub">The next Maya DSP plugin is a delay built with the same care for detail. It is in development, and details will be announced here first.</p>
-    <div class="card">
-      <div class="card-grid">
+    <p class="sub">The next Maya DSP plugin is a tape and BBD style delay built with the same care for detail. It is in development, and details will be announced here first.</p>
+
+    <div class="showcase">
+      <div class="vst vst-grid">
         <div>
           <span class="badge soon">PREVIEW</span>
           <h3 class="product-name">maya <span>echo</span> ME-24</h3>
           <p class="sub" style="margin-top:10px;">A warm, tempo-friendly delay for producers who like their repeats to sit in the mix. Pricing and release date will be shared when the plugin is ready.</p>
           <div class="pills">
-            <span class="pill">DELAY</span>
+            <span class="pill">TAPE / BBD</span>
             <span class="pill">TEMPO SYNC</span>
             <span class="pill">IN DEVELOPMENT</span>
           </div>
         </div>
-        <div>
-          <div class="orb" style="background: repeating-conic-gradient(from 0deg, #F6B9D1 0deg 4deg, #D9739C 4deg 8deg);" aria-hidden="true"></div>
-          <div class="orb-label">ME-24</div>
+
+        <div class="stage" aria-label="Maya Echo ME-24 faceplate preview">
+          <div class="faceplate">
+            <span class="bolt b1"></span><span class="bolt b2"></span><span class="bolt b3"></span><span class="bolt b4"></span>
+            <div class="fp-head"><div class="fp-brand">maya <span>echo</span></div><div class="fp-model">ME-24</div></div>
+            <div class="tape" aria-hidden="true">
+              <span class="reel r1"></span><span class="tape-win"></span><span class="reel r2"></span>
+            </div>
+            <div class="vu">
+              <span class="vu-l">LEVEL</span>
+              <span class="needle"></span><span class="hub"></span>
+            </div>
+            <div class="knobs">
+              <div class="kw lg"><div class="well"><div class="knob"><div class="face" style="--rot:-40deg"></div></div></div><div class="kname">TIME</div><div class="kval">380 ms</div></div>
+              <div class="kw lg"><div class="well"><div class="knob"><div class="face" style="--rot:20deg"></div></div></div><div class="kname">FEEDBACK</div><div class="kval">46%</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:-100deg"></div></div></div><div class="kname">WOW / FLUTTER</div><div class="kval">0.3</div></div>
+            </div>
+            <div class="knobs" style="margin-top:14px;">
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:-10deg"></div></div></div><div class="kname">NEURAL DRIVE</div><div class="kval">+3 dB</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:70deg"></div></div></div><div class="kname">COLOR</div><div class="kval">warm</div></div>
+              <div class="kw"><div class="well"><div class="knob"><div class="face" style="--rot:45deg"></div></div></div><div class="kname">MIX</div><div class="kval">35%</div></div>
+            </div>
+            <div class="leds">
+              <div class="led on"><i></i>SYNC</div>
+              <div class="led off"><i></i>BYPASS</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
